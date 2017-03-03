@@ -274,7 +274,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Controllers\HomeController.vb" />
     <Compile Include="Models\AccountModels.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +291,13 @@
     <Content Include="Content\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\css\dialog.css" />
+    <Content Include="Content\css\dialog.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\BarCodeFormat\13RS.xlsx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -308,7 +314,10 @@
     <Content Include="Content\css\custom.css" />
     <Content Include="Content\css\fileinput.css" />
     <Content Include="Content\css\fileinput.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\js\Authorization\pagination.js" />
+    <Content Include="Content\js\bootstrap-checkbox.js" />
+    <Content Include="Content\js\bootstrap-checkbox.min.js" />
     <Content Include="Content\js\Comparison\comparison.js" />
     <Content Include="Content\js\Approbation\fileinput.js" />
     <Content Include="Content\js\Approbation\slider.js" />
@@ -317,6 +326,12 @@
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\Comparison\pagination.js" />
+    <Content Include="Content\js\dialog.js" />
+    <Content Include="Content\js\dialog.min.js" />
+    <Content Include="Content\js\draggable.js" />
+    <Content Include="Content\js\draggable.min.js" />
+    <Content Include="Content\js\droppable.js" />
+    <Content Include="Content\js\droppable.min.js" />
     <Content Include="Content\js\fileinput.js" />
     <Content Include="Content\js\fileinput.min.js" />
     <Content Include="Content\js\locales\fr.js" />
@@ -484,7 +499,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\BarCodeFormat\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
@@ -507,7 +521,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>true</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>45948</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

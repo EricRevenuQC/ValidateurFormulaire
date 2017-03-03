@@ -141,9 +141,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Approbation\Controllers\VerificationControllerTests.vb" />
+    <Compile Include="Approbation\Models\AlertsManagerTest.vb" />
+    <Compile Include="Approbation\Models\ComparePixelColorTest.vb" />
     <Compile Include="Approbation\Models\ConvertPDFToImageTests.vb" />
     <Compile Include="Approbation\Models\PaginationTests.vb" />
-    <Compile Include="Controllers\HomeControllerTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>

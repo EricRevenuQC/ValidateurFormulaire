@@ -27,6 +27,9 @@ Public Class PDFToImageConverter
                 Dim images(page_number) As Image
                 For i As Integer = 1 To page_number
                     images(i) = rasterizer.GetPage(config.GetDPI, config.GetDPI, i)
+                    If (images(i) Is Nothing) Then
+                        Throw New System.Exception("Could not convert pdf to image.")
+                    End If
                     'Toutes les images font une rotation de 90 degrés dans le sens anti-horraire sauf la première.
                     'Il faut donc leur faire une rotation de 90 degrés dans le sens horraire pour les rendre droite.
                     If (i > 1) Then
