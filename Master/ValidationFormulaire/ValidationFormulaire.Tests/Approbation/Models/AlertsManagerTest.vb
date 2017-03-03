@@ -7,19 +7,14 @@ Imports ValidationFormulaire
 
 <TestClass()> _
 Public Class AlertsManagerTest
-
     Private alerts_manager As AlertsManager
     Private alert_title As String
     Private alert_message As String
-
-
-
 
     <TestInitialize()> _
     Public Sub Initialize()
         alerts_manager = New AlertsManager()
     End Sub
-
 
     <TestMethod()> _
     Public Sub VerifyThatKeyAndValueInAlertsAreFoundInAlerts()
@@ -75,7 +70,4 @@ Public Class AlertsManagerTest
         Assert.IsFalse(manager.ContainsValue(Environment.NewLine + "VALEUR1"))
 
     End Sub
-
-
-
 End Class
