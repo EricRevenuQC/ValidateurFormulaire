@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{13F093F9-55E4-4D2C-AA42-A9E66CD280CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ValidationFormulaire.Core</RootNamespace>
+    <AssemblyName>ValidationFormulaire.Core</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ValidationFormulaire.Core.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ValidationFormulaire.Core.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Emgu.CV, Version=2.4.2.1773, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ValidationFormulaire\Dependencies\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>..\ValidationFormulaire\Dependencies\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util">
+      <HintPath>..\ValidationFormulaire\Dependencies\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Utils">
+      <HintPath>..\ValidationFormulaire\Dependencies\Emgu.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.9, Version=9.4.0.12, Culture=neutral, PublicKeyToken=eec8f7c6e3c49e11, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\GdPicture.NET.9.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.9.PDF, Version=2.2.0.29, Culture=neutral, PublicKeyToken=c6711ff198004a0f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\GdPicture.NET 9\Redist\Framework 4.5\GdPicture.NET.9.PDF.dll</HintPath>
+    </Reference>
+    <Reference Include="Ghostscript.NET">
+      <HintPath>..\ValidationFormulaire\Dependencies\Ghostscript.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>bin\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\ValidationFormulaire\Dependencies\ZedGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="zlib.net">
+      <HintPath>..\ValidationFormulaire\Dependencies\zlib.net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\Approbation\IConfig.vb" />
+    <Compile Include="Interfaces\Approbation\IConverter.vb" />
+    <Compile Include="Interfaces\Approbation\IPagination.vb" />
+    <Compile Include="Interfaces\Approbation\IVerification.vb" />
+    <Compile Include="Model\Alerts\AlertMessages.vb" />
+    <Compile Include="Model\Alerts\AlertsManager.vb" />
+    <Compile Include="Model\Approbation\Comparison\Comparaison.vb" />
+    <Compile Include="Model\Authorization\AuthorizationBackUp.vb" />
+    <Compile Include="Model\Authorization\BarCodeData.vb" />
+    <Compile Include="Model\Authorization\BarCodeProperties.vb" />
+    <Compile Include="Model\Authorization\BarCode\BarCodeFormatImporter.vb" />
+    <Compile Include="Model\Authorization\DictionaryOperations.vb" />
+    <Compile Include="Model\Config.vb" />
+    <Compile Include="Model\Converters\BarCodeFormatImporter.vb" />
+    <Compile Include="Model\Converters\PDFToImageConverter.vb" />
+    <Compile Include="Model\Approbation\FormulairePosition.vb" />
+    <Compile Include="Model\ImageOperations\FormulaireImage.vb" />
+    <Compile Include="Model\Authorization\Authorization.vb" />
+    <Compile Include="Model\Authorization\BarCode\BarCodeReader.vb" />
+    <Compile Include="Model\Authorization\ExceptionsManager.vb" />
+    <Compile Include="Model\Authorization\TextExtractor.vb" />
+    <Compile Include="Model\Authorization\StringOperations\SearchForText.vb" />
+    <Compile Include="Model\Authorization\StringOperations\TextAdjuster.vb" />
+    <Compile Include="Model\ImageOperations\ComparePixelColor.vb" />
+    <Compile Include="Model\Pagination\DeterminePage.vb" />
+    <Compile Include="Model\ImageOperations\DrawOnImage.vb" />
+    <Compile Include="Model\ImageOperations\SearchPixelInImage.vb" />
+    <Compile Include="Model\ImageOperations\Threshold.vb" />
+    <Compile Include="Model\Approbation\Verification\Verification.vb" />
+    <Compile Include="Model\Session\SessionValueProvider.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GdPicture.NET.9.barcode.1d.reader.64.dll" />
+    <Content Include="GdPicture.NET.9.barcode.1d.writer.dll" />
+    <Content Include="GdPicture.NET.9.barcode.2d.writer.dll" />
+    <Content Include="GdPicture.NET.9.barcode.dm.reader.64.dll" />
+    <Content Include="GdPicture.NET.9.barcode.dm.reader.dll" />
+    <Content Include="GdPicture.NET.9.barcode.pdf417.reader.64.dll" />
+    <Content Include="GdPicture.NET.9.barcode.qr.reader.64.dll" />
+    <Content Include="GdPicture.NET.9.dll" />
+    <Content Include="GdPicture.NET.9.filters.64.dll" />
+    <Content Include="GdPicture.NET.9.filters.dll" />
+    <Content Include="GdPicture.NET.9.image.gdimgplug.64.dll" />
+    <Content Include="GdPicture.NET.9.image.gdimgplug.dll" />
+    <Content Include="GdPicture.NET.9.jbig2.encoder.64.dll" />
+    <Content Include="GdPicture.NET.9.ocr.tesseract.3.64.dll" />
+    <Content Include="GdPicture.NET.9.omr.64.dll" />
+    <Content Include="GdPicture.NET.9.PDF.dll" />
+    <Content Include="GdPicture.NET.9.twain.client.64.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
