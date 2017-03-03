@@ -475,3 +475,4 @@ C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationForm
 C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.dll
 C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.xml
 C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.pdb
+C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\itextsharp.xml
