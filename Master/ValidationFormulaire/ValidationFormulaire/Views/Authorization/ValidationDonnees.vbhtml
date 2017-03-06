@@ -129,9 +129,9 @@ End Code
 		 Dim dialog_label_id As String = "dialog_label_id" + i.ToString
 		 Dim dialog_page_text As String = "dialog_page_text" + i.ToString
 		 Dim col_width As String = "col-md-8"
-		@<div id="@dialog_id" title="Veuillez entrer les données demandées inscrites sur le relevé">
+		@<div id="@dialog_id"  title="Veuillez entrer les données demandées inscrites sur le relevé "style="background:lightblue">
 			<div data-role="body">
-				<label for="dialog_input_id" id="@dialog_label_id">
+				<label for="dialog_input_id" id="@dialog_label_id" style="background:lightblue">
 					@If Session("page_number_releve_donnees") > 1 Then
 						@<span id="@dialog_page_text">
 							Page @Session("current_page_releve_donnees")
@@ -165,7 +165,7 @@ End Code
 	End If
 </div>
 <div style="display: none;">
-	<div id="dialog-confirmation" title="Veuillez confirmer">
+	<div id="dialog-confirmation" title="Veuillez confirmer"style="background:lightblue">
 		<div data-role="body">
 			Le champ saisie n'est pas identique à celui indiqué par le code à bar.<br />
 			Vous avez entré : <div id="dialog-text-input" style="display: inline"></div><br />
