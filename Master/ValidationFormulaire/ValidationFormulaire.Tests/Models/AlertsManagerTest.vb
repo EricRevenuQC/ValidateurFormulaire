@@ -20,11 +20,11 @@ Public Class AlertsManagerTest
     Public Sub VerifyThatKeyAndValueInAlertsAreFoundInAlerts()
         Dim manager As New Dictionary(Of String, String)
 
-        alerts_manager.AddAlert("KEY", "VALEUR")
+        alerts_manager.AddAlert("test", "oops")
         manager = alerts_manager.GetAllAlerts()
 
-        Assert.IsTrue(manager.ContainsKey("KEY"))
-        Assert.IsTrue(manager.ContainsValue("VALEUR"))
+        Assert.IsTrue(manager.ContainsKey("test"))
+        Assert.IsTrue(manager.ContainsValue("oops"))
     End Sub
 
     <TestMethod()> _
@@ -39,35 +39,14 @@ Public Class AlertsManagerTest
     End Sub
 
     <TestMethod()> _
-    Public Sub VerifyThatMessageAddedToTitle1()
-
+    Public Sub VerifyThatMessageIsAddedToTitle()
         Dim manager As New Dictionary(Of String, String)
 
+        alerts_manager.AddAlert("test")
 
-        alerts_manager.AddAlert("KEY")
-
-        alerts_manager.AddMessageToTitle(alert_title:="KEY", alert_message:="VALEUR")
+        alerts_manager.AddMessageToTitle("test", "oops")
         manager = alerts_manager.GetAllAlerts()
 
-        Assert.IsTrue(manager.ContainsKey("KEY"))
-        Assert.IsTrue(manager.ContainsValue(Environment.NewLine + "VALEUR"))
-
-    End Sub
-
-
-    <TestMethod()> _
-    Public Sub VerifyThatMessageAddedToTitleIsNotCorrect()
-
-        Dim manager As New Dictionary(Of String, String)
-
-
-        alerts_manager.AddAlert("KEY")
-
-        alerts_manager.AddMessageToTitle(alert_title:="KEY", alert_message:="VALEUR")
-        manager = alerts_manager.GetAllAlerts()
-
-
-        Assert.IsFalse(manager.ContainsValue(Environment.NewLine + "VALEUR1"))
-
+        Assert.IsTrue(manager.ContainsValue(Environment.NewLine + "oops"))
     End Sub
 End Class

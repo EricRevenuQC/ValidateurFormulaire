@@ -106,6 +106,7 @@
     <Compile Include="Interfaces\Approbation\IConverter.vb" />
     <Compile Include="Interfaces\Approbation\IPagination.vb" />
     <Compile Include="Interfaces\Approbation\IVerification.vb" />
+    <Compile Include="Interfaces\ImageOperations\IComparePixelColor.vb" />
     <Compile Include="Model\Alerts\AlertMessages.vb" />
     <Compile Include="Model\Alerts\AlertsManager.vb" />
     <Compile Include="Model\Approbation\Comparison\Comparaison.vb" />
