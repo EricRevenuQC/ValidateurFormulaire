@@ -144,7 +144,18 @@
     <Import Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Approbation\Controllers\ComparaisonControllerTests.vb" />
+=======
+<<<<<<< HEAD
+    <Compile Include="Controllers\VerificationControllerTests.vb" />
+    <Compile Include="Models\AlertsManagerTest.vb" />
+    <Compile Include="Models\ComparePixelColorTest.vb" />
+    <Compile Include="Models\ConvertPDFToImageTests.vb" />
+    <Compile Include="Models\PaginationTests.vb" />
+    <Compile Include="Models\ThresholdTests.vb" />
+=======
+>>>>>>> 8f20680e69d1a735310600c673ea2ccf3b72d4fe
     <Compile Include="Approbation\Controllers\VerificationControllerTests.vb" />
     <Compile Include="Approbation\Models\AlertsManagerTest.vb" />
     <Compile Include="Approbation\Models\ComparePixelColorTest.vb" />
@@ -153,6 +164,7 @@
     <Compile Include="Approbation\Models\SearchForTextTest.vb" />
     <Compile Include="Approbation\Models\TextAdjusterTest.vb" />
     <Compile Include="Approbation\Models\TextExtractorTest.vb" />
+>>>>>>> e137c1943955126df4e1872abf41cd0e0de8b9ac
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +183,10 @@
       <Project>{EFCEE880-64C9-46B0-90BE-DFDDC7E9A462}</Project>
       <Name>ValidationFormulaire</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Approbation\" />
+    <Folder Include="Models\Authorization\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
