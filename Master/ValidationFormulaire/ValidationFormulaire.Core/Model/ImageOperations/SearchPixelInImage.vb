@@ -15,7 +15,7 @@ Public Class SearchPixelInImage
                                          row_start As Integer, col_start As Integer,
                                          row_end As Integer, col_end As Integer,
                                          row_step As Integer, col_step As Integer,
-                                         blue As Integer, green As Integer, red As Integer) As Point?
+                                         blue As Integer, green As Integer, red As Integer) As Point
         For current_row As Integer = row_start To row_end Step row_step
             For current_col As Integer = col_start To col_end Step col_step
                 If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,

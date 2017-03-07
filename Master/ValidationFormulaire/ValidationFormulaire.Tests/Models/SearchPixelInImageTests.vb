@@ -47,4 +47,15 @@ Imports System.Drawing
                                                                   image_test.Height - 1, 1, 1, 0, 0, 255))
         Assert.AreEqual(New Point(2, 1), pixel)
     End Sub
+
+    <TestMethod()> Public Sub VerifyThatFindFirstPixelOfDifferentColorReturnCorrectPoint()
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(255, 255, 255, 255, 255, 255)).Returns(False)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(36, 255, 28, 255, 237, 255)).Returns(True)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(76, 255, 177, 255, 34, 255)).Returns(True)
+
+        pixel_search = New SearchPixelInImage(compare_pixels_color.Object)
+        Dim pixel As New Point(pixel_search.FindFirstPixelOfDifferentColor(image_test, 0, 0, image_test.Width - 1,
+                                                                  image_test.Height - 1, 1, 1, 255, 255, 255))
+        Assert.AreEqual(New Point(2, 1), pixel)
+    End Sub
 End Class
