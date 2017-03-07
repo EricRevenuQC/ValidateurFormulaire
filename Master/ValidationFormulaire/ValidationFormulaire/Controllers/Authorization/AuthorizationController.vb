@@ -38,19 +38,18 @@ Public Class AuthorizationController
         Dim model As New AuthorizationModel()
         If file IsNot Nothing AndAlso file.ContentLength > 0 Then
             Dim images() As Image
-            Dim alerts_manager As New AlertsManager()
 
-            images = converter.PDFToImage(file, alerts_manager)
+            images = converter.PDFToImage(file)
             session_value_provider.SetValue("images_donnees", images)
             session_value_provider.SetValue("page_number_releve_donnees", converter.GetPageNumber())
             session_value_provider.SetValue("current_page_releve_donnees", 1)
             file.InputStream.Position = 0
 
-            model.bar_code_data = authorization.AuthorizePDF(file, alerts_manager)
+            model.bar_code_data = authorization.AuthorizePDF(file)
             session_value_provider.SetValue("current_dialog", 0)
 
             model.alert_messages = New Dictionary(Of String, String)()
-            For Each alert As KeyValuePair(Of String, String) In alerts_manager.GetAllAlerts
+            For Each alert As KeyValuePair(Of String, String) In AlertsManager.GetAllAlerts
                 model.alert_messages.Add(alert.Key, alert.Value)
             Next
         End If

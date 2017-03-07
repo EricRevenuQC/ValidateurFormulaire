@@ -5,11 +5,10 @@
     Private chars_remaining As String = ""
 
     Public Function RemoveStringFromString(to_find As String, to_search As String,
-                                           Optional alerts_manager As AlertsManager = Nothing,
                                             Optional char_minimum_length As Integer = 0,
                                             Optional save_remaining_chars As Boolean = False) As String
         Dim current_word As String = ""
-        exceptions = New ExceptionsManager(alerts_manager)
+        exceptions = New ExceptionsManager()
         to_find += " "
 
         For Each character As Char In to_find

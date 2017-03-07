@@ -7,21 +7,20 @@ Imports ValidationFormulaire
 
 <TestClass()> _
 Public Class AlertsManagerTest
-    Private alerts_manager As AlertsManager
     Private alert_title As String
     Private alert_message As String
 
     <TestInitialize()> _
     Public Sub Initialize()
-        alerts_manager = New AlertsManager()
     End Sub
 
     <TestMethod()> _
     Public Sub VerifyThatKeyAndValueInAlertsAreFoundInAlerts()
+        AlertsManager.ClearAlerts()
         Dim manager As New Dictionary(Of String, String)
 
-        alerts_manager.AddAlert("test", "oops")
-        manager = alerts_manager.GetAllAlerts()
+        AlertsManager.AddAlert("test", "oops")
+        manager = AlertsManager.GetAllAlerts()
 
         Assert.IsTrue(manager.ContainsKey("test"))
         Assert.IsTrue(manager.ContainsValue("oops"))
@@ -29,10 +28,11 @@ Public Class AlertsManagerTest
 
     <TestMethod()> _
     Public Sub VerifyThatKeyAndValueNotInAlertsAreNotFoundInAlerts()
+        AlertsManager.ClearAlerts()
         Dim manager As New Dictionary(Of String, String)
 
-        alerts_manager.AddAlert("test", "oops")
-        manager = alerts_manager.GetAllAlerts()
+        AlertsManager.AddAlert("test", "oops")
+        manager = AlertsManager.GetAllAlerts()
 
         Assert.IsFalse(manager.ContainsKey("KEY"))
         Assert.IsFalse(manager.ContainsValue("VALEUR"))
@@ -40,12 +40,13 @@ Public Class AlertsManagerTest
 
     <TestMethod()> _
     Public Sub VerifyThatMessageIsAddedToTitle()
+        AlertsManager.ClearAlerts()
         Dim manager As New Dictionary(Of String, String)
 
-        alerts_manager.AddAlert("test")
+        AlertsManager.AddAlert("test")
 
-        alerts_manager.AddMessageToTitle("test", "oops")
-        manager = alerts_manager.GetAllAlerts()
+        AlertsManager.AddAlert("test", "oops")
+        manager = AlertsManager.GetAllAlerts()
 
         Assert.IsTrue(manager.ContainsValue(Environment.NewLine + "oops"))
     End Sub

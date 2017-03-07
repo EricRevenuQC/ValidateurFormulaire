@@ -19,7 +19,7 @@ Public Class PDFToImageConverter
     Private page_number As Integer
     Private config As New Config()
 
-    Public Function PDFToImage(file As HttpPostedFileBase, Optional alert_manager As AlertsManager = Nothing) As Image() Implements IConverter.PDFToImage
+    Public Function PDFToImage(file As HttpPostedFileBase) As Image() Implements IConverter.PDFToImage
         Using rasterizer = New Ghostscript.NET.Rasterizer.GhostscriptRasterizer()
             Try
                 rasterizer.Open(file.InputStream)
@@ -39,9 +39,7 @@ Public Class PDFToImageConverter
                 rasterizer.Close()
                 Return images
             Catch ex As Exception
-                If alert_manager IsNot Nothing Then
-                    alert_manager.AddAlert("Incapable de convertir ce fichier en image! Assurez-vous que le fichier n'est pas protégé.")
-                End If
+                AlertsManager.AddAlert("Incapable de convertir ce fichier en image! Assurez-vous que le fichier n'est pas protégé.")
                 System.Diagnostics.Debug.WriteLine(ex)
             End Try
             Return Nothing

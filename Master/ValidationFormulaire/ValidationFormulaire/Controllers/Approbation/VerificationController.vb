@@ -46,6 +46,7 @@ Public Class VerificationController
     <HttpPost> _
     Public Function VerificationFormat(image_file As HttpPostedFileBase, image_file_template As HttpPostedFileBase,
                                        Optional verif_threshold As Single = 0) As ActionResult
+        AlertsManager.ClearAlerts()
         Dim model As New ApprobationModel()
         Dim template_image As Image
 
@@ -57,17 +58,16 @@ Public Class VerificationController
 
         If image_file IsNot Nothing AndAlso image_file.ContentLength > 0 Then
             Dim images() As Image
-            Dim alerts_manager As New AlertsManager()
 
-            images = converter.PDFToImage(image_file, alerts_manager)
-            images = verification.VerifiyWithTemnplate(images, template_image, verif_threshold, alerts_manager)
-            images = verification.DetermineInputZone(images, alerts_manager)
+            images = converter.PDFToImage(image_file)
+            images = verification.VerifiyWithTemnplate(images, template_image, verif_threshold)
+            images = verification.DetermineInputZone(images)
             session_value_provider.SetValue("images", images)
             session_value_provider.SetValue("page_number", converter.GetPageNumber())
             session_value_provider.SetValue("current_page", 1)
 
             model.alert_messages = New Dictionary(Of String, String)()
-            For Each alert As KeyValuePair(Of String, String) In alerts_manager.GetAllAlerts
+            For Each alert As KeyValuePair(Of String, String) In AlertsManager.GetAllAlerts
                 model.alert_messages.Add(alert.Key, alert.Value)
             Next
         End If

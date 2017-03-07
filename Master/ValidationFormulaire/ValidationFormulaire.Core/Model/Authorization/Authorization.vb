@@ -14,7 +14,7 @@ Public Class Authorization
     Private Const LENGTH_INDEX As Integer = 4
     Private Const CODE_INDEX As Integer = 6
 
-    Public Function AuthorizePDF(file As HttpPostedFileBase, alerts_manager As AlertsManager) As Dictionary(Of String, BarCodeData)
+    Public Function AuthorizePDF(file As HttpPostedFileBase) As Dictionary(Of String, BarCodeData)
         Dim pdf_text(), bar_code_text, bar_code_id As String
         Dim data As DataSet
 
@@ -25,11 +25,12 @@ Public Class Authorization
         pdf_text = extractor.PDFToText(file)
         data = New BarCodeFormatImporter().ImportExcelData(bar_code_id)
 
-        Return FillBarCodeDataIntoDictionary(bar_code_text, pdf_text, data, alerts_manager)
+        Return FillBarCodeDataIntoDictionary(bar_code_text, pdf_text, data)
     End Function
 
-    Private Function FillBarCodeDataIntoDictionary(bar_code_text As String, pdf_text() As String, data As DataSet,
-                                                       alerts_manager As AlertsManager) As Dictionary(Of String, BarCodeData)
+    Private Function FillBarCodeDataIntoDictionary(bar_code_text As String,
+                                                   pdf_text() As String,
+                                                   data As DataSet) As Dictionary(Of String, BarCodeData)
         Dim current_string As String
         Dim checked_row As New List(Of String)()
         Dim data_dictionary As New Dictionary(Of String, BarCodeData)()
@@ -51,7 +52,7 @@ Public Class Authorization
                 End If
             Next
         Catch ex As Exception
-            alerts_manager.AddAlert("Incapable de trouver le code à bar ou son gabarit excel associé!")
+            AlertsManager.AddAlert("Incapable de trouver le code à bar ou son gabarit excel associé!")
             System.Diagnostics.Debug.WriteLine(ex)
         End Try
         Return data_dictionary
