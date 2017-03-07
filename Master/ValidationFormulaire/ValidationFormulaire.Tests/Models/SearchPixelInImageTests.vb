@@ -58,4 +58,55 @@ Imports System.Drawing
                                                                   image_test.Height - 1, 1, 1, 255, 255, 255))
         Assert.AreEqual(New Point(2, 1), pixel)
     End Sub
+
+    <TestMethod()> Public Sub VerifyThatFindFirstPixelOfColorDiagonallyReturnCorrectPoint()
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(255, 0, 255, 255, 255, 0)).Returns(True)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(36, 0, 28, 255, 237, 0)).Returns(True)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(76, 0, 177, 255, 34, 0)).Returns(False)
+
+        pixel_search = New SearchPixelInImage(compare_pixels_color.Object)
+        Dim pixel As New Point(pixel_search.FindFirstPixelOfColorDiagonally(image_test, New Point(5, 2), 0, 255, 0))
+        Assert.AreEqual(New Point(3, 4), pixel)
+    End Sub
+
+    <TestMethod()> Public Sub VerifyThatFindFirstPixelOfColorDiagonallyReturnNothingWhenOutOfRange()
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(255, 0, 255, 255, 255, 0)).Returns(True)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(36, 0, 28, 255, 237, 0)).Returns(True)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(76, 0, 177, 255, 34, 0)).Returns(False)
+
+        pixel_search = New SearchPixelInImage(compare_pixels_color.Object)
+        Dim pixel As New Point(pixel_search.FindFirstPixelOfColorDiagonally(image_test, New Point(8, 5), 0, 255, 0))
+        Assert.AreEqual(Nothing, pixel)
+    End Sub
+
+    <TestMethod()> Public Sub VerifyThatFindAllPixelsOfColorNextToPointReturnCorrectArrayOfPoints()
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(255, 0, 255, 0, 255, 255)).Returns(True)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(36, 0, 28, 0, 237, 255)).Returns(False)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(76, 0, 177, 0, 34, 255)).Returns(True)
+
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(255, 0, 255, 255, 255, 0)).Returns(True)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(36, 0, 28, 255, 237, 0)).Returns(True)
+        compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(76, 0, 177, 255, 34, 0)).Returns(False)
+
+        pixel_search = New SearchPixelInImage(compare_pixels_color.Object)
+        Dim red_pixels As List(Of Point) = pixel_search.FindAllPixelsOfColorNextToPoint(image_test, New Point(2, 3), 0, 0, 255)
+        Dim green_pixels As List(Of Point) = pixel_search.FindAllPixelsOfColorNextToPoint(image_test, New Point(5, 4), 0, 255, 0)
+
+        Dim result_red_pixels As New List(Of Point)()
+        result_red_pixels.Add(New Point(2, 3))
+        result_red_pixels.Add(New Point(2, 4))
+        result_red_pixels.Add(New Point(2, 5))
+        result_red_pixels.Add(New Point(2, 2))
+        result_red_pixels.Add(New Point(2, 1))
+
+        Dim result_green_pixels As New List(Of Point)()
+        result_green_pixels.Add(New Point(5, 4))
+        result_green_pixels.Add(New Point(6, 4))
+        result_green_pixels.Add(New Point(7, 4))
+        result_green_pixels.Add(New Point(4, 4))
+        result_green_pixels.Add(New Point(3, 4))
+
+        CollectionAssert.AreEqual(result_red_pixels, red_pixels)
+        CollectionAssert.AreEqual(result_green_pixels, green_pixels)
+    End Sub
 End Class

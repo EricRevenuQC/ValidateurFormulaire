@@ -61,7 +61,7 @@ Public Class SearchPixelInImage
                 positive_search_direction = False
                 current_point.X = starting_point.X + i
                 current_point.Y = starting_point.Y - i
-                If current_point.X >= image.Width - 1 Or current_point.Y <= 0 Then
+                If current_point.X > image.Width - 1 Or current_point.Y < 0 Then
                     Exit While
                 End If
                 i += 1
@@ -69,7 +69,7 @@ Public Class SearchPixelInImage
                 positive_search_direction = True
                 current_point.X = starting_point.X - j
                 current_point.Y = starting_point.Y + j
-                If current_point.X <= 0 Or current_point.Y >= image.Height - 1 Then
+                If current_point.X < 0 Or current_point.Y > image.Height - 1 Then
                     Exit While
                 End If
                 j += 1
