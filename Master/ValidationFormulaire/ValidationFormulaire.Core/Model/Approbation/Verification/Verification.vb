@@ -67,6 +67,11 @@ Public Class Verification
                                                        bitmap_image.Width - 1, 0, 0, bitmap_image.Height - 1, -1, 1,
                                                        0, 0, 0)
 
+                If bot_left_anchor = Nothing Or top_right_anchor = Nothing Then
+                    alerts_manager.AddAlert(New AlertMessages().GetBlankPageMsg())
+                    Exit For
+                End If
+
                 'Find the real anchor from the template's anchor's position.
                 Dim anchor_found As Point = search_pixel.FindFirstPixelOfColorDiagonally(bitmap_image, bot_left_anchor, 0, 0, 0)
                 If anchor_found = Nothing Then

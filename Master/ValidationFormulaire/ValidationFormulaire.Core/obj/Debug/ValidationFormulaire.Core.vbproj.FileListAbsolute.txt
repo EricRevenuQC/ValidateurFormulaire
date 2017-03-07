@@ -64,9 +64,9 @@ C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\Valida
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\itextsharp.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\ZedGraph.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\zlib.net.dll
-C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbprojResolveAssemblyReference.cache
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.Resources.resources
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbproj.GenerateResource.Cache
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.xml
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.pdb
+C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbprojResolveAssemblyReference.cache

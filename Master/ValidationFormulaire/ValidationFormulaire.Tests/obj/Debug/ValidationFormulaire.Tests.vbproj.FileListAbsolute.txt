@@ -475,7 +475,6 @@ C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationForm
 C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.dll
 C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.xml
 C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.pdb
-<<<<<<< HEAD
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\opencv_core231.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\opencv_core242.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\opencv_imgproc231.dll
@@ -505,7 +504,6 @@ C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\Valida
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\ValidationFormulaire.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\Emgu.CV.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\GdPicture.NET.9.dll
-C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\itextsharp.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\Ghostscript.NET.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\System.Web.Optimization.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\EntityFramework.dll
@@ -570,6 +568,3 @@ C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\Valida
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.xml
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.pdb
-=======
-C:\Users\RGHZ001\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\itextsharp.xml
->>>>>>> e137c1943955126df4e1872abf41cd0e0de8b9ac

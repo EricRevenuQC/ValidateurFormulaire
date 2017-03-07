@@ -144,23 +144,13 @@
     <Import Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Controllers\VerificationControllerTests.vb" />
     <Compile Include="Models\AlertsManagerTest.vb" />
     <Compile Include="Models\ComparePixelColorTest.vb" />
     <Compile Include="Models\ConvertPDFToImageTests.vb" />
     <Compile Include="Models\PaginationTests.vb" />
     <Compile Include="Models\ThresholdTests.vb" />
-=======
-    <Compile Include="Approbation\Controllers\VerificationControllerTests.vb" />
-    <Compile Include="Approbation\Models\AlertsManagerTest.vb" />
-    <Compile Include="Approbation\Models\ComparePixelColorTest.vb" />
-    <Compile Include="Approbation\Models\ConvertPDFToImageTests.vb" />
-    <Compile Include="Approbation\Models\PaginationTests.vb" />
-    <Compile Include="Approbation\Models\SearchForTextTest.vb" />
-    <Compile Include="Approbation\Models\TextAdjusterTest.vb" />
-    <Compile Include="Approbation\Models\TextExtractorTest.vb" />
->>>>>>> e137c1943955126df4e1872abf41cd0e0de8b9ac
+    <Compile Include="Models\SearchPixelInImageTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>
