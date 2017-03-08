@@ -148,9 +148,10 @@
     <Compile Include="Models\AlertsManagerTest.vb" />
     <Compile Include="Models\ComparePixelColorTest.vb" />
     <Compile Include="Models\ConvertPDFToImageTests.vb" />
+    <Compile Include="Models\ColorSelectorTests.vb" />
     <Compile Include="Models\PaginationTests.vb" />
     <Compile Include="Models\ThresholdTests.vb" />
-    <Compile Include="Models\SearchPixelInImageTests.vb" />
+    <Compile Include="Models\FindFirstPixelTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>

@@ -113,8 +113,8 @@
     <Compile Include="Model\Alerts\AlertsManager.vb" />
     <Compile Include="Model\Approbation\Comparison\Comparaison.vb" />
     <Compile Include="Model\Approbation\Verification\Anchor.vb" />
-    <Compile Include="Model\Approbation\Verification\FindTopRightAnchorCorner.vb" />
-    <Compile Include="Model\Approbation\Verification\FindBotLeftAnchorCorner.vb" />
+    <Compile Include="Model\Approbation\Verification\AnchorCorner\FindTopRightAnchorCorner.vb" />
+    <Compile Include="Model\Approbation\Verification\AnchorCorner\FindBotLeftAnchorCorner.vb" />
     <Compile Include="Model\Authorization\AuthorizationBackUp.vb" />
     <Compile Include="Model\Authorization\BarCodeData.vb" />
     <Compile Include="Model\Authorization\BarCodeProperties.vb" />
@@ -138,7 +138,7 @@
     <Compile Include="Model\ImageOperations\ComparePixelColor.vb" />
     <Compile Include="Model\Pagination\DeterminePage.vb" />
     <Compile Include="Model\ImageOperations\DrawOnImage.vb" />
-    <Compile Include="Model\ImageOperations\SearchPixelInImage.vb" />
+    <Compile Include="Model\ImageOperations\ColorSelector.vb" />
     <Compile Include="Model\ImageOperations\Threshold.vb" />
     <Compile Include="Model\Approbation\Verification\Verification.vb" />
     <Compile Include="Model\Session\SessionValueProvider.vb" />
@@ -196,6 +196,7 @@
     <Content Include="GdPicture.NET.9.PDF.dll" />
     <Content Include="GdPicture.NET.9.twain.client.64.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -7,22 +7,19 @@ Public Class Verification
 
     Private compare_pixels_color As New ComparePixelColor()
     Private red_circle = Image.FromFile(New Config().GetRedCirclePath)
-    Private search_pixel As SearchPixelInImage
+    Private color_selector As ColorSelector
     Private anchor As Anchor
     Private draw As New DrawOnImage()
 
-    Protected top_right_anchor, bot_left_anchor As Point
+    Protected top_right_anchor_position, bot_left_anchor_position As Point
     Protected bitmap_image As Bitmap
 
     Private Const LINE_SIZE As Integer = 1
     Private Const ANCHOR_LINE_SIZE As Integer = 2
 
-    Public Sub New()
-        search_pixel = New SearchPixelInImage()
-    End Sub
-
     Public Function VerifiyWithTemnplate(images() As Image, template_image As Image,
-                            Optional distance_threshold As Single = 0) As Image() Implements IVerification.VerifiyWithTemnplate
+                            Optional distance_threshold As Single = 0) As Image() _
+                        Implements IVerification.VerifiyWithTemnplate
         Dim image_template As New Image(Of Bgr, Byte)(template_image)
         Dim emgu_images(images.Length) As Image(Of Bgr, Byte)
         Dim image_result As Image(Of Bgr, Byte)
@@ -52,13 +49,15 @@ Public Class Verification
     Public Function DetermineInputZone(images() As Image) As Image() Implements IVerification.DetermineInputZone
         For image As Integer = 1 To images.Length - 1
             bitmap_image = New Bitmap(images(image))
-            Dim anchor_points_bot_left As New List(Of Point)()
-            Dim anchor_points_top_right As New List(Of Point)()
+            Dim bot_left_anchor_pixels As New List(Of Point)()
+            Dim top_right_anchor_pixels As New List(Of Point)()
             anchor = New Anchor(bitmap_image)
+            color_selector = New ColorSelector(bitmap_image)
 
             'Set the input zone with the first page's anchor only.
             If image = 1 Then
                 anchor.FindTemplateAnchors()
+
                 If anchor.GetBotLeftAnchor() = Nothing OrElse anchor.GetTopRightAnchor() = Nothing Then
                     AlertsManager.AddAlert(New AlertMessages().GetBlankPageMsg())
                     Exit For
@@ -66,45 +65,41 @@ Public Class Verification
 
                 anchor.FindRealAnchorsCorners()
 
-                bot_left_anchor = anchor.GetBotLeftAnchor()
-                top_right_anchor = anchor.GetTopRightAnchor()
+                bot_left_anchor_position = anchor.GetBotLeftAnchor()
+                top_right_anchor_position = anchor.GetTopRightAnchor()
 
                 'Save all pixels of each anchor into a list of points. This allow us to ignore these pixels
                 'when checking for out of bounds pixels later (anchors can't be out of bounds).
-                anchor_points_bot_left = search_pixel.FindAllPixelsOfColorNextToPoint(bitmap_image,
-                                                                                      bot_left_anchor,
-                                                                                      0, 0, 0)
-                anchor_points_top_right = search_pixel.FindAllPixelsOfColorNextToPoint(bitmap_image,
-                                                                                       top_right_anchor,
-                                                                                       0, 0, 0)
+                bot_left_anchor_pixels = color_selector.FindAllPixelsOfColorFromPoint(anchor.GetBotLeftAnchor(), New Colors(0, 0, 0))
+                top_right_anchor_pixels = color_selector.FindAllPixelsOfColorFromPoint(anchor.GetTopRightAnchor(), New Colors(0, 0, 0))
 
                 'Set the corner of the starting position of the input zone farther than the real anchor's corner's position.
                 'This gives us a treshold to work with when checking out of bound pixels.
-                bot_left_anchor.X += ANCHOR_LINE_SIZE
-                bot_left_anchor.Y -= ANCHOR_LINE_SIZE
-                top_right_anchor.X -= ANCHOR_LINE_SIZE
-                top_right_anchor.Y += ANCHOR_LINE_SIZE
+                bot_left_anchor_position.X += ANCHOR_LINE_SIZE
+                bot_left_anchor_position.Y -= ANCHOR_LINE_SIZE
+                top_right_anchor_position.X -= ANCHOR_LINE_SIZE
+                top_right_anchor_position.Y += ANCHOR_LINE_SIZE
             End If
 
             'Draw the input zone for each zones (left, right, top, bottom).
-            draw.DrawZone(bitmap_image, bot_left_anchor.X, top_right_anchor.X,
-                          bot_left_anchor.Y - LINE_SIZE, bot_left_anchor.Y, 1, 1, Color.Green)
-            draw.DrawZone(bitmap_image, bot_left_anchor.X, top_right_anchor.X,
-                          top_right_anchor.Y + LINE_SIZE, top_right_anchor.Y, 1, -1, Color.Green)
-            draw.DrawZone(bitmap_image, bot_left_anchor.X, bot_left_anchor.X + LINE_SIZE,
-                          top_right_anchor.Y, bot_left_anchor.Y, 1, 1, Color.Green)
-            draw.DrawZone(bitmap_image, top_right_anchor.X, top_right_anchor.X - LINE_SIZE,
-                          top_right_anchor.Y, bot_left_anchor.Y, -1, 1, Color.Green)
+            draw.DrawZone(bitmap_image, bot_left_anchor_position.X, top_right_anchor_position.X,
+                          bot_left_anchor_position.Y - LINE_SIZE, bot_left_anchor_position.Y, 1, 1, Color.Green)
+            draw.DrawZone(bitmap_image, bot_left_anchor_position.X, top_right_anchor_position.X,
+                          top_right_anchor_position.Y + LINE_SIZE, top_right_anchor_position.Y, 1, -1, Color.Green)
+            draw.DrawZone(bitmap_image, bot_left_anchor_position.X, bot_left_anchor_position.X + LINE_SIZE,
+                          top_right_anchor_position.Y, bot_left_anchor_position.Y, 1, 1, Color.Green)
+            draw.DrawZone(bitmap_image, top_right_anchor_position.X, top_right_anchor_position.X - LINE_SIZE,
+                          top_right_anchor_position.Y, bot_left_anchor_position.Y, -1, 1, Color.Green)
 
             'Search through all pixels outside the input zone and mark them.
             Dim outside_pixels As New List(Of Point)()
-            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, anchor_points_bot_left, anchor_points_top_right, 0,
-                                 bitmap_image.Width - 1, 0, top_right_anchor.Y - 1, 1, 1, red_circle))
-            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, anchor_points_bot_left, anchor_points_top_right, 0,
-                                  bitmap_image.Width - 1, bot_left_anchor.Y + 1, bitmap_image.Height - 1, 1, 1, red_circle))
-            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, anchor_points_bot_left, anchor_points_top_right, 0,
-                                  bot_left_anchor.X - 1, 0, bitmap_image.Height - 1, 1, 1, red_circle))
-            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, anchor_points_bot_left, anchor_points_top_right, top_right_anchor.X + 1,
+            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, bot_left_anchor_pixels, top_right_anchor_pixels, 0,
+                                 bitmap_image.Width - 1, 0, top_right_anchor_position.Y - 1, 1, 1, red_circle))
+            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, bot_left_anchor_pixels, top_right_anchor_pixels, 0,
+                                  bitmap_image.Width - 1, bot_left_anchor_position.Y + 1, bitmap_image.Height - 1, 1, 1, red_circle))
+            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, bot_left_anchor_pixels, top_right_anchor_pixels, 0,
+                                  bot_left_anchor_position.X - 1, 0, bitmap_image.Height - 1, 1, 1, red_circle))
+            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, bot_left_anchor_pixels, top_right_anchor_pixels, top_right_anchor_position.X + 1,
                                   bitmap_image.Width - 1, 0, bitmap_image.Height - 1, 1, 1, red_circle))
 
             If outside_pixels.Count > 0 Then

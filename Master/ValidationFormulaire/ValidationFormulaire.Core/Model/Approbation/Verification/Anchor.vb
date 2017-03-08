@@ -1,7 +1,6 @@
 ﻿Imports System.Drawing
 
 Public Class Anchor
-    Private search_pixel As New SearchPixelInImage()
     Private bot_left_anchor, top_right_anchor As Point
     Private image As Bitmap
     Private find_first_pixel_of_same_color, find_first_pixel_of_same_color_diagonally As IFindFirstPixel
