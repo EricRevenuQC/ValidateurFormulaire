@@ -23,6 +23,12 @@ Public Class Authorization
         bar_code_id = bar_code_reader.GetBarCodeId
         file.InputStream.Position = 0
         pdf_text = extractor.PDFToText(file)
+
+        System.Diagnostics.Debug.WriteLine("Reading bar code")
+        For Each s As String In pdf_text
+            System.Diagnostics.Debug.WriteLine(s)
+        Next
+        System.Diagnostics.Debug.WriteLine("Finished")
         data = New BarCodeFormatImporter().ImportExcelData(bar_code_id)
 
         Return FillBarCodeDataIntoDictionary(bar_code_text, pdf_text, data)

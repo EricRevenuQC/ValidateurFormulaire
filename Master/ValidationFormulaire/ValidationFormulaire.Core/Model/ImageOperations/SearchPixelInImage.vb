@@ -83,62 +83,64 @@ Public Class SearchPixelInImage
         Dim pixels As New List(Of Point)()
 
         For current_row As Integer = starting_point.X To image.Width - 1 Step 1
-            If (compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, starting_point.Y).B, blue,
-                                                   image.GetPixel(current_row, starting_point.Y).G, green,
-                                                   image.GetPixel(current_row, starting_point.Y).R, red)) Then
+            If Not (compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, starting_point.Y).B, blue,
+                                                    image.GetPixel(current_row, starting_point.Y).G, green,
+                                                    image.GetPixel(current_row, starting_point.Y).R, red)) Then
+                For current_col As Integer = starting_point.Y To image.Height - 1 Step 1
+                    If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,
+                                                        image.GetPixel(current_row, current_col).G, green,
+                                                        image.GetPixel(current_row, current_col).R, red)) Then
+                        If Not pixels.Contains(New Point(current_row, current_col)) Then
+                            pixels.Add(New Point(current_row, current_col))
+                        End If
+                    Else
+                        Exit For
+                    End If
+                Next
+                For current_col As Integer = starting_point.Y To 0 Step -1
+                    If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,
+                                                        image.GetPixel(current_row, current_col).G, green,
+                                                        image.GetPixel(current_row, current_col).R, red)) Then
+                        If Not pixels.Contains(New Point(current_row, current_col)) Then
+                            pixels.Add(New Point(current_row, current_col))
+                        End If
+                    Else
+                        Exit For
+                    End If
+                Next
+            Else
                 Exit For
             End If
-            For current_col As Integer = starting_point.Y To image.Height - 1 Step 1
-                If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,
-                                                   image.GetPixel(current_row, current_col).G, green,
-                                                   image.GetPixel(current_row, current_col).R, red)) Then
-                    If Not pixels.Contains(New Point(current_row, current_col)) Then
-                        pixels.Add(New Point(current_row, current_col))
-                    End If
-                Else
-                    Exit For
-                End If
-            Next
-            For current_col As Integer = starting_point.Y To 0 Step -1
-                If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,
-                                                   image.GetPixel(current_row, current_col).G, green,
-                                                   image.GetPixel(current_row, current_col).R, red)) Then
-                    If Not pixels.Contains(New Point(current_row, current_col)) Then
-                        pixels.Add(New Point(current_row, current_col))
-                    End If
-                Else
-                    Exit For
-                End If
-            Next
         Next
         For current_row As Integer = starting_point.X To 0 Step -1
-            If (compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, starting_point.Y).B, blue,
-                                                   image.GetPixel(current_row, starting_point.Y).G, green,
-                                                   image.GetPixel(current_row, starting_point.Y).R, red)) Then
+            If Not (compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, starting_point.Y).B, blue,
+                                                    image.GetPixel(current_row, starting_point.Y).G, green,
+                                                    image.GetPixel(current_row, starting_point.Y).R, red)) Then
+                For current_col As Integer = starting_point.Y To image.Height - 1 Step 1
+                    If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,
+                                                        image.GetPixel(current_row, current_col).G, green,
+                                                        image.GetPixel(current_row, current_col).R, red)) Then
+                        If Not pixels.Contains(New Point(current_row, current_col)) Then
+                            pixels.Add(New Point(current_row, current_col))
+                        End If
+                    Else
+                        Exit For
+                    End If
+                Next
+                For current_col As Integer = starting_point.Y To 0 Step -1
+                    If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,
+                                                        image.GetPixel(current_row, current_col).G, green,
+                                                        image.GetPixel(current_row, current_col).R, red)) Then
+                        If Not pixels.Contains(New Point(current_row, current_col)) Then
+                            pixels.Add(New Point(current_row, current_col))
+                        End If
+                    Else
+                        Exit For
+                    End If
+                Next
+            Else
                 Exit For
             End If
-            For current_col As Integer = starting_point.Y To image.Height - 1 Step 1
-                If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,
-                                                   image.GetPixel(current_row, current_col).G, green,
-                                                   image.GetPixel(current_row, current_col).R, red)) Then
-                    If Not pixels.Contains(New Point(current_row, current_col)) Then
-                        pixels.Add(New Point(current_row, current_col))
-                    End If
-                Else
-                    Exit For
-                End If
-            Next
-            For current_col As Integer = starting_point.Y To 0 Step -1
-                If (Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, blue,
-                                                   image.GetPixel(current_row, current_col).G, green,
-                                                   image.GetPixel(current_row, current_col).R, red)) Then
-                    If Not pixels.Contains(New Point(current_row, current_col)) Then
-                        pixels.Add(New Point(current_row, current_col))
-                    End If
-                Else
-                    Exit For
-                End If
-            Next
         Next
         Return pixels
     End Function

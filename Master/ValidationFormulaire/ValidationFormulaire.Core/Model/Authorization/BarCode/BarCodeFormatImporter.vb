@@ -21,8 +21,6 @@ Public Class BarCodeFormatImporter
                 ";Extended Properties=Excel 12.0 XML;"
         End If
 
-        System.Diagnostics.Debug.WriteLine(excel_connection_string)
-
         excel_connection = New OleDbConnection(excel_connection_string)
         excel_connection.Open()
         Dim cmd As New OleDbCommand()

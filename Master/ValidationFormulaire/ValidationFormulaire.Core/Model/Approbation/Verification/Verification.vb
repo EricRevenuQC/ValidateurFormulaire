@@ -19,7 +19,6 @@ Public Class Verification
 
     Public Sub New()
         search_pixel = New SearchPixelInImage()
-        anchor = New Anchor()
     End Sub
 
     Public Function VerifiyWithTemnplate(images() As Image, template_image As Image,
@@ -55,37 +54,20 @@ Public Class Verification
             bitmap_image = New Bitmap(images(image))
             Dim anchor_points_bot_left As New List(Of Point)()
             Dim anchor_points_top_right As New List(Of Point)()
+            anchor = New Anchor(bitmap_image)
 
             'Set the input zone with the first page's anchor only.
             If image = 1 Then
-                'anchor.FindTemplateAnchors()
-                bot_left_anchor = search_pixel.FindFirstPixelOfColor(New Bitmap(New Config().GetVerificationImageTemplatePath),
-                                                      0, bitmap_image.Height - 1, bitmap_image.Width - 1, 0, 1, -1,
-                                                      0, 0, 0)
-                top_right_anchor = search_pixel.FindFirstPixelOfColor(New Bitmap(New Config().GetVerificationImageTemplatePath),
-                                                       bitmap_image.Width - 1, 0, 0, bitmap_image.Height - 1, -1, 1,
-                                                       0, 0, 0)
-                If bot_left_anchor = Nothing Or top_right_anchor = Nothing Then
+                anchor.FindTemplateAnchors()
+                If anchor.GetBotLeftAnchor() = Nothing OrElse anchor.GetTopRightAnchor() = Nothing Then
                     AlertsManager.AddAlert(New AlertMessages().GetBlankPageMsg())
                     Exit For
                 End If
 
-                'Find the real anchor from the template's anchor's position.
-                Dim anchor_found As Point = search_pixel.FindFirstPixelOfColorDiagonally(bitmap_image, bot_left_anchor, 0, 0, 0)
-                If anchor_found = Nothing Then
-                    AlertsManager.AddAlert(New AlertMessages().GetBotLeftAnchorMsg)
-                Else
-                    bot_left_anchor = anchor_found
-                End If
-                anchor_found = search_pixel.FindFirstPixelOfColorDiagonally(bitmap_image, top_right_anchor, 0, 0, 0)
-                If anchor_found = Nothing Then
-                    AlertsManager.AddAlert(New AlertMessages().GetTopRightAnchorMsg)
-                Else
-                    top_right_anchor = anchor_found
-                End If
+                anchor.FindRealAnchorsCorners()
 
-                bot_left_anchor = anchor.FindAnchorCorner(bitmap_image, bot_left_anchor, AnchorCorner.bot_left)
-                top_right_anchor = anchor.FindAnchorCorner(bitmap_image, top_right_anchor, AnchorCorner.top_right)
+                bot_left_anchor = anchor.GetBotLeftAnchor()
+                top_right_anchor = anchor.GetTopRightAnchor()
 
                 'Save all pixels of each anchor into a list of points. This allow us to ignore these pixels
                 'when checking for out of bounds pixels later (anchors can't be out of bounds).

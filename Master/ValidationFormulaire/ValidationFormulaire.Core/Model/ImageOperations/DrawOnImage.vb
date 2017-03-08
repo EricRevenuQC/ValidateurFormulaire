@@ -9,11 +9,11 @@ Public Class DrawOnImage
                                    col_start As Integer, col_end As Integer,
                                    row_step As Integer, col_step As Integer,
                                    color As Color)
-        For current_row As Integer = row_start To row_end Step row_step
-            For current_col As Integer = col_start To col_end Step col_step
+        For current_row As Long = row_start To row_end Step row_step
+            For current_col As Long = col_start To col_end Step col_step
                 If Not compare_pixels_color.DifferentPixelColor(bitmap_image.GetPixel(current_row, current_col).B, 255,
-                                               bitmap_image.GetPixel(current_row, current_col).G, 255,
-                                               bitmap_image.GetPixel(current_row, current_col).R, 255) Then
+                                                bitmap_image.GetPixel(current_row, current_col).G, 255,
+                                                bitmap_image.GetPixel(current_row, current_col).R, 255) Then
                     bitmap_image.SetPixel(current_row, current_col, color)
                 End If
             Next
