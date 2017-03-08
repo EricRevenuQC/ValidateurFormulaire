@@ -47,6 +47,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Downloads\itextsharp-all-5.5.10\itextsharp-dll-core\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>True</SpecificVersion>
     </Reference>
@@ -157,12 +158,104 @@
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config" />
+    <Content Include="bin\Debug\de\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\de\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\de\System.Spatial.resources.dll" />
+    <Content Include="bin\Debug\Emgu.CV.dll" />
+    <Content Include="bin\Debug\Emgu.Util.dll" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\es\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\es\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\es\System.Spatial.resources.dll" />
+    <Content Include="bin\Debug\fr\EntityFramework.resources.dll" />
+    <Content Include="bin\Debug\fr\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\fr\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Net.Http.Formatting.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Spatial.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.Helpers.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.Http.OData.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.Http.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.Http.WebHost.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.Mvc.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.Optimization.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.Razor.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.WebPages.Deployment.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.WebPages.Razor.resources.dll" />
+    <Content Include="bin\Debug\fr\System.Web.WebPages.resources.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.dll" />
+    <Content Include="bin\Debug\Ghostscript.NET.dll" />
+    <Content Include="bin\Debug\itextsharp.dll" />
+    <Content Include="bin\Debug\itextsharp.xml" />
+    <Content Include="bin\Debug\it\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\it\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\it\System.Spatial.resources.dll" />
+    <Content Include="bin\Debug\ja\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\ja\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\ja\System.Spatial.resources.dll" />
+    <Content Include="bin\Debug\ko\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\ko\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\ko\System.Spatial.resources.dll" />
+    <Content Include="bin\Debug\Microsoft.Data.Edm.dll" />
+    <Content Include="bin\Debug\Microsoft.Data.OData.dll" />
+    <Content Include="bin\Debug\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Debug\Microsoft.Web.Mvc.FixedDisplayModes.dll" />
+    <Content Include="bin\Debug\Moq.dll" />
+    <Content Include="bin\Debug\Moq.pdb" />
+    <Content Include="bin\Debug\Moq.xml" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\opencv_core231.dll" />
+    <Content Include="bin\Debug\opencv_core242.dll" />
+    <Content Include="bin\Debug\opencv_imgproc231.dll" />
+    <Content Include="bin\Debug\opencv_imgproc242.dll" />
+    <Content Include="bin\Debug\ru\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\ru\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\ru\System.Spatial.resources.dll" />
+    <Content Include="bin\Debug\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\Debug\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\Debug\System.Spatial.dll" />
+    <Content Include="bin\Debug\System.Web.Helpers.dll" />
+    <Content Include="bin\Debug\System.Web.Helpers.xml" />
+    <Content Include="bin\Debug\System.Web.Http.dll" />
+    <Content Include="bin\Debug\System.Web.Http.OData.dll" />
+    <Content Include="bin\Debug\System.Web.Http.OData.xml" />
+    <Content Include="bin\Debug\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\Debug\System.Web.Http.WebHost.xml" />
+    <Content Include="bin\Debug\System.Web.Http.xml" />
+    <Content Include="bin\Debug\System.Web.Mvc.dll" />
+    <Content Include="bin\Debug\System.Web.Mvc.xml" />
+    <Content Include="bin\Debug\System.Web.Optimization.dll" />
+    <Content Include="bin\Debug\System.Web.Razor.dll" />
+    <Content Include="bin\Debug\System.Web.Razor.xml" />
+    <Content Include="bin\Debug\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\Debug\System.Web.WebPages.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\Debug\System.Web.WebPages.xml" />
+    <Content Include="bin\Debug\ValidationFormulaire.Core.dll" />
+    <Content Include="bin\Debug\ValidationFormulaire.Core.pdb" />
+    <Content Include="bin\Debug\ValidationFormulaire.Core.xml" />
+    <Content Include="bin\Debug\ValidationFormulaire.dll" />
+    <Content Include="bin\Debug\ValidationFormulaire.pdb" />
+    <Content Include="bin\Debug\ValidationFormulaire.Tests.dll" />
+    <Content Include="bin\Debug\ValidationFormulaire.Tests.pdb" />
+    <Content Include="bin\Debug\ValidationFormulaire.Tests.xml" />
+    <Content Include="bin\Debug\ValidationFormulaire.xml" />
+    <Content Include="bin\Debug\zh-Hans\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\zh-Hans\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\zh-Hans\System.Spatial.resources.dll" />
+    <Content Include="bin\Debug\zh-Hant\Microsoft.Data.Edm.resources.dll" />
+    <Content Include="bin\Debug\zh-Hant\Microsoft.Data.OData.resources.dll" />
+    <Content Include="bin\Debug\zh-Hant\System.Spatial.resources.dll" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\ValidationFormulaire.Tests.dll.config" />
     <None Include="Files\4 blank pages.pdf" />
     <None Include="Files\pdftest1.pdf" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ValidationFormulaire.Core\ValidationFormulaire.Core.vbproj">

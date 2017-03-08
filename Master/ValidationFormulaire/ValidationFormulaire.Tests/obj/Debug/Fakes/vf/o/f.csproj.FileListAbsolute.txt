@@ -1,0 +1,1 @@
+C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\Fakes\vf\o\f.csprojResolveAssemblyReference.cache

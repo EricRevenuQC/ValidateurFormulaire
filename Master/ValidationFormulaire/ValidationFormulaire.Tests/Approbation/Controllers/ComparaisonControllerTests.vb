@@ -24,7 +24,6 @@ Public Class ComparaisonControllerTests
         converter = New Mock(Of IConverter)
 
         config = New Mock(Of IConfig)
-
         session_value_provider.Setup(Function(f) f.GetValue("current_page_left")).Returns(2)
     End Sub
 
