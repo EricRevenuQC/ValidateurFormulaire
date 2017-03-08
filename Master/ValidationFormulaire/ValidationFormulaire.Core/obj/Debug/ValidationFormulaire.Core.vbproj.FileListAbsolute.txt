@@ -73,16 +73,6 @@ C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\Valida
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\ValidationFormulaire.Core.dll
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\ValidationFormulaire.Core.pdb
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\ValidationFormulaire.Core.xml
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\Emgu.CV.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\Emgu.CV.UI.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\Emgu.Util.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\Emgu.Utils.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\GdPicture.NET.9.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\Ghostscript.NET.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\itextsharp.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\ZedGraph.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\zlib.net.dll
-C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbprojResolveAssemblyReference.cache
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.Resources.resources
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbproj.GenerateResource.Cache
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.dll

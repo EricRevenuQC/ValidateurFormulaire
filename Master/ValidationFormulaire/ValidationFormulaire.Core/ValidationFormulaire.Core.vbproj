@@ -107,32 +107,31 @@
     <Compile Include="Interfaces\Approbation\IPagination.vb" />
     <Compile Include="Interfaces\Approbation\IVerification.vb" />
     <Compile Include="Interfaces\ImageOperations\IComparePixelColor.vb" />
-    <Compile Include="Model\Alerts\AlertMessages.vb" />
-    <Compile Include="Model\Alerts\AlertsManager.vb" />
-    <Compile Include="Model\Approbation\Comparison\Comparaison.vb" />
-    <Compile Include="Model\Authorization\AuthorizationBackUp.vb" />
-    <Compile Include="Model\Authorization\BarCodeData.vb" />
-    <Compile Include="Model\Authorization\BarCodeProperties.vb" />
-    <Compile Include="Model\Authorization\BarCode\BarCodeFormatImporter.vb" />
-    <Compile Include="Model\Authorization\DictionaryOperations.vb" />
-    <Compile Include="Model\Config.vb" />
-    <Compile Include="Model\Converters\BarCodeFormatImporter.vb" />
-    <Compile Include="Model\Converters\PDFToImageConverter.vb" />
-    <Compile Include="Model\Approbation\FormulairePosition.vb" />
-    <Compile Include="Model\ImageOperations\FormulaireImage.vb" />
-    <Compile Include="Model\Authorization\Authorization.vb" />
-    <Compile Include="Model\Authorization\BarCode\BarCodeReader.vb" />
-    <Compile Include="Model\Authorization\ExceptionsManager.vb" />
-    <Compile Include="Model\Authorization\TextExtractor.vb" />
-    <Compile Include="Model\Authorization\StringOperations\SearchForText.vb" />
-    <Compile Include="Model\Authorization\StringOperations\TextAdjuster.vb" />
-    <Compile Include="Model\ImageOperations\ComparePixelColor.vb" />
-    <Compile Include="Model\Pagination\DeterminePage.vb" />
-    <Compile Include="Model\ImageOperations\DrawOnImage.vb" />
-    <Compile Include="Model\ImageOperations\SearchPixelInImage.vb" />
-    <Compile Include="Model\ImageOperations\Threshold.vb" />
-    <Compile Include="Model\Approbation\Verification\Verification.vb" />
-    <Compile Include="Model\Session\SessionValueProvider.vb" />
+    <Compile Include="obj\Model\Alerts\AlertMessages.vb" />
+    <Compile Include="obj\Model\Alerts\AlertsManager.vb" />
+    <Compile Include="obj\Model\Approbation\Comparison\Comparaison.vb" />
+    <Compile Include="obj\Model\Authorization\BarCodeData.vb" />
+    <Compile Include="obj\Model\Authorization\BarCodeProperties.vb" />
+    <Compile Include="obj\Model\Authorization\BarCode\BarCodeFormatImporter.vb" />
+    <Compile Include="obj\Model\Authorization\DictionaryOperations.vb" />
+    <Compile Include="obj\Model\Config.vb" />
+    <Compile Include="obj\Model\Converters\BarCodeFormatImporter.vb" />
+    <Compile Include="obj\Model\Converters\PDFToImageConverter.vb" />
+    <Compile Include="obj\Model\Approbation\FormulairePosition.vb" />
+    <Compile Include="obj\Model\ImageOperations\FormulaireImage.vb" />
+    <Compile Include="obj\Model\Authorization\Authorization.vb" />
+    <Compile Include="obj\Model\Authorization\BarCode\BarCodeReader.vb" />
+    <Compile Include="obj\Model\Authorization\ExceptionsManager.vb" />
+    <Compile Include="obj\Model\Authorization\TextExtractor.vb" />
+    <Compile Include="obj\Model\Authorization\StringOperations\SearchForText.vb" />
+    <Compile Include="obj\Model\Authorization\StringOperations\TextAdjuster.vb" />
+    <Compile Include="obj\Model\ImageOperations\ComparePixelColor.vb" />
+    <Compile Include="obj\Model\Pagination\DeterminePage.vb" />
+    <Compile Include="obj\Model\ImageOperations\DrawOnImage.vb" />
+    <Compile Include="obj\Model\ImageOperations\SearchPixelInImage.vb" />
+    <Compile Include="obj\Model\ImageOperations\Threshold.vb" />
+    <Compile Include="obj\Model\Approbation\Verification\Verification.vb" />
+    <Compile Include="obj\Model\Session\SessionValueProvider.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -156,6 +155,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\ValidationFormulaire.Core.Resources.resources" />
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -167,8 +167,41 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="obj\Debug\build.force" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\ValidationFormulaire.Core.vbproj.GenerateResource.Cache" />
+    <None Include="obj\Debug\ValidationFormulaire.Core.vbprojResolveAssemblyReference.cache" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Emgu.CV.dll" />
+    <Content Include="bin\Debug\Emgu.CV.UI.dll" />
+    <Content Include="bin\Debug\Emgu.Util.dll" />
+    <Content Include="bin\Debug\Emgu.Utils.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.barcode.1d.reader.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.barcode.1d.writer.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.barcode.2d.writer.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.barcode.dm.reader.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.barcode.pdf417.reader.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.barcode.qr.reader.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.filters.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.filters.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.image.gdimgplug.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.image.gdimgplug.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.jbig2.encoder.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.ocr.tesseract.3.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.omr.64.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.PDF.dll" />
+    <Content Include="bin\Debug\GdPicture.NET.9.twain.client.64.dll" />
+    <Content Include="bin\Debug\Ghostscript.NET.dll" />
+    <Content Include="bin\Debug\itextsharp.dll" />
+    <Content Include="bin\Debug\ValidationFormulaire.Core.dll" />
+    <Content Include="bin\Debug\ValidationFormulaire.Core.pdb" />
+    <Content Include="bin\Debug\ValidationFormulaire.Core.xml" />
+    <Content Include="bin\Debug\ZedGraph.dll" />
+    <Content Include="bin\Debug\zlib.net.dll" />
+    <Content Include="bin\GdPicture.NET.9.dll" />
+    <Content Include="bin\itextsharp.dll" />
     <Content Include="GdPicture.NET.9.barcode.1d.reader.64.dll" />
     <Content Include="GdPicture.NET.9.barcode.1d.writer.dll" />
     <Content Include="GdPicture.NET.9.barcode.2d.writer.dll" />
@@ -186,6 +219,14 @@
     <Content Include="GdPicture.NET.9.omr.64.dll" />
     <Content Include="GdPicture.NET.9.PDF.dll" />
     <Content Include="GdPicture.NET.9.twain.client.64.dll" />
+    <Content Include="itextsharp.dll" />
+    <Content Include="obj\Debug\ValidationFormulaire.Core.dll" />
+    <Content Include="obj\Debug\ValidationFormulaire.Core.pdb" />
+    <Content Include="obj\Debug\ValidationFormulaire.Core.vbproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\ValidationFormulaire.Core.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
