@@ -34,10 +34,11 @@ Public Class ComparisonController
             If (session_value_provider.GetValue("images_left") IsNot Nothing) And
                     (session_value_provider.GetValue("images_right") IsNot Nothing) Then
                 session_value_provider.SetValue("threshold", threshold)
-                session_value_provider.SetValue("compared_images",
-                                            comparaison.Comparer(session_value_provider.GetValue("images_left")(session_value_provider.GetValue("current_page_left")),
-                                                                 session_value_provider.GetValue("images_right")(session_value_provider.GetValue("current_page_right")),
-                                                                 session_value_provider.GetValue("threshold")))
+                session_value_provider.SetValue("compared_images", comparaison.Comparer(
+                    session_value_provider.GetValue("images_left")(session_value_provider.GetValue("current_page_left")),
+                    session_value_provider.GetValue("images_right")(session_value_provider.GetValue("current_page_right")),
+                    session_value_provider.GetValue("threshold")
+                ))
                 session_value_provider.SetValue("comparing", "block")
                 session_value_provider.SetValue("non_comparing", "none")
             End If
@@ -45,9 +46,11 @@ Public Class ComparisonController
             session_value_provider.SetValue("comparing", "none")
             session_value_provider.SetValue("non_comparing", "block")
             If (formulaire = FormulairePosition.left) Then
-                session_value_provider.SetValue("current_page_left", pagination.DeterminePageChange(page_action, session_value_provider.GetValue("current_page_left"), page))
+                session_value_provider.SetValue("current_page_left", pagination.DeterminePageChange(
+                    page_action, session_value_provider.GetValue("current_page_left"), page))
             ElseIf (formulaire = FormulairePosition.right) Then
-                session_value_provider.SetValue("current_page_right", pagination.DeterminePageChange(page_action, session_value_provider.GetValue("current_page_right"), page))
+                session_value_provider.SetValue("current_page_right", pagination.DeterminePageChange(
+                    page_action, session_value_provider.GetValue("current_page_right"), page))
             End If
         End If
         Return View("ComparisonFormulaire")

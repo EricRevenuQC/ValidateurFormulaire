@@ -112,6 +112,7 @@
     <Compile Include="Model\Alerts\AlertMessages.vb" />
     <Compile Include="Model\Alerts\AlertsManager.vb" />
     <Compile Include="Model\Approbation\Comparison\Comparaison.vb" />
+    <Compile Include="Model\Approbation\ImageMask.vb" />
     <Compile Include="Model\Approbation\Verification\Anchor.vb" />
     <Compile Include="Model\Approbation\Verification\AnchorCorner\FindTopRightAnchorCorner.vb" />
     <Compile Include="Model\Approbation\Verification\AnchorCorner\FindBotLeftAnchorCorner.vb" />

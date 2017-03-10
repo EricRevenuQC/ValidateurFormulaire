@@ -26,7 +26,7 @@ Public Class Verification
             End If
 
             draw_input_zone.DrawInputZoneFromAnchors(anchor.GetBotLeftAnchor(), anchor.GetTopRightAnchor())
-            pixel_marker.FindAllOutOfBoundPixels(anchor.GetBotLeftAnchor(), anchor.GetTopRightAnchor(), page)
+            pixel_marker.FindAllOutOfBoundColoredPixels(anchor.GetBotLeftAnchor(), anchor.GetTopRightAnchor(), page)
             images(page) = images(page)
         Next
         Return images
@@ -44,8 +44,7 @@ Public Class Verification
         Dim image_result As Image(Of Bgr, Byte) = emgu_image - emgu_template_image
         threshold.RemovePixels(image_result.Data)
 
-        Dim image_mask As Image(Of Gray, Byte) = image_result.InRange(New Bgr(10, 10, 10), New Bgr(255, 255, 255))
-        image_result.SetValue(New Bgr(255, 255, 0), image_mask) 'Set color to cyan since black - cyan = red.
+        image_result = New ImageMask().ApplyRedMaskToImage(image_result)
 
         images(FIRST_PAGE) = (emgu_image - image_result).ToBitmap()
         Return images

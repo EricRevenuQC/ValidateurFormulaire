@@ -22,35 +22,35 @@ Public Class PixelMarker
         anchors_pixels.AddRange(color_selector.FindAllPixelsOfColorFromPoint(top_right_anchor, New Colors(0, 0, 0)))
     End Sub
 
-    Public Sub FindAllOutOfBoundPixels(bot_left_anchor As Point, top_right_anchor As Point, page As Integer)
+    Public Sub FindAllOutOfBoundColoredPixels(bot_left_anchor As Point, top_right_anchor As Point, page As Integer)
         Dim out_of_bound_pixels As New List(Of Point)()
         Dim steps As New Point(1, 1)
 
         Dim starting_position As New Point(0, 0)
         Dim ending_position As New Point(image.Width - 1, top_right_anchor.Y - 1)
 
-        out_of_bound_pixels.AddRange(FindAllPixelsInZone(starting_position, ending_position, steps, page))
+        out_of_bound_pixels.AddRange(FindAllColoredPixelsInZone(starting_position, ending_position, steps, page))
 
         starting_position = New Point(0, bot_left_anchor.Y + 1)
         ending_position = New Point(image.Width - 1, image.Height - 1)
 
-        out_of_bound_pixels.AddRange(FindAllPixelsInZone(starting_position, ending_position, steps, page))
+        out_of_bound_pixels.AddRange(FindAllColoredPixelsInZone(starting_position, ending_position, steps, page))
 
         starting_position = New Point(0, 0)
         ending_position = New Point(bot_left_anchor.X - 1, image.Height - 1)
 
-        out_of_bound_pixels.AddRange(FindAllPixelsInZone(starting_position, ending_position, steps, page))
+        out_of_bound_pixels.AddRange(FindAllColoredPixelsInZone(starting_position, ending_position, steps, page))
 
         starting_position = New Point(top_right_anchor.X + 1, 0)
         ending_position = New Point(image.Width - 1, image.Height - 1)
 
-        out_of_bound_pixels.AddRange(FindAllPixelsInZone(starting_position, ending_position, steps, page))
+        out_of_bound_pixels.AddRange(FindAllColoredPixelsInZone(starting_position, ending_position, steps, page))
 
         MarkPixels(out_of_bound_pixels)
         AddOutOfZoneAlerts(out_of_bound_pixels, page)
     End Sub
 
-    Private Function FindAllPixelsInZone(starting_point As Point, ending_point As Point,
+    Private Function FindAllColoredPixelsInZone(starting_point As Point, ending_point As Point,
                                   steps As Point, page As Integer) As List(Of Point)
         Dim error_pixels As New List(Of Point)()
         Dim proximity_error_pixels As New List(Of Point)()
