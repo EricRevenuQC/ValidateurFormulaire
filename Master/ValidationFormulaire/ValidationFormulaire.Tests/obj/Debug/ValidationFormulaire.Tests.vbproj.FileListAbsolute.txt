@@ -655,4 +655,3 @@ C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\Val
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.dll
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.xml
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\obj\Debug\ValidationFormulaire.Tests.pdb
->>>>>>> 21d60a116891229e3e4831587ac28e3e0d91c26c

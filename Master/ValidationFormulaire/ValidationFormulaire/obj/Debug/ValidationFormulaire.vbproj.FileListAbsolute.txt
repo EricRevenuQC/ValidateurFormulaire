@@ -530,7 +530,6 @@ C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\Valida
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\bin\ru\System.Spatial.resources.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\bin\zh-Hant\System.Spatial.resources.dll
-C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.vbprojResolveAssemblyReference.cache
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.Resources.resources
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.vbproj.GenerateResource.Cache
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.dll
@@ -646,3 +645,4 @@ C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\Val
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.dll
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.xml
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.pdb
+C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.vbprojResolveAssemblyReference.cache

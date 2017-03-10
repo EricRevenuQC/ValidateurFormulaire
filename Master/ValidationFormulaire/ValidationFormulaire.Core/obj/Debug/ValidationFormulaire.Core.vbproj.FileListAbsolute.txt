@@ -69,9 +69,6 @@ C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\Valida
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.xml
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.pdb
-<<<<<<< HEAD
-C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbprojResolveAssemblyReference.cache
-=======
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\ValidationFormulaire.Core.dll
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\ValidationFormulaire.Core.pdb
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\ValidationFormulaire.Core.xml
@@ -90,4 +87,4 @@ C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\Val
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.dll
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.xml
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.pdb
->>>>>>> 21d60a116891229e3e4831587ac28e3e0d91c26c
+C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbprojResolveAssemblyReference.cache
