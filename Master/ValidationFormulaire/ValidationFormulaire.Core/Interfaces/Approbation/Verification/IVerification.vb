@@ -1,8 +1,8 @@
-﻿Imports ValidationFormulaire.Core.PDFToImageConverter
-Imports System.Drawing
+﻿Imports System.Drawing
 
 Public Interface IVerification
-    Function VerifiyWithTemnplate(images() As Drawing.Image, template_image As Image,
-                                  Optional distance_treshold As Single = 0) As Drawing.Image()
-    Function DetermineInputZone(images() As Drawing.Image) As Drawing.Image()
+    Function Verification(images() As Image) As Image()
+    Function CalculateThreshold(images() As Image, template_image As Image,
+                           Optional distance_threshold As Integer = 0) As Image()
+
 End Interface

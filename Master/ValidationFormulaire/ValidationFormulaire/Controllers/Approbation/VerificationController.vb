@@ -39,12 +39,15 @@ Public Class VerificationController
     Function VerificationFormat(page_action As DeterminePage.PageAction,
                                 Optional formulaire As FormulairePosition = Nothing,
                                 Optional page As Integer = Nothing) As ActionResult
-        session_value_provider.SetValue("current_page", pagination.DeterminePageChange(page_action, session_value_provider.GetValue("current_page"), page))
+        session_value_provider.SetValue("current_page", pagination.DeterminePageChange(
+                                        page_action, session_value_provider.GetValue("current_page"),
+                                        page))
         Return View("VerificationFormat")
     End Function
 
     <HttpPost> _
-    Public Function VerificationFormat(image_file As HttpPostedFileBase, image_file_template As HttpPostedFileBase,
+    Public Function VerificationFormat(image_file As HttpPostedFileBase,
+                                       image_file_template As HttpPostedFileBase,
                                        Optional verif_threshold As Single = 0) As ActionResult
         AlertsManager.ClearAlerts()
         Dim model As New ApprobationModel()
@@ -60,8 +63,9 @@ Public Class VerificationController
             Dim images() As Image
 
             images = converter.PDFToImage(image_file)
-            images = verification.VerifiyWithTemnplate(images, template_image, verif_threshold)
-            images = verification.DetermineInputZone(images)
+
+            images = verification.CalculateThreshold(images, template_image, verif_threshold)
+            images = verification.Verification(images)
             session_value_provider.SetValue("images", images)
             session_value_provider.SetValue("page_number", converter.GetPageNumber())
             session_value_provider.SetValue("current_page", 1)
