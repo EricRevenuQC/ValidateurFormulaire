@@ -34,7 +34,7 @@ Public Class ComparisonController
             If (session_value_provider.GetValue("images_left") IsNot Nothing) And
                     (session_value_provider.GetValue("images_right") IsNot Nothing) Then
                 session_value_provider.SetValue("threshold", threshold)
-                session_value_provider.SetValue("compared_images", comparaison.Comparer(
+                session_value_provider.SetValue("compared_images", comparaison.Compare(
                     session_value_provider.GetValue("images_left")(session_value_provider.GetValue("current_page_left")),
                     session_value_provider.GetValue("images_right")(session_value_provider.GetValue("current_page_right")),
                     session_value_provider.GetValue("threshold")

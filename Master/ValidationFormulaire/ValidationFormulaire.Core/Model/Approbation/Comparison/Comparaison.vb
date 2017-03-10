@@ -8,7 +8,7 @@ Public Class Comparaison
     Private Const RIGHT_IMAGE_INDEX As Integer = 1
     Private Const NUMBER_OF_IMAGES As Integer = 2
 
-    Public Function Comparer(image_left As Image, image_right As Image, distance_threshold As Single) As Image()
+    Public Function Compare(image_left As Image, image_right As Image, distance_threshold As Single) As Image()
         Dim image_result(NUMBER_OF_IMAGES) As Bitmap
         Dim threshold As New Threshold(distance_threshold)
 
