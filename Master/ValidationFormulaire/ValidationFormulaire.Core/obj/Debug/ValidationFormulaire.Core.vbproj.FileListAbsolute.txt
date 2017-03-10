@@ -78,3 +78,4 @@ C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\Val
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.dll
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.xml
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.pdb
+C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbprojResolveAssemblyReference.cache
