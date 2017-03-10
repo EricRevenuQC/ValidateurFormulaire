@@ -19,6 +19,14 @@ Public Class ComparisonController
         session_value_provider = New SessionValueProvider()
         comparaison = New Comparaison()
     End Sub
+    Public Sub New(Optional pagination As IPagination = Nothing, Optional converter As IConverter = Nothing,
+                   Optional verification As IVerification = Nothing, Optional config As IConfig = Nothing,
+                   Optional session_value_provider As SessionValueProvider = Nothing)
+        Me.pagination = pagination
+        Me.converter = converter
+        Me.config = config
+        Me.session_value_provider = session_value_provider
+    End Sub
 
     Function ComparisonFormulaire() As ActionResult
         Return View("ComparisonFormulaire")

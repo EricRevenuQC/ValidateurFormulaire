@@ -37,14 +37,14 @@ Public Class VerificationControllerTests
 
     <TestMethod()> _
     Public Sub VerificationFormatSetSessionForCurrentPageToCorrectPageForNextPageAction()
-        pagination.Setup(Function(f) f.DeterminePageChange(PageAction.NextPage, 2, Nothing)).Returns(2)
+        pagination.Setup(Function(f) f.DeterminePageChange(PageAction.NextPage, 2, Nothing)).Returns(3)
         InitController()
         verification_controller.VerificationFormat(PageAction.NextPage)
-        session_value_provider.Verify(Sub(f) f.SetValue("current_page", 2), Times.Exactly(1))
+        session_value_provider.Verify(Sub(f) f.SetValue("current_page", 3), Times.Exactly(1))
     End Sub
 
     <TestMethod()> _
-    Public Sub VerificationFormatSetSessionForCurrentPageToCorrectPageForPreviousPageAction()
+    Public Sub VerificationFormatSetSessionForCurrentPageToCorrectPageFor()
         pagination.Setup(Function(f) f.DeterminePageChange(PageAction.PreviousPage, 2, Nothing)).Returns(4)
         InitController()
         verification_controller.VerificationFormat(PageAction.PreviousPage)
@@ -53,9 +53,9 @@ Public Class VerificationControllerTests
 
     <TestMethod()> _
     Public Sub VerificationFormatSetSessionForCurrentPageToCorrectPageForJumpToPageAction()
-        pagination.Setup(Function(f) f.DeterminePageChange(PageAction.JumpToPage, 2, 5)).Returns(8)
+        pagination.Setup(Function(f) f.DeterminePageChange(PageAction.JumpToPage, 2, 5)).Returns(7)
         InitController()
         verification_controller.VerificationFormat(PageAction.JumpToPage, page:=5)
-        session_value_provider.Verify(Sub(f) f.SetValue("current_page", 8), Times.Exactly(1))
+        session_value_provider.Verify(Sub(f) f.SetValue("current_page", 7), Times.Exactly(1))
     End Sub
 End Class

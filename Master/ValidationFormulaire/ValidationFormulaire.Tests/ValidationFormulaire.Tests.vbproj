@@ -144,6 +144,10 @@
     <Import Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Approbation\Controllers\ComparaisonControllerTests.vb" />
+    <Compile Include="Approbation\Models\SearchForTextTest.vb" />
+    <Compile Include="Approbation\Models\TextAdjusterTest.vb" />
+    <Compile Include="Approbation\Models\TextExtractorTest.vb" />
     <Compile Include="Controllers\VerificationControllerTests.vb" />
     <Compile Include="Models\AlertsManagerTest.vb" />
     <Compile Include="Models\ComparePixelColorTest.vb" />
@@ -159,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Files\4 blank pages.pdf" />
+    <None Include="Files\pdftest1.pdf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
