@@ -5,17 +5,17 @@ Imports Emgu.CV.Structure
 Public Class Verification
     Implements IVerification
 
-    Private compare_pixels_color As New ComparePixelColor()
     Private red_circle = Image.FromFile(New Config().GetRedCirclePath)
-    Private color_selector As ColorSelector
+    Private draw_input_zone As DrawInputZone
     Private anchor As Anchor
-    Private draw As New DrawOnImage()
+    Private pixel_marker As PixelMarker
+    Private bitmap_image As Bitmap
 
-    Protected top_right_anchor_position, bot_left_anchor_position As Point
-    Protected bitmap_image As Bitmap
+    Private Const FIRST_PAGE As Integer = 1
 
-    Private Const LINE_SIZE As Integer = 1
-    Private Const ANCHOR_LINE_SIZE As Integer = 2
+    Public Sub New()
+        anchor = New Anchor(bitmap_image)
+    End Sub
 
     Public Function VerifiyWithTemnplate(images() As Image, template_image As Image,
                             Optional distance_threshold As Single = 0) As Image() _
@@ -27,90 +27,42 @@ Public Class Verification
         Dim config As New Config()
         Dim threshold As Threshold
 
-        For image As Integer = 1 To 1 'images.Length - 1
-            bitmap_image = New Bitmap(images(image))
+        For page As Integer = 1 To FIRST_PAGE
+            bitmap_image = New Bitmap(images(page))
             threshold = New Threshold(distance_threshold)
 
-            emgu_images(image) = New Image(Of Bgr, Byte)(bitmap_image)
+            emgu_images(page) = New Image(Of Bgr, Byte)(bitmap_image)
 
-            threshold.SearchDifferences(image_template.Data, emgu_images(image).Data)
-            image_result = emgu_images(image) - image_template
+            threshold.SearchForDifferencesBetweenImages(image_template.Data, emgu_images(page).Data)
+            image_result = emgu_images(page) - image_template
             threshold.RemovePixels(image_result.Data)
 
             image_mask = image_result.InRange(New Bgr(10, 10, 10), New Bgr(255, 255, 255))
             image_result.SetValue(New Bgr(255, 255, 0), image_mask) 'Set color to cyan since black - cyan = red.
 
-            images(image) = (emgu_images(image) - image_result).ToBitmap()
+            images(page) = (emgu_images(page) - image_result).ToBitmap()
         Next
 
         Return images
     End Function
 
     Public Function DetermineInputZone(images() As Image) As Image() Implements IVerification.DetermineInputZone
-        For image As Integer = 1 To images.Length - 1
-            bitmap_image = New Bitmap(images(image))
-            Dim bot_left_anchor_pixels As New List(Of Point)()
-            Dim top_right_anchor_pixels As New List(Of Point)()
-            anchor = New Anchor(bitmap_image)
-            color_selector = New ColorSelector(bitmap_image)
+        For page As Integer = 1 To images.Length - 1
+            bitmap_image = New Bitmap(images(page))
+            draw_input_zone = New DrawInputZone(bitmap_image)
+            pixel_marker = New PixelMarker(bitmap_image, red_circle)
 
-            'Set the input zone with the first page's anchor only.
-            If image = 1 Then
-                anchor.FindTemplateAnchors()
-
-                If anchor.GetBotLeftAnchor() = Nothing OrElse anchor.GetTopRightAnchor() = Nothing Then
-                    AlertsManager.AddAlert(New AlertMessages().GetBlankPageMsg())
-                    Exit For
-                End If
-
-                anchor.FindRealAnchorsCorners()
-
-                bot_left_anchor_position = anchor.GetBotLeftAnchor()
-                top_right_anchor_position = anchor.GetTopRightAnchor()
-
-                'Save all pixels of each anchor into a list of points. This allow us to ignore these pixels
-                'when checking for out of bounds pixels later (anchors can't be out of bounds).
-                bot_left_anchor_pixels = color_selector.FindAllPixelsOfColorFromPoint(anchor.GetBotLeftAnchor(), New Colors(0, 0, 0))
-                top_right_anchor_pixels = color_selector.FindAllPixelsOfColorFromPoint(anchor.GetTopRightAnchor(), New Colors(0, 0, 0))
-
-                'Set the corner of the starting position of the input zone farther than the real anchor's corner's position.
-                'This gives us a treshold to work with when checking out of bound pixels.
-                bot_left_anchor_position.X += ANCHOR_LINE_SIZE
-                bot_left_anchor_position.Y -= ANCHOR_LINE_SIZE
-                top_right_anchor_position.X -= ANCHOR_LINE_SIZE
-                top_right_anchor_position.Y += ANCHOR_LINE_SIZE
+            If page = FIRST_PAGE Then
+                anchor = New Anchor(bitmap_image)
+                anchor.FindTemplateAnchors(New SameColor())
+                anchor.FindRealAnchorsCorners(New SameColorDiagonally())
+                pixel_marker.FindAllAnchorsPixels(anchor.GetBotLeftAnchor(), anchor.GetTopRightAnchor())
+                anchor.AdjustAnchorsPosition()
             End If
 
-            'Draw the input zone for each zones (left, right, top, bottom).
-            draw.DrawZone(bitmap_image, bot_left_anchor_position.X, top_right_anchor_position.X,
-                          bot_left_anchor_position.Y - LINE_SIZE, bot_left_anchor_position.Y, 1, 1, Color.Green)
-            draw.DrawZone(bitmap_image, bot_left_anchor_position.X, top_right_anchor_position.X,
-                          top_right_anchor_position.Y + LINE_SIZE, top_right_anchor_position.Y, 1, -1, Color.Green)
-            draw.DrawZone(bitmap_image, bot_left_anchor_position.X, bot_left_anchor_position.X + LINE_SIZE,
-                          top_right_anchor_position.Y, bot_left_anchor_position.Y, 1, 1, Color.Green)
-            draw.DrawZone(bitmap_image, top_right_anchor_position.X, top_right_anchor_position.X - LINE_SIZE,
-                          top_right_anchor_position.Y, bot_left_anchor_position.Y, -1, 1, Color.Green)
-
-            'Search through all pixels outside the input zone and mark them.
-            Dim outside_pixels As New List(Of Point)()
-            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, bot_left_anchor_pixels, top_right_anchor_pixels, 0,
-                                 bitmap_image.Width - 1, 0, top_right_anchor_position.Y - 1, 1, 1, red_circle))
-            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, bot_left_anchor_pixels, top_right_anchor_pixels, 0,
-                                  bitmap_image.Width - 1, bot_left_anchor_position.Y + 1, bitmap_image.Height - 1, 1, 1, red_circle))
-            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, bot_left_anchor_pixels, top_right_anchor_pixels, 0,
-                                  bot_left_anchor_position.X - 1, 0, bitmap_image.Height - 1, 1, 1, red_circle))
-            outside_pixels.AddRange(draw.MarkPixelWithImage(bitmap_image, bot_left_anchor_pixels, top_right_anchor_pixels, top_right_anchor_position.X + 1,
-                                  bitmap_image.Width - 1, 0, bitmap_image.Height - 1, 1, 1, red_circle))
-
-            If outside_pixels.Count > 0 Then
-                If outside_pixels.Count > 1 Then
-                    AlertsManager.AddAlert("Page " + image.ToString + " - " + New AlertMessages().GetElementsOutOfZoneMsg)
-                Else
-                    AlertsManager.AddAlert("Page " + image.ToString + " - " + New AlertMessages().GetElementOutOfZoneMsg)
-                End If
-            End If
-
-            images(image) = bitmap_image
+            draw_input_zone.DrawInputZoneFromAnchors(anchor.GetBotLeftAnchor(), anchor.GetTopRightAnchor())
+            pixel_marker.FindAllOutOfBoundPixels(anchor.GetBotLeftAnchor(), anchor.GetTopRightAnchor(), page)
+            images(page) = bitmap_image
         Next
         Return images
     End Function

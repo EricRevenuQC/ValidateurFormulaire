@@ -58,7 +58,7 @@ Imports Moq
         Dim result_color As Integer = 255
 
         Dim threshold As New Threshold(0, compare_pixels_color.Object)
-        threshold.SearchDifferences(first_image_data, second_image_data)
+        threshold.SearchForDifferencesBetweenImages(first_image_data, second_image_data)
         threshold.RemovePixels(first_image_data)
 
         'Set result byte array pixel colors :
@@ -102,7 +102,7 @@ Imports Moq
         Dim result_color As Integer = 255
 
         Dim threshold As New Threshold(3, compare_pixels_color.Object)
-        threshold.SearchDifferences(first_image_data, second_image_data)
+        threshold.SearchForDifferencesBetweenImages(first_image_data, second_image_data)
         threshold.RemovePixels(first_image_data)
 
         'Set result byte array pixel colors :

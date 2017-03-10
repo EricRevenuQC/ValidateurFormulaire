@@ -23,9 +23,9 @@ Public Class Comparaison
         first_image_result_right = emgu_image_left - emgu_image_right
         second_image_result_right = emgu_image_right - emgu_image_left
 
-        threshold.SearchDifferences(first_image_result_left.Data, second_image_result_left.Data)
+        threshold.SearchForDifferencesBetweenImages(first_image_result_left.Data, second_image_result_left.Data)
         threshold.RemovePixels(first_image_result_left.Data)
-        threshold.SearchDifferences(second_image_result_right.Data, first_image_result_right.Data)
+        threshold.SearchForDifferencesBetweenImages(second_image_result_right.Data, first_image_result_right.Data)
         threshold.RemovePixels(second_image_result_right.Data)
 
         image_mask = first_image_result_left.InRange(New Bgr(10, 10, 10), New Bgr(255, 255, 255))

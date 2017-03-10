@@ -15,7 +15,7 @@ Public Class Threshold
         distance_threshold = threshold
     End Sub
 
-    Public Sub SearchDifferences(first_image_data As Byte(,,), second_image_data As Byte(,,))
+    Public Sub SearchForDifferencesBetweenImages(first_image_data As Byte(,,), second_image_data As Byte(,,))
         Dim threshold_applied As Point?
         For current_row As Integer = first_image_data.GetLength(0) - 1 To 0 Step -1
             For current_col As Integer = first_image_data.GetLength(1) - 1 To 0 Step -1
