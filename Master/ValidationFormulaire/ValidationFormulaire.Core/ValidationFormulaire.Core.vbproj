@@ -50,16 +50,13 @@
   <ItemGroup>
     <Reference Include="Emgu.CV, Version=2.4.2.1773, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ValidationFormulaire\Dependencies\Emgu.CV.dll</HintPath>
+      <HintPath>bin\Debug\Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI">
       <HintPath>..\ValidationFormulaire\Dependencies\Emgu.CV.UI.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util">
       <HintPath>..\ValidationFormulaire\Dependencies\Emgu.Util.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.Utils">
-      <HintPath>..\ValidationFormulaire\Dependencies\Emgu.Utils.dll</HintPath>
     </Reference>
     <Reference Include="GdPicture.NET.9, Version=9.4.0.12, Culture=neutral, PublicKeyToken=eec8f7c6e3c49e11, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,7 +70,7 @@
       <HintPath>..\ValidationFormulaire\Dependencies\Ghostscript.NET.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
-      <HintPath>bin\itextsharp.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\itextsharp-all-5.5.10\itextsharp-dll-core\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -197,6 +194,7 @@
     <Content Include="GdPicture.NET.9.omr.64.dll" />
     <Content Include="GdPicture.NET.9.PDF.dll" />
     <Content Include="GdPicture.NET.9.twain.client.64.dll" />
+    <Content Include="itextsharp.dll" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

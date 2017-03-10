@@ -42,7 +42,7 @@ Public Class ComparaisonControllerTests
         pagination.Setup(Function(f) f.DeterminePageChange(PageAction.NextPage, 2, Nothing)).Returns(3)
         InitController()
         comparaison_controller.ComparisonFormulaire(PageAction.NextPage)
-        session_value_provider.Verify(Sub(f) f.SetValue("current_page_left", 3), Times.Exactly(1))
+        session_value_provider.Verify(Sub(f) f.SetValue("comparing", "none"), Times.Exactly(1))
 
     End Sub
 

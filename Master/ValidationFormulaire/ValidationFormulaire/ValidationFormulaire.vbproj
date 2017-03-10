@@ -50,19 +50,15 @@
   <ItemGroup>
     <Reference Include="Emgu.CV, Version=2.4.2.1773, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Dependencies\Emgu.CV.dll</HintPath>
+      <HintPath>..\ValidationFormulaire.Core\bin\Debug\Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI, Version=2.4.2.1773, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Emgu.CV.UI.dll</HintPath>
+      <HintPath>..\ValidationFormulaire.Core\bin\Debug\Emgu.CV.UI.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util, Version=2.4.2.1773, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Emgu.Util.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Emgu.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Ghostscript.NET, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f85051de34525b59, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -283,6 +279,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\ValidationFormulaire.Resources.resources" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-slider.css" />
@@ -408,6 +405,11 @@
     <Content Include="Dependencies\zlib.net.dll" />
     <Content Include="Images\Blank.png" />
     <Content Include="Images\VerificationTemplate.png" />
+    <Content Include="obj\Debug\TempPE\My Project.Resources.Designer.vb.dll" />
+    <Content Include="obj\Debug\ValidationFormulaire.dll" />
+    <Content Include="obj\Debug\ValidationFormulaire.pdb" />
+    <Content Include="obj\Debug\ValidationFormulaire.vbproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\ValidationFormulaire.xml" />
     <Content Include="opencv_core231.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -439,6 +441,10 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="obj\Debug\build.force" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\ValidationFormulaire.vbproj.GenerateResource.Cache" />
+    <Content Include="obj\Debug\ValidationFormulaire.vbprojResolveAssemblyReference.cache" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -506,6 +512,9 @@
       <Project>{13f093f9-55e4-4d2c-aa42-a9e66cd280cb}</Project>
       <Name>ValidationFormulaire.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

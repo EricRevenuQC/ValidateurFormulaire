@@ -52,7 +52,7 @@
     </Reference>
     <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Users\RSIE016\Downloads\Moq.4.0.10827.Final\Moq.4.0.10827\NET40\Moq.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
