@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Approbation\Controllers\ComparaisonControllerTests.vb" />
+    <Compile Include="Approbation\Controllers\CompraisonTests.vb" />
     <Compile Include="Approbation\Models\SearchForTextTest.vb" />
     <Compile Include="Approbation\Models\TextAdjusterTest.vb" />
     <Compile Include="Approbation\Models\TextExtractorTest.vb" />
@@ -248,11 +249,31 @@
     <Content Include="bin\Debug\zh-Hant\Microsoft.Data.Edm.resources.dll" />
     <Content Include="bin\Debug\zh-Hant\Microsoft.Data.OData.resources.dll" />
     <Content Include="bin\Debug\zh-Hant\System.Spatial.resources.dll" />
+    <Content Include="Files\image.png" />
+    <Content Include="obj\Debug\Fakes\vf\f.cs" />
+    <Content Include="obj\Debug\Fakes\vf\f.csproj" />
+    <Content Include="obj\Debug\Fakes\vf\o\f.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\ValidationFormulaire.Tests.dll" />
+    <Content Include="obj\Debug\ValidationFormulaire.Tests.pdb" />
+    <Content Include="obj\Debug\ValidationFormulaire.Tests.vbproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\ValidationFormulaire.Tests.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="bin\Debug\ValidationFormulaire.Tests.dll.config" />
     <None Include="Files\4 blank pages.pdf" />
+    <None Include="Files\formulaire111.pdf" />
     <None Include="Files\pdftest1.pdf" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\Fakes\fakes.args" />
+    <None Include="obj\Debug\Fakes\vf\f.ah" />
+    <None Include="obj\Debug\Fakes\vf\f.ch" />
+    <None Include="obj\Debug\Fakes\vf\f.fakes" />
+    <None Include="obj\Debug\Fakes\vf\f.fakesconfig" />
+    <None Include="obj\Debug\Fakes\vf\o\f.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\ValidationFormulaire.Tests.vbprojResolveAssemblyReference.cache" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -270,6 +291,11 @@
   <ItemGroup>
     <Folder Include="Models\Approbation\" />
     <Folder Include="Models\Authorization\" />
+    <Folder Include="obj\Debug\Fakes\vf\b\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

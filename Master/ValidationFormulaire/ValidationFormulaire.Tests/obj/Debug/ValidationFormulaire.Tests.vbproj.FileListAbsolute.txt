@@ -597,3 +597,4 @@ C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\Val
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\ValidationFormulaire.Tests.xml
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
 C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\fr\Microsoft.QualityTools.Testing.Fakes.resources.dll
+C:\Users\RGHZ001\Validateur\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Tests\bin\Debug\ValidationFormulaire.Tests.dll.config
