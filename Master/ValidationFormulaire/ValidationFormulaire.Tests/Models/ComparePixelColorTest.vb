@@ -15,12 +15,12 @@ Public Class ComparePixelColorTest
 
     <TestMethod()> _
     Public Sub VerifyThatSamePixelColorsAreNotDifferent()
-        Dim color1a As Integer = RGB(0, 0, 255)
-        Dim color2a As Integer = RGB(0, 0, 255)
-        Dim color1b As Integer = RGB(0, 0, 255)
-        Dim color2b As Integer = RGB(0, 0, 255)
-        Dim color1c As Integer = RGB(0, 0, 255)
-        Dim color2c As Integer = RGB(0, 0, 255)
+        Dim color1a As Byte = 255
+        Dim color2a As Byte = 255
+        Dim color1b As Byte = 255
+        Dim color2b As Byte = 255
+        Dim color1c As Byte = 255
+        Dim color2c As Byte = 255
 
         result = DiffrentColorPixel.DifferentPixelColor(color1a, color2a, color1b, color2b, color1c, color2c)
 
@@ -29,12 +29,12 @@ Public Class ComparePixelColorTest
 
     <TestMethod()> _
     Public Sub VerifyThatDifferentPixelColorsAreDifferent()
-        Dim color1a As Integer = RGB(0, 0, 255)
-        Dim color2a As Integer = RGB(0, 255, 255)
-        Dim color1b As Integer = RGB(255, 255, 255)
-        Dim color2b As Integer = RGB(255, 0, 255)
-        Dim color1c As Integer = RGB(255, 0, 0)
-        Dim color2c As Integer = RGB(0, 255, 0)
+        Dim color1a As Byte = 255
+        Dim color2a As Byte = 0
+        Dim color1b As Byte = 255
+        Dim color2b As Byte = 255
+        Dim color1c As Byte = 255
+        Dim color2c As Byte = 0
 
         result = DiffrentColorPixel.DifferentPixelColor(color1a, color2a, color1b, color2b, color1c, color2c)
 
