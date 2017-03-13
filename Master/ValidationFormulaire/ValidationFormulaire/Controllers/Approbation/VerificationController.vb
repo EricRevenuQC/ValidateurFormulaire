@@ -53,6 +53,9 @@ Public Class VerificationController
         Dim model As New ApprobationModel()
         Dim template_image As Image
 
+        Dim TimerStart As DateTime
+        Dim TimeSpent As System.TimeSpan
+
         If image_file_template IsNot Nothing AndAlso image_file_template.ContentLength > 0 Then
             template_image = converter.PDFToImage(image_file_template).First
         Else
@@ -62,7 +65,12 @@ Public Class VerificationController
         If image_file IsNot Nothing AndAlso image_file.ContentLength > 0 Then
             Dim images() As Image
 
+            TimerStart = Now
+
             images = converter.PDFToImage(image_file)
+
+            TimeSpent = Now.Subtract(TimerStart)
+            System.Diagnostics.Debug.WriteLine(TimeSpent.TotalSeconds.ToString + " seconds spent on this task")
 
             images = verification.CalculateThreshold(images, template_image, verif_threshold)
             images = verification.Verification(images)

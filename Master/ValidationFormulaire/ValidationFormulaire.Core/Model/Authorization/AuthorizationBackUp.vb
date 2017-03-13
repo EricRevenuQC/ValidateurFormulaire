@@ -15,7 +15,7 @@
 '    Private Const LENGTH_INDEX As Integer = 4
 '    Private Const CODE_INDEX As Integer = 6
 
-'    Public Function AuthorizePDF(file As HttpPostedFileBase, alerts_manager As AlertsManager) As Dictionary(Of String, String)
+'    Public Function AuthorizePDF(file As HttpPostedFileBase) As Dictionary(Of String, String)
 '        Dim pdf_text(), bar_code_text, bar_code_id As String
 '        Dim data As DataSet
 
@@ -24,13 +24,13 @@
 '        bar_code_id = bar_code_reader.GetBarCodeId
 '        file.InputStream.Position = 0
 '        pdf_text = extractor.PDFToText(file)
-'        data = New BarCodeFormatImporter().ImportExcelData(bar_code_id)
+'        data = New BarCodeImporter().ImportExcelData(bar_code_id)
 
-'        Return SearchForAllBarCodeCharactersInPDFText(bar_code_text, pdf_text, data, alerts_manager)
+'        Return SearchForAllBarCodeCharactersInPDFText(bar_code_text, pdf_text, data)
 '    End Function
 
-'    Private Function SearchForAllBarCodeCharactersInPDFText(bar_code_text As String, pdf_text() As String, data As DataSet,
-'                                                       alerts_manager As AlertsManager) As Dictionary(Of String, String)
+'    Private Function SearchForAllBarCodeCharactersInPDFText(bar_code_text As String, pdf_text() As String,
+'                                                            data As DataSet) As Dictionary(Of String, String)
 '        Dim chars_not_found_remaining, current_string As String
 '        Dim checked_row As List(Of String)
 '        Dim data_dictionary As New Dictionary(Of String, String)()
@@ -53,7 +53,7 @@
 '                                                                data.Tables(0).Rows(i)(LENGTH_INDEX)).ToString
 '                    If Not String.IsNullOrWhiteSpace(current_string) Then
 '                        pdf_text(current_page) = search_text.RemoveStringFromString(current_string, pdf_text(current_page),
-'                                                                                        alerts_manager, save_remaining_chars:=True)
+'                                                                                    save_remaining_chars:=True)
 '                    End If
 '                    If Not data_dictionary.ContainsKey(data.Tables(0).Rows(i)(CODE_INDEX)) Then
 '                        data_dictionary.Add(data.Tables(0).Rows(i)(CODE_INDEX), current_string)
@@ -65,15 +65,15 @@
 '                chars_not_found_remaining = search_text.GetRemainingCharacters
 
 '                chars_not_found_remaining = search_text.RemoveStringFromString(pdf_text(current_page), chars_not_found_remaining,
-'                                                                                alerts_manager, char_minimum_length:=1)
+'                                                                               char_minimum_length:=1)
 
 
-'                FindMissingCharIndex(chars_not_found_remaining, bar_code_text, data, alerts_manager, pdf_text.Length - 1, current_page)
+'                FindMissingCharIndex(chars_not_found_remaining, bar_code_text, data, pdf_text.Length - 1, current_page)
 
 '                System.Diagnostics.Debug.WriteLine(chars_not_found_remaining)
 '                System.Diagnostics.Debug.WriteLine("Number of characters not found : " + chars_not_found_remaining.Length.ToString)
 '            Else
-'                alerts_manager.AddAlert(New AlertMessages().GetImageFormatMsg)
+'                AlertsManager.AddAlert(New AlertMessages().GetImageFormatMsg)
 '                Exit For
 '            End If
 '        Next
@@ -81,7 +81,7 @@
 '        Return data_dictionary
 '    End Function
 
-'    Private Sub FindMissingCharIndex(to_find As String, to_search As String, data As DataSet, alerts_manager As AlertsManager,
+'    Private Sub FindMissingCharIndex(to_find As String, to_search As String, data As DataSet,
 '                                     Optional page_number As Integer = 1, Optional current_page As Integer = 1)
 '        Dim current_word As String = ""
 '        Dim empty_word As String = ""
@@ -111,30 +111,14 @@
 
 '                            If current_word = bar_code_current_word Then
 '                                'Add an alert message for missing word
-'                                If is_first_word Then
-'                                    If page_number > 1 AndAlso new_page = True Then
-'                                        alerts_manager.AddAlert(New AlertMessages().GetCharNotFoundMsg,
-'                                                                "Page " + current_page.ToString + " :" + Environment.NewLine +
-'                                                                data.Tables(0).Rows(i)(DESCRIPTION_INDEX) + " : " + current_word)
-'                                        new_page = False
-'                                    Else
-'                                        alerts_manager.AddAlert(New AlertMessages().GetCharNotFoundMsg,
-'                                                                data.Tables(0).Rows(i)(DESCRIPTION_INDEX) + " : " + current_word)
-'                                    End If
-'                                    is_first_word = False
+'                                If page_number > 1 AndAlso new_page = True Then
+'                                    AlertsManager.AddAlert(New AlertMessages().GetCharNotFoundMsg,
+'                                                            "Page " + current_page.ToString + " :" + Environment.NewLine +
+'                                                            data.Tables(0).Rows(i)(DESCRIPTION_INDEX) + " : " + current_word)
+'                                    new_page = False
 '                                Else
-'                                    If page_number > 1 AndAlso new_page = True Then
-'                                        alerts_manager.AddMessageToTitle(New AlertMessages().GetCharNotFoundMsg,
-'                                                                         Environment.NewLine + "Page " + current_page.ToString +
-'                                                                         " :" + Environment.NewLine +
-'                                                                         data.Tables(0).Rows(i)(DESCRIPTION_INDEX) + " : " +
-'                                                                         current_word)
-'                                        new_page = False
-'                                    Else
-'                                        alerts_manager.AddMessageToTitle(New AlertMessages().GetCharNotFoundMsg,
-'                                                                         data.Tables(0).Rows(i)(DESCRIPTION_INDEX) + " : " +
-'                                                                         current_word)
-'                                    End If
+'                                    AlertsManager.AddAlert(New AlertMessages().GetCharNotFoundMsg,
+'                                                            data.Tables(0).Rows(i)(DESCRIPTION_INDEX) + " : " + current_word)
 '                                End If
 
 '                                'Replace the word with an emtpy string

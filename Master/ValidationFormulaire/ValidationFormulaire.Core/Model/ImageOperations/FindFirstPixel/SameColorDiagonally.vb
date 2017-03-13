@@ -43,6 +43,7 @@ Public Class SameColorDiagonally
                 j += 1
             End If
         End While
+
         Return Nothing
     End Function
 End Class

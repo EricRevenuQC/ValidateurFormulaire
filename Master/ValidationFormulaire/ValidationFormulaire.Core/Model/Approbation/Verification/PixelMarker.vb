@@ -1,4 +1,6 @@
 ﻿Imports System.Drawing
+Imports System.Runtime.InteropServices
+Imports System.Drawing.Imaging
 
 Public Class PixelMarker
 
@@ -54,20 +56,28 @@ Public Class PixelMarker
                                   steps As Point, page As Integer) As List(Of Point)
         Dim error_pixels As New List(Of Point)()
         Dim proximity_error_pixels As New List(Of Point)()
+        Dim position As Integer
+        Dim image_data As BitmapData = image.LockBits(
+            New Rectangle(0, 0, image.Width, image.Height),
+            ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb)
+        Dim image_bytes As Byte() = New Byte(Math.Abs(image_data.Stride) * image.Height) {}
+        Dim scan0 As IntPtr = image_data.Scan0
+        Marshal.Copy(scan0, image_bytes, 0, image_bytes.Length - 1)
 
-        For current_row As Integer = starting_point.X To ending_point.X Step steps.X
-            For current_col As Integer = starting_point.Y To ending_point.Y Step steps.Y
-                If compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, 255,
-                                               image.GetPixel(current_row, current_col).G, 255,
-                                               image.GetPixel(current_row, current_col).R, 255) And
-                                           compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, 0,
-                                               image.GetPixel(current_row, current_col).G, 0,
-                                               image.GetPixel(current_row, current_col).R, 255) Then
-                    If Not proximity_error_pixels.Contains(New Point(current_row, current_col)) And
-                            Not anchors_pixels.Contains(New Point(current_row, current_col)) Then
-                        error_pixels.Add(New Point(current_row, current_col))
-                        For i As Integer = current_row - PROXIMITY_PIXEL_DISTANCE To current_row + PROXIMITY_PIXEL_DISTANCE Step steps.X
-                            For j As Integer = current_col - PROXIMITY_PIXEL_DISTANCE To current_col + PROXIMITY_PIXEL_DISTANCE Step steps.Y
+        For x As Integer = starting_point.X To ending_point.X Step steps.X
+            For y As Integer = starting_point.Y To ending_point.Y Step steps.Y
+                position = (y * image_data.Stride) + (x * Drawing.Image.GetPixelFormatSize(image_data.PixelFormat) / 8)
+                If compare_pixels_color.DifferentPixelColor(image_bytes(position), 255,
+                                                   image_bytes(position + 1), 255,
+                                                   image_bytes(position + 2), 255) And
+                                           compare_pixels_color.DifferentPixelColor(image_bytes(position), 0,
+                                                   image_bytes(position + 1), 0,
+                                                   image_bytes(position + 2), 255) Then
+                    If Not proximity_error_pixels.Contains(New Point(x, y)) And
+                            Not anchors_pixels.Contains(New Point(x, y)) Then
+                        error_pixels.Add(New Point(x, y))
+                        For i As Integer = x - PROXIMITY_PIXEL_DISTANCE To x + PROXIMITY_PIXEL_DISTANCE Step steps.X
+                            For j As Integer = y - PROXIMITY_PIXEL_DISTANCE To y + PROXIMITY_PIXEL_DISTANCE Step steps.Y
                                 proximity_error_pixels.Add(New Point(i, j))
                             Next
                         Next
@@ -75,6 +85,8 @@ Public Class PixelMarker
                 End If
             Next
         Next
+
+        image.UnlockBits(image_data)
         Return error_pixels
     End Function
 

@@ -121,7 +121,6 @@
     <Compile Include="Model\Authorization\AuthorizationBackUp.vb" />
     <Compile Include="Model\Authorization\BarCodeData.vb" />
     <Compile Include="Model\Authorization\BarCodeProperties.vb" />
-    <Compile Include="Model\Authorization\BarCode\BarCodeFormatImporter.vb" />
     <Compile Include="Model\Authorization\DictionaryOperations.vb" />
     <Compile Include="Model\Config.vb" />
     <Compile Include="Model\Converters\BarCodeImporter.vb" />

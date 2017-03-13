@@ -42,8 +42,8 @@ Public Class PDFToImageConverter
                 AlertsManager.AddAlert("Incapable de convertir ce fichier en image! Assurez-vous que le fichier n'est pas protégé.")
                 System.Diagnostics.Debug.WriteLine(ex)
             End Try
-            Return Nothing
         End Using
+        Return Nothing
     End Function
 
     Public Function GetPageNumber() As Integer Implements IConverter.GetPageNumber

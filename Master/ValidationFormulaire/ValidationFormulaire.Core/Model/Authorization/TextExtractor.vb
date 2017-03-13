@@ -9,7 +9,7 @@ Public Class TextExtractor
         Using reader As New PdfReader(file.InputStream)
             Dim text_result(reader.NumberOfPages) As String
 
-            For i As Integer = 1 To reader.NumberOfPages Step 1
+            For i As Integer = 1 To reader.NumberOfPages
                 text_result(i) = PdfTextExtractor.GetTextFromPage(reader, i)
             Next
 

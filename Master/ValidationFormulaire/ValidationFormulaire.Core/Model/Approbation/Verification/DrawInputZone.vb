@@ -1,4 +1,6 @@
 ﻿Imports System.Drawing
+Imports System.Runtime.InteropServices
+Imports System.Drawing.Imaging
 
 Public Class DrawInputZone
     Private image As Bitmap
@@ -39,14 +41,28 @@ Public Class DrawInputZone
     End Sub
 
     Private Sub DrawLine(starting_position As Point, ending_position As Point, steps As Point)
-        For current_row As Long = starting_position.X To ending_position.X Step steps.X
-            For current_col As Long = starting_position.Y To ending_position.Y Step steps.Y
-                If Not compare_pixels_color.DifferentPixelColor(image.GetPixel(current_row, current_col).B, 255,
-                                                image.GetPixel(current_row, current_col).G, 255,
-                                                image.GetPixel(current_row, current_col).R, 255) Then
-                    image.SetPixel(current_row, current_col, LINE_COLOR)
+        Dim position As Integer
+        Dim image_data As BitmapData = image.LockBits(
+            New Rectangle(0, 0, image.Width, image.Height),
+            ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb)
+        Dim image_bytes As Byte() = New Byte(Math.Abs(image_data.Stride) * image.Height) {}
+        Dim scan0 As IntPtr = image_data.Scan0
+        Marshal.Copy(scan0, image_bytes, 0, image_bytes.Length - 1)
+
+        For x As Integer = starting_position.X To ending_position.X Step steps.X
+            For y As Integer = starting_position.Y To ending_position.Y Step steps.Y
+                position = (y * image_data.Stride) + (x * Drawing.Image.GetPixelFormatSize(image_data.PixelFormat) / 8)
+                If (Not compare_pixels_color.DifferentPixelColor(image_bytes(position), 255,
+                                                   image_bytes(position + 1), 255,
+                                                   image_bytes(position + 2), 255)) Then
+                    image_bytes(position) = 0
+                    image_bytes(position + 1) = 255
+                    image_bytes(position + 2) = 0
                 End If
             Next
         Next
+
+        Marshal.Copy(image_bytes, 0, scan0, image_bytes.Length - 1)
+        image.UnlockBits(image_data)
     End Sub
 End Class

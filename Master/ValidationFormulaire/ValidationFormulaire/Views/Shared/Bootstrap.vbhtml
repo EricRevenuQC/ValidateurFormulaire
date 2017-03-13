@@ -25,6 +25,7 @@
     <script src="/content/js/bootstrap-slider.min.js"></script>
 	<script src="/content/js/bootstrap-checkbox.min.js"></script>
     <script src="/content/js/fileinput.min.js"></script>
+	<script src="/content/js/FileSaver.min.js"></script>
     <script src="/content/js/plugins/sortable.min.js"></script>
     <script src="/content/js/plugins/purify.min.js"></script>
 	<script src="/content/js/locales/fr.js"></script>

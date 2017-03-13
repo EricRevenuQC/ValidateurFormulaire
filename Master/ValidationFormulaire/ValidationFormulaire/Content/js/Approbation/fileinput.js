@@ -1,8 +1,7 @@
 $("#file").fileinput({
     maxFileCount: 1,
     showUpload: false,
-    language: "fr",
-    allowedFileExtensions: ["pdf"]
+    language: "fr"
 });
 
 $("#file_template").fileinput({
@@ -16,20 +15,17 @@ $("#file_template").fileinput({
     initialPreviewConfig: [
         { caption: "Gabarit",width: "120px", key: 1 }
     ],
-    purifyHtml: true,
-    allowedFileExtensions: ["pdf"]
+    purifyHtml: true
 });
 
 $("#file_left").fileinput({
     maxFileCount: 1,
     showUpload: false,
-    language: "fr",
-    allowedFileExtensions: ["pdf"]
+    language: "fr"
 });
 
 $("#file_right").fileinput({
     maxFileCount: 1,
     showUpload: false,
-    language: "fr",
-    allowedFileExtensions: ["pdf"]
+    language: "fr"
 });

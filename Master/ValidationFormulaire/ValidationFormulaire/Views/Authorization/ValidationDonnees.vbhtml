@@ -18,10 +18,19 @@ End Code
 		visibility: hidden;
 	}
 
+	.ui-dialog, .ui-widget-content, .ui-corner-all, .ui-draggable, .ui-resizable {
+		background: #eee;
+	}​
+
+	 .ui-dialog-title, .ui-dialog-titlebar {
+		color: #f9f9f9;
+		background: #428bca;
+	}​
+
 	.nopadding {
 	   padding: 1px !important;
 	   margin-left: 0 !important;
-	}
+	}	
 </style>
 
 <div class="container-fluid">
@@ -129,9 +138,9 @@ End Code
 		 Dim dialog_label_id As String = "dialog_label_id" + i.ToString
 		 Dim dialog_page_text As String = "dialog_page_text" + i.ToString
 		 Dim col_width As String = "col-md-8"
-		@<div id="@dialog_id"  title="Veuillez entrer les données demandées inscrites sur le relevé "style="background:lightblue">
+		@<div id="@dialog_id"  title="Veuillez entrer les données demandées inscrites sur le relevé">
 			<div data-role="body">
-				<label for="dialog_input_id" id="@dialog_label_id" style="background:lightblue">
+				<label for="dialog_input_id" id="@dialog_label_id">
 					@If Session("page_number_releve_donnees") > 1 Then
 						@<span id="@dialog_page_text">
 							Page @Session("current_page_releve_donnees")
@@ -165,7 +174,7 @@ End Code
 	End If
 </div>
 <div style="display: none;">
-	<div id="dialog-confirmation" title="Veuillez confirmer"style="background:lightblue">
+	<div id="dialog-confirmation" title="Veuillez confirmer">
 		<div data-role="body">
 			Le champ saisie n'est pas identique à celui indiqué par le code à bar.<br />
 			Vous avez entré : <div id="dialog-text-input" style="display: inline"></div><br />
@@ -190,16 +199,30 @@ End Code
 	var current_page_releve_donnees = parseInt('@Session("current_page_releve_donnees")');
 	var page_number_releve_donnees = parseInt('@Session("page_number_releve_donnees")');
 	var current_dialog = 0;
-	var wrong_data_list_messages = new Array();
 	var data_log = [];
 	for (var i = 0; i < page_number_releve_donnees; i++) {
 		data_log[i] = {}
+		var key_index = 0;
 		$.each(Razor(@Html.Raw(Json.Encode(Model.bar_code_data))), function (key, value) {
+
+			// Remove spaces from all values except expected strings.
+			if (key_index != 35 && key_index != 36 && key_index != 37 && key_index != 38
+				 && key_index != 39 && key_index != 40 && key_index != 42 && key_index != 43
+				 && key_index != 44 && key_index != 45 && key_index != 46 && key_index != 47) {
+				value.value = value.value.replace(/\s/g, '');
+			}
+			else {
+				value.value = value.value.replace(/\s+/g, " ");
+				value.value = value.value.replace(/\s+$/, '');
+			}
+
 			data_log[i][key] = {
 				description: value.description,
 				bar_code_value: value.value,
 				input_value: ""
 			};
+
+			key_index += 1
 		});
 	}
 
@@ -211,6 +234,11 @@ End Code
 			$(this).blur();
 			$("#dialog_valider_id".concat(current_dialog)).focus().click();
 		}
+	}
+
+	function SaveFile(filename, data) {
+		var blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+		saveAs(blob, filename);
 	}
 
 	$('#show-template-checkbox').checkboxpicker({
@@ -238,21 +266,18 @@ End Code
 
 	$("#dialog-annuler").click(function () {
 		$("#dialog-confirmation").dialog('close');
-		wrong_data_list_messages = [];
 		$("#dialog_input_id".concat(current_dialog)).focus()
 	});
 
 	$("#dialog-confirmer").click(function () {
 		$("#dialog-confirmation").dialog('close');
 		NextDialog();
-		wrong_data_list_messages.push($("#dialog_label_id".concat(current_dialog)).text().replace(/\r?\n|\r/g, '') + " - saisie: " +
-			$("#dialog-text-input").text() + ", CAB: " + $("#dialog-text-barcode").text());
 		var collection = Razor(@Html.Raw(Json.Encode(Model.bar_code_data)));
-		var data_index = 0;
+		var data_index = 1;
 
 		$.each(collection, function (key, value) {
 			if (data_index === current_dialog) {
-				data_log[current_page_releve_donnees][key]["input_value"] = $("#dialog-text-input").text();
+				data_log[current_page_releve_donnees - 1][key].input_value = $("#dialog-text-input").text();
 			}
 			data_index += 1;
 		});
@@ -336,7 +361,7 @@ End Code
 
 				if (bar_code_value === $("#dialog_input_id".concat(current_dialog)).val()) {
 					NextDialog();
-					data_log[current_page_releve_donnees][key]["input_value"] = $("#dialog_input_id".concat(current_dialog)).val();
+					delete data_log[current_page_releve_donnees - 1][key];
 					return false
 				}
 				else {
@@ -419,19 +444,22 @@ End Code
 			$("#dialog_page_text".concat(current_dialog)).text("Page " + current_page_releve_donnees);
 		}
 		else {
-			alert("Terminer");
 			var text = "";
-			for (var i = 1; i < data_log.length + 1; i++) {
-				text = text + "Page " + i + "\n";
+			for (var i = 0; i < data_log.length; i++) {
+				var page = i + 1
+				if (page > 1) {
+					text += "\r\n\r\n---------------------------------------------\r\n\r\n";
+				}
+				text = text + "Page " + page + "\r\n\r\n";
 				var obj = data_log[i];
 				for (var key in obj) {
 					if (!obj.hasOwnProperty(key)) continue;
-					text = text + "Description : " + data_log[i][key].description + "\n";
-					text = text + "Code bar : " + data_log[i][key].bar_code_value + "\n";
-					text = text + "Saisie : " + data_log[i][key].input_value + "\n\n";
+					text = text + "Description : " + data_log[i][key].description + "\r\n";
+					text = text + "Code bar : " + data_log[i][key].bar_code_value + "\r\n";
+					text = text + "Saisie : " + data_log[i][key].input_value + "\r\n\r\n";
 				}
 			}
-			alert(text);
+			SaveFile("Rapport.txt", text);
 		}
 	}
 

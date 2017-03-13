@@ -22,6 +22,21 @@ Public Class Authorization
         bar_code_text = bar_code_reader.GetBarCodeText
         bar_code_id = bar_code_reader.GetBarCodeId
         file.InputStream.Position = 0
+
+        System.Diagnostics.Debug.WriteLine("Bar Code : " + bar_code_text)
+
+        If bar_code_text Is Nothing Then
+            AlertsManager.AddAlert("Incapable de lire le code à bar de données!")
+        End If
+
+        If bar_code_id Is Nothing Then
+            AlertsManager.AddAlert("Incapable de lire le code à bar d'identification!")
+        End If
+
+        If bar_code_id Is Nothing OrElse bar_code_text Is Nothing Then
+            Return New Dictionary(Of String, BarCodeData)()
+        End If
+
         pdf_text = extractor.PDFToText(file)
 
         System.Diagnostics.Debug.WriteLine("Reading bar code")
@@ -29,18 +44,17 @@ Public Class Authorization
             System.Diagnostics.Debug.WriteLine(s)
         Next
         System.Diagnostics.Debug.WriteLine("Finished")
-        data = New BarCodeFormatImporter().ImportExcelData(bar_code_id)
 
-        Return FillBarCodeDataIntoDictionary(bar_code_text, pdf_text, data)
+        data = New BarCodeImporter().ImportExcelData(bar_code_id)
+
+        Return FillBarCodeDataIntoDictionary(bar_code_text, data)
     End Function
 
     Private Function FillBarCodeDataIntoDictionary(bar_code_text As String,
-                                                   pdf_text() As String,
                                                    data As DataSet) As Dictionary(Of String, BarCodeData)
         Dim current_string As String
         Dim checked_row As New List(Of String)()
         Dim data_dictionary As New Dictionary(Of String, BarCodeData)()
-
         Try
             For i As Integer = 0 To data.Tables(0).Rows.Count - 1
                 If Not IsDBNull(data.Tables(0).Rows(i)(ID_INDEX)) AndAlso Not checked_row.Contains(data.Tables(0).Rows(i)(CODE_INDEX)) Then
@@ -58,7 +72,7 @@ Public Class Authorization
                 End If
             Next
         Catch ex As Exception
-            AlertsManager.AddAlert("Incapable de trouver le code à bar ou son gabarit excel associé!")
+            AlertsManager.AddAlert("Incapable de trouver le gabarit excel associé au code à bar d'identification!")
             System.Diagnostics.Debug.WriteLine(ex)
         End Try
         Return data_dictionary
