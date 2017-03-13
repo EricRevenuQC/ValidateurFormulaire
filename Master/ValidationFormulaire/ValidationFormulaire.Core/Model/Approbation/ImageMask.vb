@@ -1,5 +1,9 @@
 ﻿Imports Emgu.CV
 Imports Emgu.CV.Structure
+Imports System.Drawing
+
+
+
 
 Public Class ImageMask
     Public Function ApplyRedMaskToImage(image As Image(Of Bgr, Byte))

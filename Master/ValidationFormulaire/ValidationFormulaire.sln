@@ -8,26 +8,6 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ValidationFormulaire.Tests", "ValidationFormulaire.Tests\ValidationFormulaire.Tests.vbproj", "{D10393E3-9437-4C7F-84F3-3B432F3E6460}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://gestsource.services.mrq:8080/tfs/rq
-		SccProjectUniqueName0 = ValidationFormulaire\\ValidationFormulaire.vbproj
-		SccProjectName0 = ../../ValidationFormulaire
-		SccAuxPath0 = http://gestsource.services.mrq:8080/tfs/rq
-		SccLocalPath0 = ValidationFormulaire
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName1 = ValidationFormulaire.Core\\ValidationFormulaire.Core.vbproj
-		SccProjectName1 = ValidationFormulaire.Core
-		SccAuxPath1 = http://gestsource.services.mrq:8080/tfs/rq
-		SccLocalPath1 = ValidationFormulaire.Core
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName2 = ValidationFormulaire.Tests\\ValidationFormulaire.Tests.vbproj
-		SccProjectName2 = ValidationFormulaire.Tests
-		SccAuxPath2 = http://gestsource.services.mrq:8080/tfs/rq
-		SccLocalPath2 = ValidationFormulaire.Tests
-		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
