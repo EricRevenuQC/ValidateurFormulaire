@@ -1,11 +1,15 @@
 ﻿Imports System.Web
 Imports System.Data.OleDb
 Imports System.Text.RegularExpressions
+Imports System.Drawing
 
 Public Class Authorization
     Private extractor As New TextExtractor()
     Private text_adjustor As New TextAdjuster()
     Private bar_code_reader As New BarCodeReader()
+    Private search_pdf_text As New SearchPDFText()
+    Private data_dictionary As New Dictionary(Of String, BarCodeData)()
+    Private failed_data_dictionary As New Dictionary(Of String, BarCodeData)()
 
     Private Const ID_INDEX As Integer = 0
     Private Const DESCRIPTION_INDEX As Integer = 1
@@ -14,9 +18,10 @@ Public Class Authorization
     Private Const LENGTH_INDEX As Integer = 4
     Private Const CODE_INDEX As Integer = 6
 
-    Public Function AuthorizePDF(file As HttpPostedFileBase) As Dictionary(Of String, BarCodeData)
-        Dim pdf_text(), bar_code_text, bar_code_id As String
+    Public Sub AuthorizePDF(file As HttpPostedFileBase)
+        Dim bar_code_text, bar_code_id As String
         Dim data As DataSet
+        Dim pdf_words As Dictionary(Of Point, String)
 
         bar_code_reader.ReadBarCode(file)
         bar_code_text = bar_code_reader.GetBarCodeText
@@ -34,21 +39,16 @@ Public Class Authorization
         End If
 
         If bar_code_id Is Nothing OrElse bar_code_text Is Nothing Then
-            Return New Dictionary(Of String, BarCodeData)()
+            Exit Sub
         End If
 
-        pdf_text = extractor.PDFToText(file)
-
-        System.Diagnostics.Debug.WriteLine("Reading bar code")
-        For Each s As String In pdf_text
-            System.Diagnostics.Debug.WriteLine(s)
-        Next
-        System.Diagnostics.Debug.WriteLine("Finished")
+        pdf_words = extractor.PDFToText(file)
 
         data = New BarCodeImporter().ImportExcelData(bar_code_id)
 
-        Return FillBarCodeDataIntoDictionary(bar_code_text, data)
-    End Function
+        data_dictionary = FillBarCodeDataIntoDictionary(bar_code_text, data)
+        failed_data_dictionary = search_pdf_text.FindBarCodeValues(pdf_words, data_dictionary)
+    End Sub
 
     Private Function FillBarCodeDataIntoDictionary(bar_code_text As String,
                                                    data As DataSet) As Dictionary(Of String, BarCodeData)
@@ -76,5 +76,13 @@ Public Class Authorization
             System.Diagnostics.Debug.WriteLine(ex)
         End Try
         Return data_dictionary
+    End Function
+
+    Public Function GetData() As Dictionary(Of String, BarCodeData)
+        Return data_dictionary
+    End Function
+
+    Public Function GetFailedData() As Dictionary(Of String, BarCodeData)
+        Return failed_data_dictionary
     End Function
 End Class

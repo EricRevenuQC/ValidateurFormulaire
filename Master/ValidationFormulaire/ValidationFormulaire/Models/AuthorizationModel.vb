@@ -65,6 +65,7 @@ Namespace Models
 
         Public Property alert_messages As Dictionary(Of String, String)
         Public Property bar_code_data As New Dictionary(Of String, BarCodeData)()
+        Public Property bar_code_unverified_data As New Dictionary(Of String, BarCodeData)()
     End Class
 
     Public Class AuthorizationDB

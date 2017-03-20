@@ -23,7 +23,7 @@
 '        bar_code_text = bar_code_reader.GetBarCodeText
 '        bar_code_id = bar_code_reader.GetBarCodeId
 '        file.InputStream.Position = 0
-'        pdf_text = extractor.PDFToText(file)
+'        'pdf_text = extractor.PDFToText(file)
 '        data = New BarCodeImporter().ImportExcelData(bar_code_id)
 
 '        Return SearchForAllBarCodeCharactersInPDFText(bar_code_text, pdf_text, data)

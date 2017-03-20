@@ -255,7 +255,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApprobationModel.vb" />
-    <Compile Include="Models\CobeBarModel.vb" />
     <Compile Include="Attributes\FileSizeAttribute.vb" />
     <Compile Include="Attributes\FileTypesAttribute.vb" />
     <Compile Include="Models\AuthorizationModel.vb" />

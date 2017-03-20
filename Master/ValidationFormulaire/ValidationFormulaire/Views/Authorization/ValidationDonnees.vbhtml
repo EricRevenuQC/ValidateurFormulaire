@@ -5,34 +5,6 @@
 	Layout = "~/Views/Authorization/Layouts/ValidationDonneesLayout.vbhtml"
 End Code      
 
-<style>
-	.ui-widget-overlay.custom-overlay { 
-		opacity: 0 !important;
-	}
-	.ui-widget-overlay.custom-overlay-black { 
-		background-color: black;
-		background-image: none;
-		opacity: .25 !important;
-	}
-	.ui-dialog-titlebar-close {
-		visibility: hidden;
-	}
-
-	.ui-dialog, .ui-widget-content, .ui-corner-all, .ui-draggable, .ui-resizable {
-		background: #eee;
-	}​
-
-	 .ui-dialog-title, .ui-dialog-titlebar {
-		color: #f9f9f9;
-		background: #428bca;
-	}​
-
-	.nopadding {
-	   padding: 1px !important;
-	   margin-left: 0 !important;
-	}	
-</style>
-
 <div class="container-fluid">
 	<div class="row top10">
 		@If Model IsNot Nothing AndAlso Model.alert_messages IsNot Nothing AndAlso Model.alert_messages.Count > 0 Then
@@ -125,10 +97,12 @@ End Code
             </div>
         </div>
     </div>
+	<div class="row top5"></div>
+	<div id="dialog-bottom-space" class="row top190" style="display: block"></div>
 </div>
 <div style="display: none;">
-	@If Model.bar_code_data.Count > 0 Then
-		@For i As Integer = 0 To Model.bar_code_data.Count - 1
+	@If Model.bar_code_unverified_data.Count > 0 Then
+		@For i As Integer = 0 To Model.bar_code_unverified_data.Count - 1
 		 Dim dialog_id As String = "dialog_id" + i.ToString
 		 Dim dialog_valider_id As String = "dialog_valider_id" + i.ToString
 		 Dim dialog_annuler_id As String = "dialog_annuler_id" + i.ToString
@@ -147,7 +121,7 @@ End Code
 						 </span>
 						@<br />
 					End If
-					@i - @Model.bar_code_data([Enum].GetName(GetType(ValidationFormulaire.Core.BarCodeProperties), i)).description
+					@i - @Model.bar_code_unverified_data.ElementAt(i).Value.description
 				</label>
 				<input type="text" class="form-control" id="@dialog_input_id"/>
 			</div>
@@ -203,7 +177,7 @@ End Code
 	for (var i = 0; i < page_number_releve_donnees; i++) {
 		data_log[i] = {}
 		var key_index = 0;
-		$.each(Razor(@Html.Raw(Json.Encode(Model.bar_code_data))), function (key, value) {
+		$.each(Razor(@Html.Raw(Json.Encode(Model.bar_code_unverified_data))), function (key, value) {
 
 			// Remove spaces from all values except expected strings.
 			if (key_index != 35 && key_index != 36 && key_index != 37 && key_index != 38
@@ -260,7 +234,7 @@ End Code
 		}
 	});
 
-	for (i = 0; i < Razor(@Model.bar_code_data.Count); i++) {
+	for (i = 0; i < Razor(@Model.bar_code_unverified_data.Count); i++) {
 		$("#dialog_input_id".concat(i)).keypress(keypressHandler);
 	}
 
@@ -272,7 +246,7 @@ End Code
 	$("#dialog-confirmer").click(function () {
 		$("#dialog-confirmation").dialog('close');
 		NextDialog();
-		var collection = Razor(@Html.Raw(Json.Encode(Model.bar_code_data)));
+		var collection = Razor(@Html.Raw(Json.Encode(Model.bar_code_unverified_data)));
 		var data_index = 1;
 
 		$.each(collection, function (key, value) {
@@ -303,13 +277,10 @@ End Code
 	dialog = $("#dialog_id0").dialog({
 		uiLibrary: 'bootstrap',
 		autoOpen: true,
-		resizable: true,
-		minWidth: 200,
-		maxWidth: 600,
-		minHeight: 100,
-		maxHeight: 450,
+		resizable: false,
+		draggable: false,
 		height: "auto",
-		width: 500,
+		width: 600,
 		position: {
 			my: "center",
 			at: "bottom",
@@ -317,6 +288,7 @@ End Code
 		},
 		open: function () {
 			$('.ui-widget-overlay').addClass('custom-overlay');
+			$('.ui-dialog').addClass('fixed-dialog');
 		},
 		close: function () {
 			$('.ui-widget-overlay').removeClass('custom-overlay');
@@ -324,9 +296,10 @@ End Code
 		autofocus: true
 	});
 
-	for (i = 0; i < Razor(@Model.bar_code_data.Count); i++) {
+	for (i = 0; i < Razor(@Model.bar_code_unverified_data.Count); i++) {
 		$("#dialog_annuler_id".concat(i)).click(function () {
 			$("#dialog_id".concat(current_dialog)).dialog('close');
+			document.getElementById("dialog-bottom-space").style.display = "none";
 			current_dialog = 0;
 		});
 		$("#dialog_precedent_id".concat(i)).click(function () {
@@ -341,7 +314,7 @@ End Code
 	}
 
 	function ValidateValue() {
-		var collection = Razor(@Html.Raw(Json.Encode(Model.bar_code_data)));
+		var collection = Razor(@Html.Raw(Json.Encode(Model.bar_code_unverified_data)));
 		var data_index = 0;
 
 		$.each(collection, function (key, value) {
@@ -383,35 +356,34 @@ End Code
 		var offset = $("#dialog_id".concat(current_dialog)).closest('.ui-dialog').offset();
 		var last_position = "left+".concat(offset.left).concat(" ").concat("top+").concat(
 			offset.top - (document.documentElement.scrollTop || document.body.scrollTop));
-
 		if ($("#dialog_id".concat(current_dialog + 1)).hasClass('ui-dialog-content')) {
 			$("#dialog_id".concat(current_dialog + 1)).dialog({
 				position: {
 					my: "left top",
-					at: last_position,
-					of: window
+					at: last_position
 				}
 			});
 			$("#dialog_id".concat(current_dialog + 1)).dialog("option", "height", height);
 			$("#dialog_id".concat(current_dialog + 1)).dialog("option", "width", width);
 		}
 		else {
+			last_position = "left+".concat(offset.left).concat(" ").concat("top+").concat(
+			offset.top - (document.documentElement.scrollTop || document.body.scrollTop) * 2);
 			$("#dialog_id".concat(current_dialog + 1)).dialog({
 				uiLibrary: 'bootstrap',
-				resizable: true,
+				resizable: false,
+				draggable: false,
 				autoOpen: false,
-				minWidth: 200,
-				maxWidth: 600,
-				minHeight: 100,
-				maxHeight: 450,
 				height: height,
 				width: width,
 				position: {
 					my: "left top",
-					at: last_position
+					at: last_position,
+					of: window
 				},
 				open: function () {
 					$('.ui-widget-overlay').addClass('custom-overlay');
+					$('.ui-dialog').addClass('fixed-dialog');
 				},
 				close: function () {
 					$('.ui-widget-overlay').removeClass('custom-overlay');
@@ -421,7 +393,7 @@ End Code
 		}
 		$("#dialog_id".concat(current_dialog)).dialog('close');
 
-		if (current_dialog < Razor(@Model.bar_code_data.Count - 1)) {
+		if (current_dialog < Razor(@Model.bar_code_unverified_data.Count - 1)) {
 			$("#dialog_id".concat(current_dialog + 1)).dialog('open');
 			$("#dialog_page_text".concat(current_dialog + 1)).text("Page " + current_page_releve_donnees);
 			current_dialog += 1
@@ -459,6 +431,7 @@ End Code
 					text = text + "Saisie : " + data_log[i][key].input_value + "\r\n\r\n";
 				}
 			}
+			document.getElementById("dialog-bottom-space").style.display = "none";
 			SaveFile("Rapport.txt", text);
 		}
 	}

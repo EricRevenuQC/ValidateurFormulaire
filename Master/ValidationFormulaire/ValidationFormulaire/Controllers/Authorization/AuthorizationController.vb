@@ -29,12 +29,15 @@ Public Class AuthorizationController
     Function ValidationDonnees(model As AuthorizationModel, page_action As DeterminePage.PageAction,
                                 Optional formulaire As FormulairePosition = Nothing,
                                 Optional page As Integer = Nothing) As ActionResult
-        session_value_provider.SetValue("current_page_releve_donnees", pagination.DeterminePageChange(page_action, session_value_provider.GetValue("current_page_releve_donnees"), page))
+        session_value_provider.SetValue(
+            "current_page_releve_donnees", pagination.DeterminePageChange(
+                page_action, session_value_provider.GetValue("current_page_releve_donnees"), page))
         Return View(model)
     End Function
 
     <HttpPost> _
     Public Function ValidationDonnees(file As HttpPostedFileBase) As ActionResult
+        AlertsManager.ClearAlerts()
         Dim model As New AuthorizationModel()
         If file IsNot Nothing AndAlso file.ContentLength > 0 Then
             Dim images() As Image
@@ -45,7 +48,10 @@ Public Class AuthorizationController
             session_value_provider.SetValue("current_page_releve_donnees", 1)
             file.InputStream.Position = 0
 
-            model.bar_code_data = authorization.AuthorizePDF(file)
+            authorization.AuthorizePDF(file)
+            model.bar_code_data = authorization.GetData
+            model.bar_code_unverified_data = authorization.GetFailedData
+            System.Diagnostics.Debug.WriteLine(model.bar_code_unverified_data.Count)
             session_value_provider.SetValue("current_dialog", 0)
 
             model.alert_messages = New Dictionary(Of String, String)()
