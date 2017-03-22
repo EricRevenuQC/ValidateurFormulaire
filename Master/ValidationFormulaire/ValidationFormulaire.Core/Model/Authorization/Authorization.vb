@@ -10,6 +10,7 @@ Public Class Authorization
     Private search_pdf_text As New SearchPDFText()
     Private data_dictionary As New Dictionary(Of String, BarCodeData)()
     Private failed_data_dictionary As New Dictionary(Of String, BarCodeData)()
+    Private dict_operations As New DictionaryOperations()
 
     Private Const ID_INDEX As Integer = 0
     Private Const DESCRIPTION_INDEX As Integer = 1
@@ -17,11 +18,12 @@ Public Class Authorization
     Private Const POSITION_INDEX_END As Integer = 3
     Private Const LENGTH_INDEX As Integer = 4
     Private Const CODE_INDEX As Integer = 6
+    Private Const HEIGHT_THRESHOLD_TOLERANCE As Integer = 5
 
     Public Sub AuthorizePDF(file As HttpPostedFileBase)
         Dim bar_code_text, bar_code_id As String
         Dim data As DataSet
-        Dim pdf_words As Dictionary(Of Point, String)
+        Dim pdf_words() As Dictionary(Of Point, String)
 
         bar_code_reader.ReadBarCode(file)
         bar_code_text = bar_code_reader.GetBarCodeText
@@ -45,8 +47,9 @@ Public Class Authorization
         pdf_words = extractor.PDFToText(file)
 
         data = New BarCodeImporter().ImportExcelData(bar_code_id)
-
         data_dictionary = FillBarCodeDataIntoDictionary(bar_code_text, data)
+
+        pdf_words = CleanPDFWords(pdf_words)
         failed_data_dictionary = search_pdf_text.FindBarCodeValues(pdf_words, data_dictionary)
     End Sub
 
@@ -61,6 +64,7 @@ Public Class Authorization
                     checked_row.Add(data.Tables(0).Rows(i)(CODE_INDEX))
                     current_string = bar_code_text.Substring(data.Tables(0).Rows(i)(POSITION_INDEX_START) - 1,
                                                                 data.Tables(0).Rows(i)(LENGTH_INDEX)).ToString
+                    current_string = current_string.Trim()
                     If Not data_dictionary.ContainsKey(data.Tables(0).Rows(i)(CODE_INDEX)) Then
                         data_dictionary.Add(data.Tables(0).Rows(i)(CODE_INDEX),
                                             New BarCodeData With {.value = current_string,
@@ -76,6 +80,26 @@ Public Class Authorization
             System.Diagnostics.Debug.WriteLine(ex)
         End Try
         Return data_dictionary
+    End Function
+
+    Private Function CleanPDFWords(words() As Dictionary(Of Point, String)) As Dictionary(Of Point, String)()
+        Dim height_threshold As Point
+        Dim temp_words As New Dictionary(Of Point, String)
+
+        For page As Integer = 1 To words.Count - 1
+            temp_words = New Dictionary(Of Point, String)(words(page))
+            height_threshold = dict_operations.GetKeyFromValue(temp_words, "Année")
+
+            If height_threshold.Y > 0 Then
+                For Each word As KeyValuePair(Of Point, String) In temp_words
+                    If word.Key.Y > height_threshold.Y + HEIGHT_THRESHOLD_TOLERANCE Then
+                        words(page).Remove(word.Key)
+                    End If
+                Next
+            End If
+        Next
+
+        Return words
     End Function
 
     Public Function GetData() As Dictionary(Of String, BarCodeData)

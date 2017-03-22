@@ -174,30 +174,38 @@ End Code
 	var page_number_releve_donnees = parseInt('@Session("page_number_releve_donnees")');
 	var current_dialog = 0;
 	var data_log = [];
-	for (var i = 0; i < page_number_releve_donnees; i++) {
-		data_log[i] = {}
+	var dialog_per_page = [];
+	SetDialogPerPage();
+	DataLogSetup();	
+
+	function DataLogSetup() {
 		var key_index = 0;
 		$.each(Razor(@Html.Raw(Json.Encode(Model.bar_code_unverified_data))), function (key, value) {
-
-			// Remove spaces from all values except expected strings.
-			if (key_index != 35 && key_index != 36 && key_index != 37 && key_index != 38
-				 && key_index != 39 && key_index != 40 && key_index != 42 && key_index != 43
-				 && key_index != 44 && key_index != 45 && key_index != 46 && key_index != 47) {
-				value.value = value.value.replace(/\s/g, '');
-			}
-			else {
-				value.value = value.value.replace(/\s+/g, " ");
-				value.value = value.value.replace(/\s+$/, '');
-			}
-
-			data_log[i][key] = {
+			data_log[key_index] = {
 				description: value.description,
 				bar_code_value: value.value,
 				input_value: ""
 			};
-
 			key_index += 1
 		});
+	}
+
+	function SetDialogPerPage() {
+		var collection = Razor(@Html.Raw(Json.Encode(Model.bar_code_unverified_data)));
+		var data_index = 0;
+		var previous_page_indicator = 0;
+		var current_page_indicator = 0;
+
+		$.each(collection, function (key, value) {
+			data_index += 1;
+			current_page_indicator = key.charAt(0); //Doesnt work with IE??
+			if (previous_page_indicator != current_page_indicator) {
+				dialog_per_page.push(data_index);
+				data_index = 0;
+			}
+			previous_page_indicator = current_page_indicator;
+		});
+		dialog_per_page.push(data_index + 1);
 	}
 
 	function Razor(obj) { return obj; }
@@ -245,16 +253,12 @@ End Code
 
 	$("#dialog-confirmer").click(function () {
 		$("#dialog-confirmation").dialog('close');
-		NextDialog();
 		var collection = Razor(@Html.Raw(Json.Encode(Model.bar_code_unverified_data)));
-		var data_index = 1;
+		var data_index = 0;
 
-		$.each(collection, function (key, value) {
-			if (data_index === current_dialog) {
-				data_log[current_page_releve_donnees - 1][key].input_value = $("#dialog-text-input").text();
-			}
-			data_index += 1;
-		});
+		data_log[current_dialog].input_value = $("#dialog-text-input").text();
+
+		NextDialog();
 	});
 
 	$("#dialog-confirmation").dialog({
@@ -321,20 +325,9 @@ End Code
 			if (data_index === current_dialog) {
 				var bar_code_value = value.value;
 
-				// Remove spaces from all values except expected strings.
-				if (current_dialog != 35 && current_dialog != 36 && current_dialog != 37 && current_dialog != 38
-					 && current_dialog != 39 && current_dialog != 40 && current_dialog != 42 && current_dialog != 43
-					 && current_dialog != 44 && current_dialog != 45 && current_dialog != 46 && current_dialog != 47) {
-					bar_code_value = bar_code_value.replace(/\s/g, '');
-				}
-				else {
-					bar_code_value = bar_code_value.replace(/\s+/g, " ");
-					bar_code_value = bar_code_value.replace(/\s+$/, '');
-				}
-
 				if (bar_code_value === $("#dialog_input_id".concat(current_dialog)).val()) {
+					delete data_log[current_dialog];
 					NextDialog();
-					delete data_log[current_page_releve_donnees - 1][key];
 					return false
 				}
 				else {
@@ -393,14 +386,19 @@ End Code
 		}
 		$("#dialog_id".concat(current_dialog)).dialog('close');
 
-		if (current_dialog < Razor(@Model.bar_code_unverified_data.Count - 1)) {
+		var current_dialog_on_current_page = current_dialog;
+		if (current_page_releve_donnees > 1) {
+			current_dialog_on_current_page = current_dialog - dialog_per_page[current_page_releve_donnees - 1]
+		}
+
+		if (current_dialog_on_current_page < dialog_per_page[current_page_releve_donnees] - 1) {
 			$("#dialog_id".concat(current_dialog + 1)).dialog('open');
 			$("#dialog_page_text".concat(current_dialog + 1)).text("Page " + current_page_releve_donnees);
-			current_dialog += 1
+			current_dialog += 1;
 		}
 		else if (current_page_releve_donnees < page_number_releve_donnees) {
 			alert("Prochaine page");
-			current_dialog = 0;
+			current_dialog += 1;
 			$("#dialog_id".concat(current_dialog)).dialog({
 				position: {
 					my: "left top",
@@ -416,21 +414,31 @@ End Code
 			$("#dialog_page_text".concat(current_dialog)).text("Page " + current_page_releve_donnees);
 		}
 		else {
+			alert("Terminer");
 			var text = "";
+			var current_page = 1;
+			var index_on_page = 0
+
+			text += "---------------------------------------------\r\n";
+			text = text + "Page " + current_page;
+			text += "\r\n---------------------------------------------\r\n\r\n";
+
 			for (var i = 0; i < data_log.length; i++) {
-				var page = i + 1
-				if (page > 1) {
-					text += "\r\n\r\n---------------------------------------------\r\n\r\n";
+				if (index_on_page == dialog_per_page[current_page]) {
+					current_page += 1;
+					index_on_page = 0;
+					text += "\r\n---------------------------------------------\r\n";
+					text = text + "Page " + current_page;
+					text += "\r\n---------------------------------------------\r\n\r\n";
 				}
-				text = text + "Page " + page + "\r\n\r\n";
-				var obj = data_log[i];
-				for (var key in obj) {
-					if (!obj.hasOwnProperty(key)) continue;
-					text = text + "Description : " + data_log[i][key].description + "\r\n";
-					text = text + "Code bar : " + data_log[i][key].bar_code_value + "\r\n";
-					text = text + "Saisie : " + data_log[i][key].input_value + "\r\n\r\n";
+				if (typeof data_log[i] != 'undefined') {
+					text = text + "Description : " + data_log[i].description + "\r\n";
+					text = text + "Code bar : " + data_log[i].bar_code_value + "\r\n";
+					text = text + "Saisie : " + data_log[i].input_value + "\r\n\r\n";
 				}
+				index_on_page += 1;
 			}
+			current_dialog = 0;
 			document.getElementById("dialog-bottom-space").style.display = "none";
 			SaveFile("Rapport.txt", text);
 		}

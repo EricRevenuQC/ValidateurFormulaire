@@ -2,33 +2,51 @@
 Imports System.Drawing
 
 Public Class SearchPDFText
-    Public Function FindBarCodeValues(words As Dictionary(Of Point, String),
+
+    Private Const NUMERO_PREPARATEUR_INDEX As Integer = 2
+    Private Const INDICATEUR_EMPLOYE_AU_POURBOIRE_INDEX As Integer = 27
+
+    Public Function FindBarCodeValues(words() As Dictionary(Of Point, String),
                                       bar_code_data As Dictionary(Of String, BarCodeData)) As Dictionary(Of String, BarCodeData)
         Dim adjusted_bar_code_values As String
-        Dim bar_code_index As Integer = 0
+        Dim bar_code_index As Integer
         Dim releve As New VerifyReleves(New Releve1)
         Dim failed_bar_code_values_index As New Dictionary(Of String, BarCodeData)()
 
-        words = words.OrderByDescending(Function(x) x.Key.Y).ThenBy(Function(x) x.Key.X).ToDictionary(Function(x) x.Key, Function(y) y.Value)
-        words = AdjustWords(words)
+        System.Diagnostics.Debug.WriteLine("Page number : " + words.Count.ToString)
 
-        For Each data As KeyValuePair(Of String, BarCodeData) In bar_code_data
-            adjusted_bar_code_values = data.Value.value.Trim()
+        For page As Integer = 1 To words.Count - 1
+            bar_code_index = 0
+            words(page) = words(page).OrderByDescending(
+                Function(x) x.Key.Y).ThenBy(Function(x) x.Key.X).ToDictionary(Function(x) x.Key, Function(y) y.Value)
+            words(page) = AdjustWords(words(page))
 
-            If words.ContainsValue(adjusted_bar_code_values) OrElse String.IsNullOrWhiteSpace(adjusted_bar_code_values) Then
-                If bar_code_index <> 0 OrElse bar_code_index <> 1 OrElse bar_code_index <> 2 _
-                        OrElse bar_code_index <> 27 Then
-                    If Not releve.VerifyTextInputPosition(words, data, bar_code_index) Then
-                        failed_bar_code_values_index.Add(bar_code_data.ElementAt(bar_code_index).Key, bar_code_data.ElementAt(bar_code_index).Value)
+            For Each test As KeyValuePair(Of Point, String) In words(page)
+                System.Diagnostics.Debug.WriteLine(test.Value)
+            Next
+
+            For Each data As KeyValuePair(Of String, BarCodeData) In bar_code_data
+                adjusted_bar_code_values = data.Value.value.Trim()
+
+                If words(page).ContainsValue(adjusted_bar_code_values) OrElse
+                        String.IsNullOrWhiteSpace(adjusted_bar_code_values) Then
+                    'On ne vérifie pas le numéro du préparateur et l'indicateur d'employé au pourboire
+                    If bar_code_index <> NUMERO_PREPARATEUR_INDEX AndAlso
+                            bar_code_index <> INDICATEUR_EMPLOYE_AU_POURBOIRE_INDEX Then
+                        If Not releve.VerifyTextInputPosition(words(page), data, bar_code_index) Then
+                            failed_bar_code_values_index.Add(page.ToString + bar_code_index.ToString,
+                                                             bar_code_data.ElementAt(bar_code_index).Value)
+                        Else
+                            words(page).Remove(New DictionaryOperations().GetKeyFromValue(words(page), adjusted_bar_code_values))
+                        End If
                     End If
+                Else
+                    failed_bar_code_values_index.Add(page.ToString + bar_code_index.ToString,
+                                                     bar_code_data.ElementAt(bar_code_index).Value)
                 End If
 
-                words.Remove(New DictionaryOperations().GetKeyFromValue(words, adjusted_bar_code_values))
-            Else
-                failed_bar_code_values_index.Add(bar_code_data.ElementAt(bar_code_index).Key, bar_code_data.ElementAt(bar_code_index).Value)
-            End If
-
-            bar_code_index += 1
+                bar_code_index += 1
+            Next
         Next
 
         For Each data As KeyValuePair(Of String, BarCodeData) In failed_bar_code_values_index

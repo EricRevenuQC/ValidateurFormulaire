@@ -107,7 +107,7 @@
     <Compile Include="Interfaces\Approbation\IPagination.vb" />
     <Compile Include="Interfaces\Approbation\Verification\IAnchorCorner.vb" />
     <Compile Include="Interfaces\Approbation\Verification\IVerification.vb" />
-    <Compile Include="Interfaces\Authorization\Releves\TextInputVerificator\IReleves.vb" />
+    <Compile Include="Interfaces\Authorization\Releves\IReleves.vb" />
     <Compile Include="Interfaces\ImageOperations\IFindFirstPixel.vb" />
     <Compile Include="Interfaces\ImageOperations\IComparePixelColor.vb" />
     <Compile Include="Model\Alerts\AlertMessages.vb" />
@@ -128,7 +128,7 @@
     <Compile Include="Model\Authorization\PDFExtraction\TextGroupSeperator.vb" />
     <Compile Include="Model\Authorization\PDFExtraction\TextProperties.vb" />
     <Compile Include="Model\Authorization\PDFExtraction\TextRectangle.vb" />
-    <Compile Include="Model\Authorization\Releves\TextInputVerificator\Releve1.vb" />
+    <Compile Include="Model\Authorization\Releves\Releves\Releve1.vb" />
     <Compile Include="Model\Authorization\SearchPDFText.vb" />
     <Compile Include="Model\Config.vb" />
     <Compile Include="Model\Converters\BarCodeImporter.vb" />

@@ -28,7 +28,7 @@ Public Class DictionaryOperations
     End Function
 
     Public Function GetKeyFromValueContains(dict As Dictionary(Of Point, String), value As String,
-                                            Optional occurence As Integer = 1) As Point
+                                            Optional occurence As Integer = 1) As Point?
         Dim key As Object
         Dim last_key As Object = Nothing
 

@@ -2,13 +2,15 @@
 
 Public Class TextGroupSeperator
 
-    Private text_groups As New Dictionary(Of Point, TextProperties)()
-    Private word_list As New Dictionary(Of Point, String)()
+    Private text_groups As Dictionary(Of Point, TextProperties)
+    Private word_list As Dictionary(Of Point, String)
 
     Private Const MAX_DISTANCE_BETWEEN_CHARACTERS As Integer = 10
 
     Public Function SeperateTextIntoGroups(text_extraction_strategy As TextExtractionStrategy) As Dictionary(Of Point, String)
         Dim text_properties As TextProperties
+        word_list = New Dictionary(Of Point, String)()
+        text_groups = New Dictionary(Of Point, TextProperties)()
 
         For Each text_rectangle As TextRectangle In text_extraction_strategy.rectangle_points
             text_properties = New TextProperties()
