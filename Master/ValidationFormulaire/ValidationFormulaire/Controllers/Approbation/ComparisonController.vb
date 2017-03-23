@@ -14,7 +14,7 @@ Public Class ComparisonController
 
     Public Sub New()
         pagination = New DeterminePage()
-        converter = New PDFToImageConverter()
+        converter = New PDFConverter()
         config = New Config()
         session_value_provider = New SessionValueProvider()
         comparaison = New Comparaison()

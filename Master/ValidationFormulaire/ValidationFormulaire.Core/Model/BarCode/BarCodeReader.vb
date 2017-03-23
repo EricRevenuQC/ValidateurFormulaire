@@ -5,14 +5,14 @@ Public Class BarCodeReader
     Private bar_code_text As String
     Private bar_code_id As String
 
-    Private Sub ActivateLicenseGDPicture()
+    Private Sub ActivateGDPictureLicense()
         Dim GDPICTURE_CLE_LICENSE = "211862729908279711114164022435896"
         Dim oLicenseManager As New LicenseManager()
         oLicenseManager.RegisterKEY(GDPICTURE_CLE_LICENSE)
     End Sub
 
     Public Sub ReadBarCode(file As HttpPostedFileBase)
-        ActivateLicenseGDPicture()
+        ActivateGDPictureLicense()
 
         Dim codeBarreDidentification = String.Empty
         Dim oGdPicturePDF As New GdPicturePDF()

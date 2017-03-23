@@ -1,4 +1,4 @@
-﻿Imports ValidationFormulaire.Core.PDFToImageConverter
+﻿Imports ValidationFormulaire.Core.PDFConverter
 Imports System.Web
 
 Public Interface IConverter

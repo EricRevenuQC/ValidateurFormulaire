@@ -46,7 +46,7 @@ Imports System.Drawing
         Dim starting_point As New Point(0, 0)
         Dim ending_point As New Point(image_test.Width - 1, image_test.Height - 1)
         Dim steps As New Point(1, 1)
-        Dim color As New Colors(0, 0, 255)
+        Dim color As New BGRColors(0, 0, 255)
         Dim pixel As New Point(find_first_pixel.Search(image_test, starting_point, ending_point, steps, color))
         Assert.AreEqual(New Point(2, 1), pixel)
     End Sub
@@ -60,7 +60,7 @@ Imports System.Drawing
         Dim starting_point As New Point(0, 0)
         Dim ending_point As New Point(image_test.Width - 1, image_test.Height - 1)
         Dim steps As New Point(1, 1)
-        Dim color As New Colors(255, 255, 255)
+        Dim color As New BGRColors(255, 255, 255)
         Dim pixel As New Point(find_first_pixel.Search(image_test, starting_point, ending_point, steps, color))
         Assert.AreEqual(New Point(2, 1), pixel)
     End Sub
@@ -72,7 +72,7 @@ Imports System.Drawing
 
         find_first_pixel = New SameColorDiagonally(compare_pixels_color.Object)
         Dim starting_point As New Point(5, 2)
-        Dim color As New Colors(0, 255, 0)
+        Dim color As New BGRColors(0, 255, 0)
         Dim pixel As New Point(find_first_pixel.Search(image_test, starting_point, Nothing, Nothing, color))
         Assert.AreEqual(New Point(3, 4), pixel)
     End Sub
@@ -84,7 +84,7 @@ Imports System.Drawing
 
         find_first_pixel = New SameColorDiagonally(compare_pixels_color.Object)
         Dim starting_point As New Point(8, 5)
-        Dim color As New Colors(0, 255, 0)
+        Dim color As New BGRColors(0, 255, 0)
         Dim pixel As New Point(find_first_pixel.Search(image_test, starting_point, Nothing, Nothing, color))
         Assert.AreEqual(Nothing, pixel)
     End Sub

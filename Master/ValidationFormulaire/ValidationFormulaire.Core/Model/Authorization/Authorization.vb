@@ -5,12 +5,11 @@ Imports System.Drawing
 
 Public Class Authorization
     Private extractor As New TextExtractor()
-    Private text_adjustor As New TextAdjuster()
     Private bar_code_reader As New BarCodeReader()
     Private search_pdf_text As New SearchPDFText()
     Private data_dictionary As New Dictionary(Of String, BarCodeData)()
     Private failed_data_dictionary As New Dictionary(Of String, BarCodeData)()
-    Private dict_operations As New DictionaryOperations()
+    Private dict_operations As New DictionaryKeys()
 
     Private Const ID_INDEX As Integer = 0
     Private Const DESCRIPTION_INDEX As Integer = 1
@@ -46,7 +45,7 @@ Public Class Authorization
 
         pdf_words = extractor.PDFToText(file)
 
-        data = New BarCodeImporter().ImportExcelData(bar_code_id)
+        data = New BarCodeConverter().ConvertBarCodeToData(bar_code_id)
         data_dictionary = FillBarCodeDataIntoDictionary(bar_code_text, data)
 
         pdf_words = CleanPDFWords(pdf_words)
@@ -88,7 +87,7 @@ Public Class Authorization
 
         For page As Integer = 1 To words.Count - 1
             temp_words = New Dictionary(Of Point, String)(words(page))
-            height_threshold = dict_operations.GetKeyFromValue(temp_words, "Année")
+            height_threshold = dict_operations.GetKeyFromDictionaryValue(temp_words, "Année")
 
             If height_threshold.Y > 0 Then
                 For Each word As KeyValuePair(Of Point, String) In temp_words

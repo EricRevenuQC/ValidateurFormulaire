@@ -47,8 +47,8 @@ Imports System.Drawing
         compare_pixels_color.Setup(Function(f) f.DifferentPixelColor(76, 0, 177, 255, 34, 0)).Returns(False)
 
         color_selector = New ColorSelector(image_test, compare_pixels_color.Object)
-        Dim red_pixels As List(Of Point) = color_selector.FindAllPixelsOfColorFromPoint(New Point(2, 3), New Colors(0, 0, 255))
-        Dim green_pixels As List(Of Point) = color_selector.FindAllPixelsOfColorFromPoint(New Point(5, 4), New Colors(0, 255, 0))
+        Dim red_pixels As List(Of Point) = color_selector.FindAllPixelsOfColorFromPoint(New Point(2, 3), New BGRColors(0, 0, 255))
+        Dim green_pixels As List(Of Point) = color_selector.FindAllPixelsOfColorFromPoint(New Point(5, 4), New BGRColors(0, 255, 0))
 
         Dim result_red_pixels As New List(Of Point)()
         result_red_pixels.Add(New Point(2, 3))

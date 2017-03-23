@@ -12,7 +12,7 @@ Public Class Anchor
 
     Public Sub FindTemplateAnchors(find_first_pixel As IFindFirstPixel)
         Dim template_image As New Bitmap(New Config().GetVerificationImageTemplatePath)
-        Dim color As New Colors(0, 0, 0)
+        Dim color As New BGRColors(0, 0, 0)
 
         Dim starting_point As New Point(0, image.Height - 1)
         Dim ending_point As New Point(image.Width - 1, 0)
@@ -32,7 +32,7 @@ Public Class Anchor
     End Sub
 
     Public Sub FindRealAnchorsCorners(find_first_pixel As IFindFirstPixel)
-        Dim color As New Colors(0, 0, 0)
+        Dim color As New BGRColors(0, 0, 0)
         Dim anchor_found As Point
         Dim bot_left_anchor_corner As New FindBotLeftAnchorCorner()
         Dim top_right_anchor_corner As New FindTopRightAnchorCorner()

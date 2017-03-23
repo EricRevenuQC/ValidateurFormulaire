@@ -13,7 +13,7 @@ Public Class SameColorDiagonally
     End Sub
 
     Public Function Search(image As Bitmap, starting_point As Point, ending_point As Point, steps As Point,
-                            color As Colors) As Point Implements IFindFirstPixel.Search
+                            color As BGRColors) As Point Implements IFindFirstPixel.Search
         Dim current_point As New Point(starting_point)
         Dim positive_search_direction As Boolean = True
         Dim i As Integer = 1

@@ -1,8 +1,8 @@
 ﻿Imports System.Web
 Imports System.Data.OleDb
 
-Public Class BarCodeImporter
-    Public Function ImportExcelData(file_name As String) As DataSet
+Public Class BarCodeConverter
+    Public Function ConvertBarCodeToData(file_name As String) As DataSet
         Dim data As New DataSet()
         Dim data_table As New DataTable()
         Dim file_location As String

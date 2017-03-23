@@ -39,7 +39,7 @@ Public Class SearchPDFText
                             failed_bar_code_values_index.Add("_" + page.ToString + bar_code_index.ToString,
                                                              bar_code_data.ElementAt(bar_code_index).Value)
                         Else
-                            words(page).Remove(New DictionaryOperations().GetKeyFromValue(words(page), adjusted_bar_code_values))
+                            words(page).Remove(New DictionaryKeys().GetKeyFromDictionaryValue(words(page), adjusted_bar_code_values))
                         End If
                     End If
                 Else

@@ -1,9 +1,5 @@
 ﻿Public Module AlertsManager
-
     Private alerts As Dictionary(Of String, String)
-
-    Private Const chars_not_found_message As String = "Au moins un champ du code à bar n'a pas été trouvé!"
-    Private Const zeros_found_message As String = "Des zéros ont été trouvés au lieu de cases vides!"
 
     Sub New()
         alerts = New Dictionary(Of String, String)
@@ -24,12 +20,4 @@
     Public Sub ClearAlerts()
         alerts.Clear()
     End Sub
-
-    Public Function GetCharNotFoundMsg() As String
-        Return chars_not_found_message
-    End Function
-
-    Public Function GetZerosFoundMsg() As String
-        Return zeros_found_message
-    End Function
 End Module

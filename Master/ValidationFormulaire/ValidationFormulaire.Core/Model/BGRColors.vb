@@ -1,4 +1,4 @@
-﻿Public Class Colors
+﻿Public Class BGRColors
     Public red As Integer
     Public blue As Integer
     Public green As Integer

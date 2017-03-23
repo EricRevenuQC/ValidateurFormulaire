@@ -13,7 +13,7 @@ Imports System.Reflection
 Imports System.Drawing.Imaging
 Imports System.Web
 
-Public Class PDFToImageConverter
+Public Class PDFConverter
     Implements IConverter
 
     Private page_number As Integer

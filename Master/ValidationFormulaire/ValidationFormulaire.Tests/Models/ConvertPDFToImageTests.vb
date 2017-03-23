@@ -10,14 +10,14 @@ Imports ValidationFormulaire.Core
 
 <TestClass()> _
 Public Class ConvertPDFToImageTests
-    Private converter As PDFToImageConverter
+    Private converter As PDFConverter
     Private file_path As String
     Private file_mock As Mock(Of HttpPostedFileBase)
     Private file_stream As FileStream
 
     <TestInitialize()> _
     Public Sub Initialize()
-        converter = New PDFToImageConverter()
+        converter = New PDFConverter()
         file_path = Path.GetFullPath("../../Files/4 blank pages.pdf")
         file_stream = New FileStream(file_path, FileMode.Open)
     End Sub

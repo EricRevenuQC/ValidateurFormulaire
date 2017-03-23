@@ -2,7 +2,7 @@
 
 Public Class VerifyReleves
     Private adjusted_bar_code_values As String
-    Private dict_operations As DictionaryOperations
+    Private dict_operations As DictionaryKeys
     Private releve As IReleves
     Private north_marker_position As Integer = 0
     Private south_marker_position As Integer = 0
@@ -16,7 +16,7 @@ Public Class VerifyReleves
     Private Const MARKER_DISTANCE_THRESHOLD As Integer = 5
 
     Public Sub New(releves As IReleves)
-        dict_operations = New DictionaryOperations()
+        dict_operations = New DictionaryKeys()
         releve = releves
     End Sub
 
@@ -37,27 +37,13 @@ Public Class VerifyReleves
             Return False
         End If
 
-        'If north_marker_position = 0 Then
-        '    System.Diagnostics.Debug.WriteLine("Could not find north reference for " + adjusted_bar_code_values)
-        '    Return False
-        'ElseIf south_marker_position = 0 Then
-        '    System.Diagnostics.Debug.WriteLine("Could not find south reference for " + adjusted_bar_code_values)
-        '    Return False
-        'ElseIf west_marker_position = 0 Then
-        '    System.Diagnostics.Debug.WriteLine("Could not find west reference for " + adjusted_bar_code_values)
-        '    Return False
-        'ElseIf east_marker_position = 0 Then
-        '    System.Diagnostics.Debug.WriteLine("Could not find east reference for " + adjusted_bar_code_values)
-        '    Return False
-        'End If
-
         System.Diagnostics.Debug.WriteLine("------------------------------------------------------")
         System.Diagnostics.Debug.WriteLine(bar_code_index.ToString + " : " + adjusted_bar_code_values)
         System.Diagnostics.Debug.WriteLine("Y : " + north_marker_position.ToString + " > " + _
-                                           dict_operations.GetKeyFromValue(words, adjusted_bar_code_values).Y.ToString + _
+                                           dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).Y.ToString + _
                                            " > " + south_marker_position.ToString)
         System.Diagnostics.Debug.WriteLine("X : " + east_marker_position.ToString + " > " + _
-                                           dict_operations.GetKeyFromValue(words, adjusted_bar_code_values).X.ToString + _
+                                           dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X.ToString + _
                                            " > " + west_marker_position.ToString)
 
 
@@ -75,10 +61,10 @@ Public Class VerifyReleves
             Return True
         End If
 
-        If north_marker_position >= dict_operations.GetKeyFromValue(words, adjusted_bar_code_values).Y - MARKER_DISTANCE_THRESHOLD AndAlso
-                south_marker_position <= dict_operations.GetKeyFromValue(words, adjusted_bar_code_values).Y + MARKER_DISTANCE_THRESHOLD AndAlso
-                west_marker_position <= dict_operations.GetKeyFromValue(words, adjusted_bar_code_values).X + MARKER_DISTANCE_THRESHOLD AndAlso
-                east_marker_position >= dict_operations.GetKeyFromValue(words, adjusted_bar_code_values).X - MARKER_DISTANCE_THRESHOLD Then
+        If north_marker_position >= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).Y - MARKER_DISTANCE_THRESHOLD AndAlso
+                south_marker_position <= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).Y + MARKER_DISTANCE_THRESHOLD AndAlso
+                west_marker_position <= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X + MARKER_DISTANCE_THRESHOLD AndAlso
+                east_marker_position >= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X - MARKER_DISTANCE_THRESHOLD Then
             System.Diagnostics.Debug.WriteLine("Pass")
             Return True
         End If
@@ -97,7 +83,7 @@ Public Class VerifyReleves
             ElseIf marker = "MIN" Then
                 Return New Point(MIN_MARKER_VALUE, MIN_MARKER_VALUE)
             Else
-                marker_position = dict_operations.GetKeyFromValueContains(words, marker, marker_occurence(marker.IndexOf(marker)))
+                marker_position = dict_operations.GetKeyFromDictionaryIfContainValue(words, marker, marker_occurence(marker.IndexOf(marker)))
                 If marker_position IsNot Nothing Then
                     Return marker_position
                 Else

@@ -15,7 +15,7 @@ Public Class VerificationController
     Public Sub New()
         pagination = New DeterminePage()
         config = New Config()
-        converter = New PDFToImageConverter()
+        converter = New PDFConverter()
         verification = New Verification()
         session_value_provider = New SessionValueProvider()
     End Sub

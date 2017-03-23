@@ -1,17 +1,17 @@
 ﻿Imports System.Drawing
 
-Public Class DictionaryOperations
-    Public Function GetValueOfKeyAsString(bar_code_property As BarCodeProperties, dict As Dictionary(Of String, BarCodeData)) As String
-        If dict IsNot Nothing Then
-            If dict.ContainsKey(bar_code_property.ToString) Then
-                Return dict.Item(bar_code_property.ToString).value.ToString
-            End If
+Public Class DictionaryKeys
+    Public Function GetValueOfKeyAsString(bar_code_property As BarCodeProperties,
+                                          dict As Dictionary(Of String, BarCodeData)) As String
+        If dict.ContainsKey(bar_code_property.ToString) Then
+            Return dict.Item(bar_code_property.ToString).value.ToString
+        Else
+            Return ""
         End If
-        Return ""
     End Function
 
-    Public Function GetKeyFromValue(dict As Dictionary(Of Point, String), value As String,
-                                    Optional occurence As Integer = 1) As Point
+    Public Function GetKeyFromDictionaryValue(dict As Dictionary(Of Point, String), value As String,
+                                              Optional occurence As Integer = 1) As Point
         Dim key As Object
 
         For Each key In dict.Keys
@@ -27,8 +27,8 @@ Public Class DictionaryOperations
         Return Nothing
     End Function
 
-    Public Function GetKeyFromValueContains(dict As Dictionary(Of Point, String), value As String,
-                                            Optional occurence As Integer = 1) As Point?
+    Public Function GetKeyFromDictionaryIfContainValue(dict As Dictionary(Of Point, String), value As String,
+                                                       Optional occurence As Integer = 1) As Point?
         Dim key As Object
         Dim last_key As Object = Nothing
 

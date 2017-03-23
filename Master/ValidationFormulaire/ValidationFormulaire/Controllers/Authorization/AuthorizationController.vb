@@ -12,7 +12,7 @@ Public Class AuthorizationController
     Private pagination As IPagination
 
     Public Sub New()
-        converter = New PDFToImageConverter()
+        converter = New PDFConverter()
         authorization = New Authorization()
         session_value_provider = New SessionValueProvider()
         pagination = New DeterminePage()

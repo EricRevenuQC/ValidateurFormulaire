@@ -20,8 +20,8 @@ Public Class PixelMarker
     End Sub
 
     Public Sub FindAllAnchorsPixels(bot_left_anchor As Point, top_right_anchor As Point)
-        anchors_pixels.AddRange(color_selector.FindAllPixelsOfColorFromPoint(bot_left_anchor, New Colors(0, 0, 0)))
-        anchors_pixels.AddRange(color_selector.FindAllPixelsOfColorFromPoint(top_right_anchor, New Colors(0, 0, 0)))
+        anchors_pixels.AddRange(color_selector.FindAllPixelsOfColorFromPoint(bot_left_anchor, New BGRColors(0, 0, 0)))
+        anchors_pixels.AddRange(color_selector.FindAllPixelsOfColorFromPoint(top_right_anchor, New BGRColors(0, 0, 0)))
     End Sub
 
     Public Sub FindAllOutOfBoundColoredPixels(bot_left_anchor As Point, top_right_anchor As Point, page As Integer)

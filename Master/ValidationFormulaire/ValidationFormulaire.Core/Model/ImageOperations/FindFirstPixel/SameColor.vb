@@ -15,7 +15,7 @@ Public Class SameColor
     End Sub
 
     Public Function Search(image As Bitmap, starting_point As Point, ending_point As Point, steps As Point,
-                            color As Colors) As Point Implements IFindFirstPixel.Search
+                            color As BGRColors) As Point Implements IFindFirstPixel.Search
         Dim position As Integer
         Dim image_data As BitmapData = image.LockBits(
             New Rectangle(0, 0, image.Width, image.Height),

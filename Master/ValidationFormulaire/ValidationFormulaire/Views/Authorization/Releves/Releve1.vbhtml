@@ -1,7 +1,7 @@
 ﻿@ModelType ValidationFormulaire.Models.AuthorizationModel
 
 @code
-	Dim dict_operations As New ValidationFormulaire.Core.DictionaryOperations()
+	Dim dict_operations As New ValidationFormulaire.Core.DictionaryKeys()
 End code
 
 <style>
