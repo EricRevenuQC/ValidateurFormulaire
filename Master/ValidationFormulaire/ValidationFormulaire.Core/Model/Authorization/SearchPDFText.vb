@@ -34,14 +34,18 @@ Public Class SearchPDFText
                     If bar_code_index <> NUMERO_PREPARATEUR_INDEX AndAlso
                             bar_code_index <> INDICATEUR_EMPLOYE_AU_POURBOIRE_INDEX Then
                         If Not releve.VerifyTextInputPosition(words(page), data, bar_code_index) Then
-                            failed_bar_code_values_index.Add(page.ToString + bar_code_index.ToString,
+                            'The _ is because chrome and IE automatically sort dictionaries when encoding a json if the key is
+                            'recognized as an integer. Adding a _ makes chrome and IE recognize it as a string.
+                            failed_bar_code_values_index.Add("_" + page.ToString + bar_code_index.ToString,
                                                              bar_code_data.ElementAt(bar_code_index).Value)
                         Else
                             words(page).Remove(New DictionaryOperations().GetKeyFromValue(words(page), adjusted_bar_code_values))
                         End If
                     End If
                 Else
-                    failed_bar_code_values_index.Add(page.ToString + bar_code_index.ToString,
+                    'The _ is because chrome and IE automatically sort dictionaries when encoding a json if the key is
+                    'recognized as an integer. Adding a _ makes chrome and IE recognize it as a string.
+                    failed_bar_code_values_index.Add("_" + page.ToString + bar_code_index.ToString,
                                                      bar_code_data.ElementAt(bar_code_index).Value)
                 End If
 

@@ -314,6 +314,9 @@
     <Content Include="Content\css\fileinput.css" />
     <Content Include="Content\css\fileinput.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\js\Authorization\confirmationDialog.js" />
+    <Content Include="Content\js\Authorization\checkbox.js" />
+    <Content Include="Content\js\Authorization\inputDialog.js" />
     <Content Include="Content\js\Authorization\pagination.js" />
     <Content Include="Content\js\bootstrap-checkbox.js" />
     <Content Include="Content\js\bootstrap-checkbox.min.js" />
