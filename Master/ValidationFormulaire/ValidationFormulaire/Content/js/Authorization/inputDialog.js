@@ -128,7 +128,6 @@ function NextDialog() {
         current_dialog += 1;
     }
     else if (current_page_releve_donnees < page_number_releve_donnees) {
-        alert("Prochaine page");
         current_dialog += 1;
         $("#dialog_id".concat(current_dialog)).dialog({
             position: {
@@ -144,7 +143,6 @@ function NextDialog() {
         $("#dialog_page_text".concat(current_dialog)).text("Page " + current_page_releve_donnees);
     }
     else {
-        alert("Terminer");
         var text = "";
         var current_page = 1;
         var index_on_page = 0
