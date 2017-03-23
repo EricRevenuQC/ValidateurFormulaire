@@ -29,7 +29,7 @@ End Code
 							<a class="nav-link" href="/authorization/validationdonnees">Autorisation</a>
 						</li>
 						@<li class="nav-item">
-							<a class="nav-link" href="#">Homologuation</a>
+							<a class="nav-link" href="#">Homologation</a>
 						</li>
 					End code
 				</ul>

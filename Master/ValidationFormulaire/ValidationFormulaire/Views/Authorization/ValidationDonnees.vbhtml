@@ -144,7 +144,7 @@ End Code
 				</div>
 			</div>
 		</div>
-				Next
+		Next
 	End If
 </div>
 <div style="display: none;">
@@ -167,7 +167,7 @@ End Code
 </div>
 
 <!--
-    Set javacript global variables for comparison view.
+    Set javacript global variables for autorization view.
 -->
 <script type="text/javascript">
 	var current_page_releve_donnees = parseInt('@Session("current_page_releve_donnees")');
