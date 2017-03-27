@@ -146,6 +146,7 @@
   <ItemGroup>
     <Compile Include="Controllers\VerificationControllerTests.vb" />
     <Compile Include="Models\Alerts\AlertsManagerTest.vb" />
+    <Compile Include="Models\Authorization\PDFText\TextCleanerTests.vb" />
     <Compile Include="Models\Authorization\Releves\Releve1Tests.vb" />
     <Compile Include="Models\Authorization\AuthorizationTests.vb" />
     <Compile Include="Models\Authorization\VerifyRelevesTests.vb" />
@@ -175,7 +176,9 @@
       <Name>ValidationFormulaire</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Authorization\PDFText\Extraction\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,11 +3,19 @@
 Public Class TextCleaner
     Implements ITextCleaner
 
-    Private dict_operations As New DictionaryKeys()
+    Private dict_operations As IDictionaryKeys
 
     Private Const HEIGHT_THRESHOLD_TOLERANCE As Integer = 5
 
-    Public Function CleanPDFWords(words() As Dictionary(Of Point, String)) As Dictionary(Of Point, String)() _
+    Sub  new()
+        dict_operations = New DictionaryKeys()
+    End Sub
+
+    Sub New(dict_operations As IDictionaryKeys)
+        Me.dict_operations = dict_operations
+    End Sub
+
+    Public Function RemoveOffLimitsWords(words() As Dictionary(Of Point, String)) As Dictionary(Of Point, String)() _
             Implements ITextCleaner.CleanPDFWords
         Dim height_threshold As Point
         Dim temp_words As New Dictionary(Of Point, String)
