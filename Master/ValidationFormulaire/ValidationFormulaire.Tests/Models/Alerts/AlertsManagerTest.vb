@@ -19,11 +19,11 @@ Public Class AlertsManagerTest
         AlertsManager.ClearAlerts()
         Dim manager As New Dictionary(Of String, String)
 
-        AlertsManager.AddAlert("test", "oops")
+        AlertsManager.AddAlert("key", "valeur")
         manager = AlertsManager.GetAllAlerts()
 
-        Assert.IsTrue(manager.ContainsKey("test"))
-        Assert.IsTrue(manager.ContainsValue("oops"))
+        Assert.IsTrue(manager.ContainsKey("key"))
+        Assert.IsTrue(manager.ContainsValue("valeur"))
     End Sub
 
     <TestMethod()> _
@@ -31,11 +31,11 @@ Public Class AlertsManagerTest
         AlertsManager.ClearAlerts()
         Dim manager As New Dictionary(Of String, String)
 
-        AlertsManager.AddAlert("test", "oops")
+        AlertsManager.AddAlert("key", "valeur")
         manager = AlertsManager.GetAllAlerts()
 
-        Assert.IsFalse(manager.ContainsKey("KEY"))
-        Assert.IsFalse(manager.ContainsValue("VALEUR"))
+        Assert.IsFalse(manager.ContainsKey("mauvaise key"))
+        Assert.IsFalse(manager.ContainsValue("mauvaise valeur"))
     End Sub
 
     <TestMethod()> _
@@ -43,11 +43,11 @@ Public Class AlertsManagerTest
         AlertsManager.ClearAlerts()
         Dim manager As New Dictionary(Of String, String)
 
-        AlertsManager.AddAlert("test")
+        AlertsManager.AddAlert("key")
 
-        AlertsManager.AddAlert("test", "oops")
+        AlertsManager.AddAlert("key", "valeur")
         manager = AlertsManager.GetAllAlerts()
 
-        Assert.IsTrue(manager.ContainsValue(Environment.NewLine + "oops"))
+        Assert.IsTrue(manager.ContainsValue(Environment.NewLine + "valeur"))
     End Sub
 End Class

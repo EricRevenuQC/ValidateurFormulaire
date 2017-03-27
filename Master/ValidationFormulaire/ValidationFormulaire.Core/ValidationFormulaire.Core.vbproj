@@ -110,6 +110,7 @@
     <Compile Include="Interfaces\Authorization\ISearchPDFText.vb" />
     <Compile Include="Interfaces\Authorization\IVerifyReleves.vb" />
     <Compile Include="Interfaces\Authorization\PDFText\Extraction\ITextExtractor.vb" />
+    <Compile Include="Interfaces\Authorization\PDFText\Extraction\ITextGroupSeperator.vb" />
     <Compile Include="Interfaces\Authorization\PDFText\ITextCleaner.vb" />
     <Compile Include="Interfaces\Authorization\Releves\IReleves.vb" />
     <Compile Include="Interfaces\BarCode\IBarCodeReader.vb" />

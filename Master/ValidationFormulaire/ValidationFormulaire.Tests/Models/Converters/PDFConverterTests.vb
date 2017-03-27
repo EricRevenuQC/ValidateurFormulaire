@@ -20,6 +20,8 @@ Public Class PDFConverterTests
         converter = New PDFConverter()
         file_path = Path.GetFullPath("../../Files/4 blank pages.pdf")
         file_stream = New FileStream(file_path, FileMode.Open)
+        file_mock = New Mock(Of HttpPostedFileBase)
+        file_mock.Setup(Function(f) f.InputStream).Returns(file_stream)
     End Sub
 
     <TestCleanup()> _
@@ -29,9 +31,6 @@ Public Class PDFConverterTests
 
     <TestMethod()> _
     Public Sub ConvertPDFToImageSetCorrectNumberOfPage()
-        file_mock = New Mock(Of HttpPostedFileBase)
-        file_mock.Setup(Function(f) f.InputStream).Returns(file_stream)
-
         converter.PDFToImage(file_mock.Object)
 
         Assert.AreEqual(5, converter.GetPageNumber)
@@ -40,8 +39,6 @@ Public Class PDFConverterTests
     <TestMethod()> _
     Public Sub ConvertPDFToImageReturnArrayOfBitMapImages()
         Dim images() As Image
-        file_mock = New Mock(Of HttpPostedFileBase)
-        file_mock.Setup(Function(f) f.InputStream).Returns(file_stream)
 
         images = converter.PDFToImage(file_mock.Object)
 

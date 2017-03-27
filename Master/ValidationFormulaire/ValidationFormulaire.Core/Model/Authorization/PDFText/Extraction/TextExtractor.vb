@@ -8,11 +8,22 @@ Imports System.Drawing
 Public Class TextExtractor
     Implements ITextExtractor
 
+    Private text_seperator As ITextGroupSeperator
+    Private text_extraction_strategy As TextExtractionStrategy
+
+    Sub New()
+        text_seperator = New TextGroupSeperator()
+        text_extraction_strategy = New TextExtractionStrategy()
+    End Sub
+
+    Sub New(text_seperator As ITextGroupSeperator, text_extraction_strategy As TextExtractionStrategy)
+        Me.text_seperator = text_seperator
+        Me.text_extraction_strategy = text_extraction_strategy
+    End Sub
+
     Public Function PDFToText(file As HttpPostedFileBase) As Dictionary(Of Point, String)() Implements ITextExtractor.PDFToText
         Using reader As New PdfReader(file.InputStream)
             Dim text_result(reader.NumberOfPages) As String
-            Dim text_extraction_strategy As New TextExtractionStrategy()
-            Dim text_seperator As New TextGroupSeperator()
             Dim words(reader.NumberOfPages) As Dictionary(Of Point, String)
 
             For i As Integer = 1 To reader.NumberOfPages

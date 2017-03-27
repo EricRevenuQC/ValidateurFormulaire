@@ -1,13 +1,15 @@
 ﻿Imports System.Drawing
 
 Public Class TextGroupSeperator
+    Implements ITextGroupSeperator
 
     Private text_groups As Dictionary(Of Point, TextProperties)
     Private word_list As Dictionary(Of Point, String)
 
     Private Const MAX_DISTANCE_BETWEEN_CHARACTERS As Integer = 10
 
-    Public Function SeperateTextIntoGroups(text_extraction_strategy As TextExtractionStrategy) As Dictionary(Of Point, String)
+    Public Function SeperateTextIntoGroups(text_extraction_strategy As TextExtractionStrategy) _
+            As Dictionary(Of Point, String) Implements ITextGroupSeperator.SeperateTextIntoGroups
         Dim text_properties As TextProperties
         word_list = New Dictionary(Of Point, String)()
         text_groups = New Dictionary(Of Point, TextProperties)()
