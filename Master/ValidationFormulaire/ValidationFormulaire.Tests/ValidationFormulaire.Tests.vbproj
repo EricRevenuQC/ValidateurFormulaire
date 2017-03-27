@@ -145,13 +145,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\VerificationControllerTests.vb" />
-    <Compile Include="Models\AlertsManagerTest.vb" />
-    <Compile Include="Models\ComparePixelColorTest.vb" />
-    <Compile Include="Models\ConvertPDFToImageTests.vb" />
-    <Compile Include="Models\ColorSelectorTests.vb" />
-    <Compile Include="Models\PaginationTests.vb" />
-    <Compile Include="Models\ThresholdTests.vb" />
-    <Compile Include="Models\FindFirstPixelTests.vb" />
+    <Compile Include="Models\Alerts\AlertsManagerTest.vb" />
+    <Compile Include="Models\Authorization\Releves\Releve1Tests.vb" />
+    <Compile Include="Models\Authorization\AuthorizationTests.vb" />
+    <Compile Include="Models\Authorization\VerifyRelevesTests.vb" />
+    <Compile Include="Models\Authorization\SearchPDFTextTests.vb" />
+    <Compile Include="Models\ImageOperations\ComparePixelColorTest.vb" />
+    <Compile Include="Models\Converters\PDFConverterTests.vb" />
+    <Compile Include="Models\ImageOperations\ColorSelectorTests.vb" />
+    <Compile Include="Models\Pagination\PaginationTests.vb" />
+    <Compile Include="Models\Approbation\ThresholdTests.vb" />
+    <Compile Include="Models\ImageOperations\FindFirstPixel\FindFirstPixelTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -171,10 +175,7 @@
       <Name>ValidationFormulaire</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Approbation\" />
-    <Folder Include="Models\Authorization\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

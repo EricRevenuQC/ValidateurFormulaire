@@ -6,7 +6,9 @@ Imports System.Text
 Imports System.Drawing
 
 Public Class TextExtractor
-    Public Function PDFToText(file As HttpPostedFileBase) As Dictionary(Of Point, String)()
+    Implements ITextExtractor
+
+    Public Function PDFToText(file As HttpPostedFileBase) As Dictionary(Of Point, String)() Implements ITextExtractor.PDFToText
         Using reader As New PdfReader(file.InputStream)
             Dim text_result(reader.NumberOfPages) As String
             Dim text_extraction_strategy As New TextExtractionStrategy()

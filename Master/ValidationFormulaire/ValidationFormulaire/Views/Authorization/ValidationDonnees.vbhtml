@@ -14,9 +14,9 @@ End Code
                 <h4>Des erreurs ont été trouvées.</h4>
                 <br />
                 @For Each alert In Model.alert_messages
-                    @If Not String.IsNullOrWhiteSpace(alert.Key) Then
+                    If Not String.IsNullOrWhiteSpace(alert.Key) Then
                         @<strong>• @alert.Key</strong>
-                        @If Not String.IsNullOrWhiteSpace(alert.Value) Then
+                        If Not String.IsNullOrWhiteSpace(alert.Value) Then
                             @<span style="white-space: pre-line">
                                 @alert.Value
                             </span>
@@ -31,13 +31,13 @@ End Code
         <div class="col-md-12">
             <div class="row">
                 <!--
-                    Display left side images.
+                    Display left side.
                 -->
 		        <div class="col-md-6" id="template" style="display: none;">
 					@Html.Partial("Releves/Releve1", Model)
 				</div>
                 <!--
-                    Display right side images.
+                    Display right side.
                 -->
                 <div id="pdf-image" class="col-md-12">
                     @For i As Integer = 1 To Session("page_number_releve_donnees")
@@ -58,12 +58,12 @@ End Code
 			            </div>
                     Next
                     <!--
-                        Right side pagination.
+                        Pagination.
                     -->
                     <div class="row">
                         @code
                             Dim display_block_right As String
-                            @If (Session("current_page_releve_donnees") > 1) Then
+                            If (Session("current_page_releve_donnees") > 1) Then
                             	display_block_right = "display:block"
                             Else
                             	display_block_right = "display:none"
@@ -77,7 +77,7 @@ End Code
                                     </button>
                                 </div>
                             </div>
-                            @If (Session("current_page_releve_donnees") < (Session("page_number_releve_donnees"))) Then
+                            If (Session("current_page_releve_donnees") < (Session("page_number_releve_donnees"))) Then
                             	display_block_right = "display:block"
                             Else
                             	display_block_right = "display:none"

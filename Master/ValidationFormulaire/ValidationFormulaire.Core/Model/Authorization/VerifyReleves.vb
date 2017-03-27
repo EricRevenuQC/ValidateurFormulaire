@@ -1,8 +1,10 @@
 ﻿Imports System.Drawing
 
 Public Class VerifyReleves
+    Implements IVerifyReleves
+
     Private adjusted_bar_code_values As String
-    Private dict_operations As DictionaryKeys
+    Private dict_operations As IDictionaryKeys
     Private releve As IReleves
     Private north_marker_position As Integer = 0
     Private south_marker_position As Integer = 0
@@ -15,14 +17,23 @@ Public Class VerifyReleves
     Private Const MIN_MARKER_VALUE As Integer = 0
     Private Const MARKER_DISTANCE_THRESHOLD As Integer = 5
 
-    Public Sub New(releves As IReleves)
-        dict_operations = New DictionaryKeys()
+    Sub New()
+        dict_operations = New DictionaryKeys
+        releve = New Releve1
+    End Sub
+
+    Sub New(releves As IReleves)
+        releve = releves
+    End Sub
+
+    Sub New(releves As IReleves, dict_operations As IDictionaryKeys)
+        Me.dict_operations = dict_operations
         releve = releves
     End Sub
 
     Public Function VerifyTextInputPosition(words As Dictionary(Of Point, String),
                                        bar_code_data As KeyValuePair(Of String, BarCodeData),
-                                       bar_code_index As Integer) As Boolean
+                                       bar_code_index As Integer) As Boolean Implements IVerifyReleves.VerifyTextInputPosition
         adjusted_bar_code_values = bar_code_data.Value.value.Trim()
         releve.SetReleveMarkers(bar_code_index)
         marker_reference = New List(Of String)()
@@ -46,18 +57,17 @@ Public Class VerifyReleves
                                            dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X.ToString + _
                                            " > " + west_marker_position.ToString)
 
-
         If String.IsNullOrWhiteSpace(adjusted_bar_code_values) Then
             For Each word As KeyValuePair(Of Point, String) In words
                 If north_marker_position >= word.Key.Y + MARKER_DISTANCE_THRESHOLD AndAlso
                         south_marker_position <= word.Key.Y - MARKER_DISTANCE_THRESHOLD AndAlso
                         west_marker_position <= word.Key.X - MARKER_DISTANCE_THRESHOLD AndAlso
                         east_marker_position >= word.Key.X + MARKER_DISTANCE_THRESHOLD Then
-                    System.Diagnostics.Debug.WriteLine("Fail, should be empty.")
+                    System.Diagnostics.Debug.WriteLine("Fail, found text when it should be empty.")
                     Return False
                 End If
             Next
-            System.Diagnostics.Debug.WriteLine("Pass, is empty.")
+            System.Diagnostics.Debug.WriteLine("Pass, empty.")
             Return True
         End If
 
@@ -83,7 +93,11 @@ Public Class VerifyReleves
             ElseIf marker = "MIN" Then
                 Return New Point(MIN_MARKER_VALUE, MIN_MARKER_VALUE)
             Else
-                marker_position = dict_operations.GetKeyFromDictionaryIfContainValue(words, marker, marker_occurence(marker.IndexOf(marker)))
+                System.Diagnostics.Debug.WriteLine(marker)
+                System.Diagnostics.Debug.WriteLine(marker_occurence(marker.IndexOf(marker)))
+                marker_position = dict_operations.GetKeyFromDictionaryIfContainValue(
+                    words, marker, marker_occurence(marker.IndexOf(marker)))
+                System.Diagnostics.Debug.WriteLine(marker_position)
                 If marker_position IsNot Nothing Then
                     Return marker_position
                 Else

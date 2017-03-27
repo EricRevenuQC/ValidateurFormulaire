@@ -2,7 +2,9 @@
 Imports System.Data.OleDb
 
 Public Class BarCodeConverter
-    Public Function ConvertBarCodeToData(file_name As String) As DataSet
+    Implements IBarCodeConverter
+
+    Public Function ConvertBarCodeToData(file_name As String) As DataSet Implements IBarCodeConverter.ConvertBarCodeToData
         Dim data As New DataSet()
         Dim data_table As New DataTable()
         Dim file_location As String

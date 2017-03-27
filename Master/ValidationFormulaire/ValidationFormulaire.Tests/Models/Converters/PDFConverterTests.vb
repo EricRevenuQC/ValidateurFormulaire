@@ -9,7 +9,7 @@ Imports System.Drawing.Imaging
 Imports ValidationFormulaire.Core
 
 <TestClass()> _
-Public Class ConvertPDFToImageTests
+Public Class PDFConverterTests
     Private converter As PDFConverter
     Private file_path As String
     Private file_mock As Mock(Of HttpPostedFileBase)

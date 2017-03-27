@@ -4,12 +4,13 @@ Imports System.Text.RegularExpressions
 Imports System.Drawing
 
 Public Class Authorization
-    Private extractor As New TextExtractor()
-    Private bar_code_reader As New BarCodeReader()
-    Private search_pdf_text As New SearchPDFText()
+    Private extractor As ITextExtractor
+    Private bar_code_reader As IBarCodeReader
+    Private search_pdf_text As ISearchPDFText
+    Private bar_code_converter As IBarCodeConverter
+    Private text_cleaner As ITextCleaner
     Private data_dictionary As New Dictionary(Of String, BarCodeData)()
     Private failed_data_dictionary As New Dictionary(Of String, BarCodeData)()
-    Private dict_operations As New DictionaryKeys()
 
     Private Const ID_INDEX As Integer = 0
     Private Const DESCRIPTION_INDEX As Integer = 1
@@ -17,7 +18,23 @@ Public Class Authorization
     Private Const POSITION_INDEX_END As Integer = 3
     Private Const LENGTH_INDEX As Integer = 4
     Private Const CODE_INDEX As Integer = 6
-    Private Const HEIGHT_THRESHOLD_TOLERANCE As Integer = 5
+
+    Sub New()
+        extractor = New TextExtractor()
+        bar_code_reader = New BarCodeReader()
+        search_pdf_text = New SearchPDFText()
+        bar_code_converter = New BarCodeConverter()
+        text_cleaner = New TextCleaner()
+    End Sub
+
+    Sub New(extractor As ITextExtractor, bar_code_reader As IBarCodeReader, search_pdf_text As ISearchPDFText,
+            bar_code_converter As IBarCodeConverter, text_cleaner As ITextCleaner)
+        Me.extractor = extractor
+        Me.bar_code_reader = bar_code_reader
+        Me.search_pdf_text = search_pdf_text
+        Me.bar_code_converter = bar_code_converter
+        Me.text_cleaner = text_cleaner
+    End Sub
 
     Public Sub AuthorizePDF(file As HttpPostedFileBase)
         Dim bar_code_text, bar_code_id As String
@@ -45,18 +62,18 @@ Public Class Authorization
 
         pdf_words = extractor.PDFToText(file)
 
-        data = New BarCodeConverter().ConvertBarCodeToData(bar_code_id)
-        data_dictionary = FillBarCodeDataIntoDictionary(bar_code_text, data)
+        data = bar_code_converter.ConvertBarCodeToData(bar_code_id)
 
-        pdf_words = CleanPDFWords(pdf_words)
+        FillBarCodeDataIntoDictionary(bar_code_text, data)
+
+        pdf_words = text_cleaner.CleanPDFWords(pdf_words)
+
         failed_data_dictionary = search_pdf_text.FindBarCodeValues(pdf_words, data_dictionary)
     End Sub
 
-    Private Function FillBarCodeDataIntoDictionary(bar_code_text As String,
-                                                   data As DataSet) As Dictionary(Of String, BarCodeData)
+    Private Sub FillBarCodeDataIntoDictionary(bar_code_text As String, data As DataSet)
         Dim current_string As String
         Dim checked_row As New List(Of String)()
-        Dim data_dictionary As New Dictionary(Of String, BarCodeData)()
         Try
             For i As Integer = 0 To data.Tables(0).Rows.Count - 1
                 If Not IsDBNull(data.Tables(0).Rows(i)(ID_INDEX)) AndAlso Not checked_row.Contains(data.Tables(0).Rows(i)(CODE_INDEX)) Then
@@ -78,28 +95,7 @@ Public Class Authorization
             AlertsManager.AddAlert("Incapable de trouver le gabarit excel associé au code à bar d'identification!")
             System.Diagnostics.Debug.WriteLine(ex)
         End Try
-        Return data_dictionary
-    End Function
-
-    Private Function CleanPDFWords(words() As Dictionary(Of Point, String)) As Dictionary(Of Point, String)()
-        Dim height_threshold As Point
-        Dim temp_words As New Dictionary(Of Point, String)
-
-        For page As Integer = 1 To words.Count - 1
-            temp_words = New Dictionary(Of Point, String)(words(page))
-            height_threshold = dict_operations.GetKeyFromDictionaryValue(temp_words, "Année")
-
-            If height_threshold.Y > 0 Then
-                For Each word As KeyValuePair(Of Point, String) In temp_words
-                    If word.Key.Y > height_threshold.Y + HEIGHT_THRESHOLD_TOLERANCE Then
-                        words(page).Remove(word.Key)
-                    End If
-                Next
-            End If
-        Next
-
-        Return words
-    End Function
+    End Sub
 
     Public Function GetData() As Dictionary(Of String, BarCodeData)
         Return data_dictionary

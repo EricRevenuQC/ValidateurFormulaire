@@ -2,6 +2,8 @@
 Imports GdPicture9
 
 Public Class BarCodeReader
+    Implements IBarCodeReader
+
     Private bar_code_text As String
     Private bar_code_id As String
 
@@ -11,7 +13,7 @@ Public Class BarCodeReader
         oLicenseManager.RegisterKEY(GDPICTURE_CLE_LICENSE)
     End Sub
 
-    Public Sub ReadBarCode(file As HttpPostedFileBase)
+    Public Sub ReadBarCode(file As HttpPostedFileBase) Implements IBarCodeReader.ReadBarCode
         ActivateGDPictureLicense()
 
         Dim codeBarreDidentification = String.Empty
@@ -43,11 +45,11 @@ Public Class BarCodeReader
         Next
     End Sub
 
-    Public Function GetBarCodeText()
+    Public Function GetBarCodeText() Implements IBarCodeReader.GetBarCodeText
         Return bar_code_text
     End Function
 
-    Public Function GetBarCodeId()
+    Public Function GetBarCodeId() Implements IBarCodeReader.GetBarCodeId
         Return bar_code_id
     End Function
 End Class

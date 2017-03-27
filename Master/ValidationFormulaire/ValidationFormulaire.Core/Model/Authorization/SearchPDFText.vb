@@ -2,15 +2,29 @@
 Imports System.Drawing
 
 Public Class SearchPDFText
+    Implements ISearchPDFText
+
+    Private dictionary_operations As IDictionaryKeys
+    Private verify_releve As IVerifyReleves
 
     Private Const NUMERO_PREPARATEUR_INDEX As Integer = 2
     Private Const INDICATEUR_EMPLOYE_AU_POURBOIRE_INDEX As Integer = 27
 
+    Sub New()
+        dictionary_operations = New DictionaryKeys()
+        verify_releve = New VerifyReleves()
+    End Sub
+
+    Sub New(dictionary_operations As IDictionaryKeys, verify_releve As IVerifyReleves)
+        Me.dictionary_operations = dictionary_operations
+        Me.verify_releve = verify_releve
+    End Sub
+
     Public Function FindBarCodeValues(words() As Dictionary(Of Point, String),
-                                      bar_code_data As Dictionary(Of String, BarCodeData)) As Dictionary(Of String, BarCodeData)
+                                      bar_code_data As Dictionary(Of String, BarCodeData)) _
+                                  As Dictionary(Of String, BarCodeData) Implements ISearchPDFText.FindBarCodeValues
         Dim adjusted_bar_code_values As String
         Dim bar_code_index As Integer
-        Dim releve As New VerifyReleves(New Releve1)
         Dim failed_bar_code_values_index As New Dictionary(Of String, BarCodeData)()
 
         System.Diagnostics.Debug.WriteLine("Page number : " + words.Count.ToString)
@@ -33,13 +47,13 @@ Public Class SearchPDFText
                     'On ne vérifie pas le numéro du préparateur et l'indicateur d'employé au pourboire
                     If bar_code_index <> NUMERO_PREPARATEUR_INDEX AndAlso
                             bar_code_index <> INDICATEUR_EMPLOYE_AU_POURBOIRE_INDEX Then
-                        If Not releve.VerifyTextInputPosition(words(page), data, bar_code_index) Then
+                        If Not verify_releve.VerifyTextInputPosition(words(page), data, bar_code_index) Then
                             'The _ is because chrome and IE automatically sort dictionaries when encoding a json if the key is
                             'recognized as an integer. Adding a _ makes chrome and IE recognize it as a string.
                             failed_bar_code_values_index.Add("_" + page.ToString + bar_code_index.ToString,
                                                              bar_code_data.ElementAt(bar_code_index).Value)
                         Else
-                            words(page).Remove(New DictionaryKeys().GetKeyFromDictionaryValue(words(page), adjusted_bar_code_values))
+                            words(page).Remove(dictionary_operations.GetKeyFromDictionaryValue(words(page), adjusted_bar_code_values))
                         End If
                     End If
                 Else
@@ -60,7 +74,8 @@ Public Class SearchPDFText
         Return failed_bar_code_values_index
     End Function
 
-    Private Function AdjustWords(words As Dictionary(Of Point, String)) As Dictionary(Of Point, String)
+    Private Function AdjustWords(words As Dictionary(Of Point, String)) _
+            As Dictionary(Of Point, String) Implements ISearchPDFText.AdjustWords
         Dim words_adjusted As New Dictionary(Of Point, String)()
 
         For Each word As KeyValuePair(Of Point, String) In words
