@@ -109,6 +109,7 @@
     <Compile Include="Interfaces\Approbation\Verification\IVerification.vb" />
     <Compile Include="Interfaces\Authorization\ISearchPDFText.vb" />
     <Compile Include="Interfaces\Authorization\IVerifyReleves.vb" />
+    <Compile Include="Interfaces\Authorization\PDFText\Extraction\ITextExtractionStrategy.vb" />
     <Compile Include="Interfaces\Authorization\PDFText\Extraction\ITextExtractor.vb" />
     <Compile Include="Interfaces\Authorization\PDFText\Extraction\ITextGroupSeperator.vb" />
     <Compile Include="Interfaces\Authorization\PDFText\ITextCleaner.vb" />

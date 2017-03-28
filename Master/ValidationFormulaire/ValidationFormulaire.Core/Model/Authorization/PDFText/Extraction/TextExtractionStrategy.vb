@@ -2,10 +2,12 @@
 
 Public Class TextExtractionStrategy
     Inherits LocationTextExtractionStrategy
+    Implements ITextExtractionStrategy
 
-    Public rectangle_points As New List(Of TextRectangle)()
 
-    Public Overrides Sub RenderText(render_info As TextRenderInfo)
+    Private rectangle_points As New List(Of TextRectangle)()
+
+    Public Overrides Sub RenderText(render_info As TextRenderInfo) Implements ITextExtractionStrategy.RenderText
         MyBase.RenderText(render_info)
 
         Dim bottom_left = render_info.GetDescentLine().GetStartPoint()
@@ -15,4 +17,8 @@ Public Class TextExtractionStrategy
 
         Me.rectangle_points.Add(New TextRectangle(rect, render_info.GetText()))
     End Sub
+
+    Public Function GetRectanglePoints() As List(Of TextRectangle) Implements ITextExtractionStrategy.GetRectanglePoints
+        Return rectangle_points
+    End Function
 End Class
