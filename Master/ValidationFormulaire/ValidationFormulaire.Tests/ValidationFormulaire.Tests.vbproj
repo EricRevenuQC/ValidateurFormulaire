@@ -159,6 +159,7 @@
     <Compile Include="Models\Pagination\PaginationTests.vb" />
     <Compile Include="Models\Approbation\ThresholdTests.vb" />
     <Compile Include="Models\ImageOperations\FindFirstPixel\FindFirstPixelTests.vb" />
+    <Compile Include="Models\DictionaryKeysTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>
