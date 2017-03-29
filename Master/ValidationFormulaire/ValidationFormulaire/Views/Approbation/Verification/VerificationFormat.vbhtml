@@ -2,7 +2,7 @@
 
 @Code
     ViewData("Title") = "VerificationFormat"
-    Layout = "~/Views/Approbation/Verification/Layouts/VerificationFormatLayout.vbhtml"
+	Layout = "~/Views/Approbation/Verification/Layouts/VerificationFormatLayout.vbhtml"
 End Code
 
 <div class="container-fluid">

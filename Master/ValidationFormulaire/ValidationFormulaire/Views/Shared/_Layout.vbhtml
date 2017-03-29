@@ -14,19 +14,20 @@ End Code
 						Dim approbation_active As String = ""
 						Dim authorization_active As String = ""
 				
-						@If Request.Url.AbsoluteUri.Contains("/verification/") Then
+						@If Request.Url.AbsoluteUri.Contains("/Verification/") OrElse
+							Request.Url.AbsoluteUri.Contains("/Comparison/") Then
 						approbation_active = "active"
-						ElseIf Request.Url.AbsoluteUri.Contains("/authorization/") Then
+						ElseIf Request.Url.AbsoluteUri.Contains("/Authorization/") Then
 						authorization_active = "active"
 						End If
 						@<li class="nav-item @approbation_active">
-							<a class="nav-link" href="/verification/verificationformat">Approbation<span class="sr-only">(current)</span></a>
+							<a class="nav-link" href="/Verification/VerificationFormat">Approbation<span class="sr-only">(current)</span></a>
 						</li>
 						@<li class="nav-item">
 							<a class="nav-link" href="#">CAB</a>
 						</li>
 						@<li class="nav-item @authorization_active">
-							<a class="nav-link" href="/authorization/validationdonnees">Autorisation</a>
+							<a class="nav-link" href="/Authorization/ValidationDonnees">Autorisation</a>
 						</li>
 						@<li class="nav-item">
 							<a class="nav-link" href="#">Homologation</a>

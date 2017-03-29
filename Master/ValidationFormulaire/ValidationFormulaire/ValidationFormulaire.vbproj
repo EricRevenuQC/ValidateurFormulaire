@@ -426,14 +426,15 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Views\Shared\Bootstrap.vbhtml" />
     <Content Include="Views\Authorization\Releves\Releve1.vbhtml" />
-    <Content Include="Views\Approbation\Verification\Layouts\VerificationFormatLayout.vbhtml" />
+    <Content Include="Views\Approbation\Layouts\ApprobationLayout.vbhtml" />
     <Content Include="Views\Approbation\Verification\VerificationFormat.vbhtml" />
-    <Content Include="Views\Approbation\Comparison\Layouts\ComparisonFormulaireLayout.vbhtml" />
     <Content Include="Views\Approbation\Comparison\ComparisonFormulaire.vbhtml" />
     <Content Include="Views\ImagesPartial.vbhtml" />
     <Content Include="Views\Authorization\Layouts\ValidationDonneesLayout.vbhtml" />
     <Content Include="Views\Approbation\VerificationText\VerificationText.vbhtml" />
     <Content Include="Views\Approbation\VerificationText\Layouts\VerificationTextLayout.vbhtml" />
+    <Content Include="Views\Approbation\Verification\Layouts\VerificationFormatLayout.vbhtml" />
+    <Content Include="Views\Approbation\Comparison\Layouts\ComparisonFormulaireLayout.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

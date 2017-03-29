@@ -27,7 +27,7 @@ Public Class VerificationTextController
     End Sub
 
     Function VerificationText() As ActionResult
-        Return View("VerificationText")
+        Return View("../Approbation/VerificationText/VerificationText")
     End Function
 
     <HttpGet> _
@@ -37,7 +37,7 @@ Public Class VerificationTextController
         session_value_provider.SetValue("current_page_text", pagination.DeterminePageChange(
                                         page_action, session_value_provider.GetValue("current_page_text"),
                                         page))
-        Return View("VerificationText")
+        Return View("../Approbation/VerificationText/VerificationText")
     End Function
 
     <HttpPost> _
@@ -54,7 +54,7 @@ Public Class VerificationTextController
 
         If image_file IsNot Nothing AndAlso image_file.ContentLength > 0 Then
         End If
-        Return View(model)
+        Return View("../Approbation/VerificationText/VerificationText", model)
     End Function
 
     Public Function GetImage(Optional formulaire As FormulairePosition = Nothing,
