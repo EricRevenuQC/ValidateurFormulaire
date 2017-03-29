@@ -58,6 +58,8 @@ Public Class AuthorizationController
             For Each alert As KeyValuePair(Of String, String) In AlertsManager.GetAllAlerts
                 model.alert_messages.Add(alert.Key, alert.Value)
             Next
+            model.alert_title = AlertsManager.GetAlertTitle
+            model.alert_color = AlertsManager.GetAlertColor
         End If
         Return View(model)
     End Function

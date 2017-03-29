@@ -7,6 +7,7 @@ Public Class SearchPDFText
     Private dictionary_operations As IDictionaryKeys
     Private verify_releve As IVerifyReleves
 
+    Private Const NUMERO_VALIDATION As Integer = 1
     Private Const NUMERO_PREPARATEUR_INDEX As Integer = 2
     Private Const INDICATEUR_EMPLOYE_AU_POURBOIRE_INDEX As Integer = 27
 
@@ -42,25 +43,27 @@ Public Class SearchPDFText
             For Each data As KeyValuePair(Of String, BarCodeData) In bar_code_data
                 adjusted_bar_code_values = data.Value.value.Trim()
 
-                If words(page).ContainsValue(adjusted_bar_code_values) OrElse
-                        String.IsNullOrWhiteSpace(adjusted_bar_code_values) Then
-                    'On ne vérifie pas le numéro du préparateur et l'indicateur d'employé au pourboire
-                    If bar_code_index <> NUMERO_PREPARATEUR_INDEX AndAlso
-                            bar_code_index <> INDICATEUR_EMPLOYE_AU_POURBOIRE_INDEX Then
+                'On ne vérifie pas le numéro du préparateur et l'indicateur d'employé au pourboire
+                If bar_code_index <> NUMERO_VALIDATION AndAlso
+                    bar_code_index <> NUMERO_PREPARATEUR_INDEX AndAlso
+                        bar_code_index <> INDICATEUR_EMPLOYE_AU_POURBOIRE_INDEX Then
+                    If words(page).ContainsValue(adjusted_bar_code_values) OrElse
+                            String.IsNullOrWhiteSpace(adjusted_bar_code_values) Then
                         If Not verify_releve.VerifyTextInputPosition(words(page), data, bar_code_index) Then
                             'The _ is because chrome and IE automatically sort dictionaries when encoding a json if the key is
                             'recognized as an integer. Adding a _ makes chrome and IE recognize it as a string.
                             failed_bar_code_values_index.Add("_" + page.ToString + bar_code_index.ToString,
-                                                             bar_code_data.ElementAt(bar_code_index).Value)
+                                                                bar_code_data.ElementAt(bar_code_index).Value)
                         Else
                             words(page).Remove(dictionary_operations.GetKeyFromDictionaryValue(words(page), adjusted_bar_code_values))
                         End If
+                    Else
+                        'The _ is because chrome and IE automatically sort dictionaries when encoding a json if the key is
+                        'recognized as an integer. Adding a _ makes chrome and IE recognize it as a string.
+                        verify_releve.AddUncertainData()
+                        failed_bar_code_values_index.Add("_" + page.ToString + bar_code_index.ToString,
+                                                         bar_code_data.ElementAt(bar_code_index).Value)
                     End If
-                Else
-                    'The _ is because chrome and IE automatically sort dictionaries when encoding a json if the key is
-                    'recognized as an integer. Adding a _ makes chrome and IE recognize it as a string.
-                    failed_bar_code_values_index.Add("_" + page.ToString + bar_code_index.ToString,
-                                                     bar_code_data.ElementAt(bar_code_index).Value)
                 End If
 
                 bar_code_index += 1
@@ -70,6 +73,24 @@ Public Class SearchPDFText
         For Each data As KeyValuePair(Of String, BarCodeData) In failed_bar_code_values_index
             System.Diagnostics.Debug.WriteLine("Failed : " + data.Value.value.Trim())
         Next
+
+        Dim success_percent As Single = (verify_releve.GetSuccessfulData / _
+                                      (verify_releve.GetSuccessfulData + verify_releve.GetFailedData + _
+                                       verify_releve.GetNotFoundData + verify_releve.GetUncertainData)) * 100
+        AlertsManager.SetAlertTitle("Analyse du relevé")
+        AlertsManager.AddAlert("L'analyse s'est terminée avec " + _
+                               success_percent.ToString.Substring(0, Math.Min(success_percent.ToString.Length, 5)) + "% de réussite", _
+                               If((verify_releve.GetSuccessfulData > 0), "Nombre de données validées : " + verify_releve.GetSuccessfulData.ToString, "") + _
+                               If((verify_releve.GetNotFoundData > 0), Environment.NewLine + "Nombre de données incapable à validées : " + verify_releve.GetNotFoundData.ToString, "") + _
+                               If((verify_releve.GetFailedData > 0), Environment.NewLine + "Nombre de données erronées : " + verify_releve.GetFailedData.ToString, "") + _
+                               If((verify_releve.GetUncertainData > 0), Environment.NewLine + "Nombre de données incertaines : " + verify_releve.GetUncertainData.ToString, ""))
+        If success_percent >= 75 Then
+            AlertsManager.SetAlertColor("alert-success")
+        ElseIf success_percent >= 50 Then
+            AlertsManager.SetAlertColor("alert-warning")
+        Else
+            AlertsManager.SetAlertColor("alert-danger")
+        End If
 
         Return failed_bar_code_values_index
     End Function

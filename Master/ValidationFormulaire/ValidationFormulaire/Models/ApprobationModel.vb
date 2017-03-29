@@ -19,8 +19,8 @@ Namespace Models
         Public Property page_number_left As Integer
         Public Property page_number_right As Integer
 
+        Public Property alert_title As String
         Public Property alert_messages As Dictionary(Of String, String)
-
     End Class
 
     Public Class ApprobationDB

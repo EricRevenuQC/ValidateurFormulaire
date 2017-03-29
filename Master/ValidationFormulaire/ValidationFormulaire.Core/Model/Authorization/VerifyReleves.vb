@@ -10,6 +10,10 @@ Public Class VerifyReleves
     Private south_marker_position As Integer = 0
     Private east_marker_position As Integer = 0
     Private west_marker_position As Integer = 0
+    Private failed_data As Integer = 0
+    Private successful_data As Integer = 0
+    Private uncertain_data As Integer = 0
+    Private not_found_data As Integer = 0
 
     Private marker_reference As List(Of String)
 
@@ -45,6 +49,7 @@ Public Class VerifyReleves
 
         If marker_reference.Count > 0 Then
             System.Diagnostics.Debug.WriteLine("Could not find references for " + String.Join(" | ", marker_reference))
+            not_found_data += 1
             Return False
         End If
 
@@ -64,10 +69,12 @@ Public Class VerifyReleves
                         west_marker_position <= word.Key.X - MARKER_DISTANCE_THRESHOLD AndAlso
                         east_marker_position >= word.Key.X + MARKER_DISTANCE_THRESHOLD Then
                     System.Diagnostics.Debug.WriteLine("Fail, found text when it should be empty.")
+                    failed_data += 1
                     Return False
                 End If
             Next
             System.Diagnostics.Debug.WriteLine("Pass, empty.")
+            successful_data += 1
             Return True
         End If
 
@@ -76,9 +83,11 @@ Public Class VerifyReleves
                 west_marker_position <= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X + MARKER_DISTANCE_THRESHOLD AndAlso
                 east_marker_position >= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X - MARKER_DISTANCE_THRESHOLD Then
             System.Diagnostics.Debug.WriteLine("Pass")
+            successful_data += 1
             Return True
         End If
         System.Diagnostics.Debug.WriteLine("Fail")
+        failed_data += 1
         Return False
     End Function
 
@@ -93,11 +102,8 @@ Public Class VerifyReleves
             ElseIf marker = "MIN" Then
                 Return New Point(MIN_MARKER_VALUE, MIN_MARKER_VALUE)
             Else
-                System.Diagnostics.Debug.WriteLine(marker)
-                System.Diagnostics.Debug.WriteLine(marker_occurence(marker.IndexOf(marker)))
                 marker_position = dict_operations.GetKeyFromDictionaryIfContainValue(
                     words, marker, marker_occurence(marker.IndexOf(marker)))
-                System.Diagnostics.Debug.WriteLine(marker_position)
                 If marker_position IsNot Nothing Then
                     Return marker_position
                 Else
@@ -109,4 +115,24 @@ Public Class VerifyReleves
         marker_reference.AddRange(current_marker_reference)
         Return New Point(0, 0)
     End Function
+
+    Public Function GetSuccessfulData() As Integer Implements IVerifyReleves.GetSuccessfulData
+        Return successful_data
+    End Function
+
+    Public Function GetFailedData() As Integer Implements IVerifyReleves.GetFailedData
+        Return failed_data
+    End Function
+
+    Public Function GetNotFoundData() As Integer Implements IVerifyReleves.GetNotFoundData
+        Return not_found_data
+    End Function
+
+    Public Function GetUncertainData() As Integer Implements IVerifyReleves.GetUncertainData
+        Return uncertain_data
+    End Function
+
+    Public Sub AddUncertainData() Implements IVerifyReleves.AddUncertainData
+        uncertain_data += 1
+    End Sub
 End Class

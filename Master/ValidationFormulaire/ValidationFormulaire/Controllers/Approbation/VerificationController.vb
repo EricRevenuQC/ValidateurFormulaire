@@ -82,6 +82,7 @@ Public Class VerificationController
             For Each alert As KeyValuePair(Of String, String) In AlertsManager.GetAllAlerts
                 model.alert_messages.Add(alert.Key, alert.Value)
             Next
+            model.alert_title = AlertsManager.GetAlertTitle
         End If
         Return View(model)
     End Function

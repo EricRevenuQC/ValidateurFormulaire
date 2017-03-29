@@ -12,8 +12,7 @@ End Code
         @If Model IsNot Nothing AndAlso Model.alert_messages IsNot Nothing AndAlso Model.alert_messages.Count > 0 Then
             @<div class="alert alert-dismissable alert-danger">
 			    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-			    <h2>Attention!</h2>
-                <h4>Des erreurs ont été trouvées.</h4>
+                <h4>@Model.alert_title</h4>
                 <br />
                 @For Each alert In Model.alert_messages
                     @If Not String.IsNullOrWhiteSpace(alert.Key) Then
