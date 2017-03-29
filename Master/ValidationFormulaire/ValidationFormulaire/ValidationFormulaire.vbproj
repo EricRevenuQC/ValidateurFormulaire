@@ -248,6 +248,7 @@
     <Compile Include="App_Start\WebApiConfig.vb" />
     <Compile Include="Attributes\RequireRequestValueAttribute.vb" />
     <Compile Include="Controllers\Approbation\ComparisonController.vb" />
+    <Compile Include="Controllers\Approbation\VerificationTextController.vb" />
     <Compile Include="Controllers\Approbation\VerificationController.vb" />
     <Compile Include="Controllers\Authorization\AuthorizationController.vb" />
     <Compile Include="Global.asax.vb">
@@ -325,7 +326,7 @@
     <Content Include="Content\js\bootstrap-slider.min.js" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
-    <Content Include="Content\js\Comparison\pagination.js" />
+    <Content Include="Content\js\Approbation\pagination.js" />
     <Content Include="Content\js\dialog.js" />
     <Content Include="Content\js\dialog.min.js" />
     <Content Include="Content\js\draggable.js" />
@@ -343,7 +344,6 @@
     <Content Include="Content\js\plugins\purify.min.js" />
     <Content Include="Content\js\plugins\sortable.js" />
     <Content Include="Content\js\plugins\sortable.min.js" />
-    <Content Include="Content\js\Verification\pagination.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -424,17 +424,16 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\npm.js" />
-    <Content Include="Views\CodeBar\Index.vbhtml" />
     <Content Include="Views\Shared\Bootstrap.vbhtml" />
     <Content Include="Views\Authorization\Releves\Releve1.vbhtml" />
-    <Content Include="Views\Verification\Layouts\VerificationFormatLayout.vbhtml" />
-    <Content Include="Views\Verification\Partials\ApprobationImagesPartial.vbhtml" />
-    <Content Include="Views\Verification\VerificationFormat.vbhtml" />
-    <Content Include="Views\Comparison\Layouts\ComparisonFormulaireLayout.vbhtml" />
-    <Content Include="Views\Comparison\ComparisonFormulaire.vbhtml" />
-    <Content Include="Views\Comparison\Partials\ApprobationImagesPartial.vbhtml" />
-    <Content Include="Views\Authorization\Partials\ValidationRelevePartial.vbhtml" />
+    <Content Include="Views\Approbation\Verification\Layouts\VerificationFormatLayout.vbhtml" />
+    <Content Include="Views\Approbation\Verification\VerificationFormat.vbhtml" />
+    <Content Include="Views\Approbation\Comparison\Layouts\ComparisonFormulaireLayout.vbhtml" />
+    <Content Include="Views\Approbation\Comparison\ComparisonFormulaire.vbhtml" />
+    <Content Include="Views\ImagesPartial.vbhtml" />
     <Content Include="Views\Authorization\Layouts\ValidationDonneesLayout.vbhtml" />
+    <Content Include="Views\Approbation\VerificationText\VerificationText.vbhtml" />
+    <Content Include="Views\Approbation\VerificationText\Layouts\VerificationTextLayout.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -478,11 +477,8 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
-    <Content Include="Views\_ViewStart.vbhtml" />
     <Content Include="Views\Authorization\Layouts\ValidationFormatLayout.vbhtml" />
     <Content Include="Views\Authorization\ValidationDonnees.vbhtml" />
-    <Content Include="Views\Shared\Autorisation_Layout.vbhtml" />
-    <Content Include="Views\Shared\_LoginPartial.vbhtml" />
     <Content Include="Views\Shared\_Layout.vbhtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -490,6 +486,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\js\Verification\" />
     <Folder Include="Filters\" />
     <Folder Include="Helpers\" />
   </ItemGroup>

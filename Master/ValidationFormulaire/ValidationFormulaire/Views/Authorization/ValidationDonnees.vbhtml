@@ -49,7 +49,7 @@ End Code
                     	End If
 			            @<div id="@image_id_releve_donnees" style="@image_display_block_right">
                             <div id="partial-image-releve-donnees">
-                            @Html.Partial("Partials/ValidationRelevePartial", Nothing, New ViewDataDictionary() From { _
+                            @Html.Partial("../ImagesPartial", Nothing, New ViewDataDictionary() From { _
                             						{"current_page", i}, _
                             						{"formulaire", ValidationFormulaire.Core.FormulairePosition.donnees} _
                             					})

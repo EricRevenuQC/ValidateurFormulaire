@@ -2,7 +2,7 @@
 
 @Code
     ViewData("Title") = "VerificationFormat"
-    Layout = "~/Views/Comparison/Layouts/ComparisonFormulaireLayout.vbhtml"
+    Layout = "~/Views/Approbation/Comparison/Layouts/ComparisonFormulaireLayout.vbhtml"
 End Code
 
 <div class="container-fluid">
@@ -15,10 +15,10 @@ End Code
 		        <div class="col-md-6">
                     <div id="compared-image-left" style="display:@Session("comparing")">
                         <div id="partial-image-compared-left">
-                            @Html.Partial("Partials/ApprobationImagesPartial", Nothing, New ViewDataDictionary() From { _
-                                                            {"current_page", 0}, _
-                                                            {"formulaire", ValidationFormulaire.Core.FormulairePosition.compared} _
-                                                        })
+                            @Html.Partial("../ImagesPartial", Nothing, New ViewDataDictionary() From { _
+                            								{"current_page", 0}, _
+                            								{"formulaire", ValidationFormulaire.Core.FormulairePosition.compared} _
+                            							})
                         </div>
                     </div>
                     <div id="non-compared-image-left" style="display:@Session("non_comparing")">
@@ -32,10 +32,10 @@ End Code
                             End If
 		                    @<div id="@image_id_left" style="@image_display_block_left">
                                 <div id="partial-image-left">
-                                    @Html.Partial("Partials/ApprobationImagesPartial", Nothing, New ViewDataDictionary() From { _
-                                                            {"current_page", i}, _
-                                                            {"formulaire", ValidationFormulaire.Core.FormulairePosition.left} _
-                                                        })
+                                    @Html.Partial("../ImagesPartial", Nothing, New ViewDataDictionary() From { _
+                                    						{"current_page", i}, _
+                                    						{"formulaire", ValidationFormulaire.Core.FormulairePosition.left} _
+                                    					})
                                 </div>
 		                    </div>
                         Next
@@ -83,7 +83,7 @@ End Code
                 <div class="col-md-6">
                     <div id="compared-image-right" style="display:@Session("comparing")">
                         <div id="partial-image-compared-right">
-                            @Html.Partial("Partials/ApprobationImagesPartial", Nothing, New ViewDataDictionary() From { _
+                            @Html.Partial("../ImagesPartial", Nothing, New ViewDataDictionary() From { _
                                                             {"current_page", 1}, _
                                                             {"formulaire", ValidationFormulaire.Core.FormulairePosition.compared} _
                                                         })
@@ -100,10 +100,10 @@ End Code
                             End If
 			                @<div id="@image_id_right" style="@image_display_block_right">
                                 <div id="partial-image-right">
-                                @Html.Partial("Partials/ApprobationImagesPartial", Nothing, New ViewDataDictionary() From { _
-                                                        {"current_page", i}, _
-                                                        {"formulaire", ValidationFormulaire.Core.FormulairePosition.right} _
-                                                    })
+                                @Html.Partial("../ImagesPartial", Nothing, New ViewDataDictionary() From { _
+                                						{"current_page", i}, _
+                                						{"formulaire", ValidationFormulaire.Core.FormulairePosition.right} _
+                                					})
                                 </div>
 			                </div>
                         Next
@@ -193,5 +193,5 @@ End Code
 
 </script>
 
-<script type="text/javascript" src="/content/js/Comparison/pagination.js"></script>
+<script type="text/javascript" src="/content/js/Approbation/pagination.js"></script>
 <script type="text/javascript" src="/content/js/Comparison/comparison.js"></script>

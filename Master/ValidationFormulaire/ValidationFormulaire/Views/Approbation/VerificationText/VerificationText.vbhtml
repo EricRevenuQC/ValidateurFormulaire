@@ -2,7 +2,7 @@
 
 @Code
     ViewData("Title") = "VerificationFormat"
-    Layout = "~/Views/Verification/Layouts/VerificationFormatLayout.vbhtml"
+    Layout = "~/Views/Approbation/VerificationText/Layouts/VerificationTextLayout.vbhtml"
 End Code
 
 <div class="container-fluid">
@@ -31,20 +31,20 @@ End Code
             Display image.
         -->
 		<div class="col-md-12">
-			@For i As Integer = 1 To Session("page_number")
-			    Dim image_id As String = "image" + i.ToString
-			    Dim image_display_block As String
-			    If (Session("current_page") = i) Then
-			    image_display_block = "display:block"
-			    Else
-			    image_display_block = "display:none"
-			    End If
+			@For i As Integer = 1 To Session("page_number_text")
+			Dim image_id As String = "image" + i.ToString
+			Dim image_display_block As String
+			If (Session("current_page_text") = i) Then
+			image_display_block = "display:block"
+			Else
+			image_display_block = "display:none"
+			End If
 			    @<div id="@image_id" style="@image_display_block">
                     <div id="image_partial_view">
-                        @Html.Partial("Partials/ApprobationImagesPartial", Nothing, New ViewDataDictionary() From { _
-                                                                    {"current_page", i}, _
-                                                                    {"formulaire", ValidationFormulaire.Core.FormulairePosition.center} _
-                                                                })
+                        @Html.Partial("../ImagesPartial", Nothing, New ViewDataDictionary() From { _
+                        											{"current_page_text", i}, _
+                        											{"formulaire", ValidationFormulaire.Core.FormulairePosition.center} _
+                        										})
                     </div>
 			    </div>
 			Next
@@ -55,10 +55,10 @@ End Code
         <div class="row">
             @code
                 Dim display_block As String
-                @If (Session("current_page") > 1) Then
-                    display_block = "display:block"
+                @If (Session("current_page_text") > 1) Then
+                	display_block = "display:block"
                 Else
-                    display_block = "display:none"
+                	display_block = "display:none"
                 End If
                 @<div class="col-md-6">
                     <div style="@display_block" id="previous-page">
@@ -68,10 +68,10 @@ End Code
                             Page précédente</button>
                     </div>
                 </div>
-                @If (Session("current_page") < (Session("page_number"))) Then
-                    display_block = "display:block"
+                @If (Session("current_page_text") < (Session("page_number_text"))) Then
+                	display_block = "display:block"
                 Else
-                    display_block = "display:none"
+                	display_block = "display:none"
                 End If
                 @<div class="col-md-6">
                     <div style="@display_block" id="next-page">
@@ -91,10 +91,10 @@ End Code
     Set javacript global variables for verification view.
 -->
 <script type="text/javascript">
-    var current_page = parseInt('@Session("current_page")');
-    var page_number = parseInt('@Session("page_number")');
+    var current_page = parseInt('@Session("current_page_text")');
+    var page_number = parseInt('@Session("page_number_text")');
 </script>
 
-<script type="text/javascript" src="/content/js/Verification/pagination.js"></script>
+<script type="text/javascript" src="/content/js/Approbation/pagination.js"></script>
 
 

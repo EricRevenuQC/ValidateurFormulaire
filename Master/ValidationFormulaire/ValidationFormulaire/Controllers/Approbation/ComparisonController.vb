@@ -21,7 +21,7 @@ Public Class ComparisonController
     End Sub
 
     Function ComparisonFormulaire() As ActionResult
-        Return View("ComparisonFormulaire")
+        Return View("../Approbation/Comparison/ComparisonFormulaire")
     End Function
 
     <HttpGet> _
@@ -38,7 +38,7 @@ Public Class ComparisonController
             session_value_provider.SetValue("current_page_right", pagination.DeterminePageChange(
                 page_action, session_value_provider.GetValue("current_page_right"), page))
         End If
-        Return View("ComparisonFormulaire")
+        Return View("../Approbation/Comparison/ComparisonFormulaire")
     End Function
 
     <HttpGet> _
@@ -54,7 +54,7 @@ Public Class ComparisonController
             session_value_provider.SetValue("comparing", "block")
             session_value_provider.SetValue("non_comparing", "none")
         End If
-        Return View("ComparisonFormulaire")
+        Return View("../Approbation/Comparison/ComparisonFormulaire")
     End Function
 
     <HttpPost> _
@@ -71,7 +71,7 @@ Public Class ComparisonController
         End If
         session_value_provider.SetValue("comparing", "none")
         session_value_provider.SetValue("non_comparing", "block")
-        Return View()
+        Return View("../Approbation/Comparison/ComparisonFormulaire")
     End Function
 
     Public Function GetImage(Optional formulaire As FormulairePosition = Nothing,

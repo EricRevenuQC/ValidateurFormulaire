@@ -31,18 +31,17 @@ Public Class VerificationController
     End Sub
 
     Function VerificationFormat() As ActionResult
-        Return View("VerificationFormat")
+        Return View("../Approbation/Verification/VerificationFormat")
     End Function
 
     <HttpGet> _
     <[RequireRequestValue]("page_action")> _
     Function VerificationFormat(page_action As DeterminePage.PageAction,
-                                Optional formulaire As FormulairePosition = Nothing,
                                 Optional page As Integer = Nothing) As ActionResult
         session_value_provider.SetValue("current_page", pagination.DeterminePageChange(
                                         page_action, session_value_provider.GetValue("current_page"),
                                         page))
-        Return View("VerificationFormat")
+        Return View("../Approbation/Verification/VerificationFormat")
     End Function
 
     <HttpPost> _
@@ -53,9 +52,6 @@ Public Class VerificationController
         Dim model As New ApprobationModel()
         Dim template_image As Image
 
-        Dim TimerStart As DateTime
-        Dim TimeSpent As System.TimeSpan
-
         If image_file_template IsNot Nothing AndAlso image_file_template.ContentLength > 0 Then
             template_image = converter.PDFToImage(image_file_template).First
         Else
@@ -65,12 +61,7 @@ Public Class VerificationController
         If image_file IsNot Nothing AndAlso image_file.ContentLength > 0 Then
             Dim images() As Image
 
-            TimerStart = Now
-
             images = converter.PDFToImage(image_file)
-
-            TimeSpent = Now.Subtract(TimerStart)
-            System.Diagnostics.Debug.WriteLine(TimeSpent.TotalSeconds.ToString + " seconds spent on this task")
 
             images = verification.CalculateThreshold(images, template_image, verif_threshold)
             images = verification.Verification(images)
@@ -84,7 +75,7 @@ Public Class VerificationController
             Next
             model.alert_title = AlertsManager.GetAlertTitle
         End If
-        Return View(model)
+        Return View("../Approbation/Verification/VerificationFormat", model)
     End Function
 
     Public Function GetImage(Optional formulaire As FormulairePosition = Nothing,
