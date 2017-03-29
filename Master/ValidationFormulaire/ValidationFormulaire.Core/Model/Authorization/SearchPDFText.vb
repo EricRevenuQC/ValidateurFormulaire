@@ -77,19 +77,23 @@ Public Class SearchPDFText
         Dim success_percent As Single = (verify_releve.GetSuccessfulData / _
                                       (verify_releve.GetSuccessfulData + verify_releve.GetFailedData + _
                                        verify_releve.GetNotFoundData + verify_releve.GetUncertainData)) * 100
-        AlertsManager.SetAlertTitle("Analyse du relevé")
-        AlertsManager.AddAlert("L'analyse s'est terminée avec " + _
-                               success_percent.ToString.Substring(0, Math.Min(success_percent.ToString.Length, 5)) + "% de réussite", _
-                               If((verify_releve.GetSuccessfulData > 0), "Nombre de données validées : " + verify_releve.GetSuccessfulData.ToString, "") + _
-                               If((verify_releve.GetNotFoundData > 0), Environment.NewLine + "Nombre de données incapable à validées : " + verify_releve.GetNotFoundData.ToString, "") + _
-                               If((verify_releve.GetFailedData > 0), Environment.NewLine + "Nombre de données erronées : " + verify_releve.GetFailedData.ToString, "") + _
-                               If((verify_releve.GetUncertainData > 0), Environment.NewLine + "Nombre de données incertaines : " + verify_releve.GetUncertainData.ToString, ""))
-        If success_percent >= 75 Then
-            AlertsManager.SetAlertColor("alert-success")
-        ElseIf success_percent >= 50 Then
-            AlertsManager.SetAlertColor("alert-warning")
+        If success_percent > 0 Then
+            AlertsManager.SetAlertTitle("Analyse du relevé")
+            AlertsManager.AddAlert("L'analyse s'est terminée avec " + _
+                                   success_percent.ToString.Substring(0, Math.Min(success_percent.ToString.Length, 5)) + "% de réussite", _
+                                   If((verify_releve.GetSuccessfulData > 0), "Nombre de données validées : " + verify_releve.GetSuccessfulData.ToString, "") + _
+                                   If((verify_releve.GetNotFoundData > 0), Environment.NewLine + "Nombre de données incapable à validées : " + verify_releve.GetNotFoundData.ToString, "") + _
+                                   If((verify_releve.GetFailedData > 0), Environment.NewLine + "Nombre de données erronées : " + verify_releve.GetFailedData.ToString, "") + _
+                                   If((verify_releve.GetUncertainData > 0), Environment.NewLine + "Nombre de données incertaines : " + verify_releve.GetUncertainData.ToString, ""))
+            If success_percent >= 75 Then
+                AlertsManager.SetAlertColor("alert-success")
+            ElseIf success_percent >= 50 Then
+                AlertsManager.SetAlertColor("alert-warning")
+            Else
+                AlertsManager.SetAlertColor("alert-danger")
+            End If
         Else
-            AlertsManager.SetAlertColor("alert-danger")
+            AlertsManager.AddAlert("L'analyse a échouée.", "Vérifiez que le PDF n'est pas en format image.")
         End If
 
         Return failed_bar_code_values_index
