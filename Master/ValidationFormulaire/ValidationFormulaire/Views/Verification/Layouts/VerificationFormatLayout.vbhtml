@@ -38,8 +38,8 @@ End Code
                                                         <input id="file_template" name="image_file_template" multiple type="file" class="file-loading">
                                                     </div>
                                                     <div class="col-md-12 text-center top10">
-                                                        <input id="verif-threshold" name="verif_threshold" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0"/>
-                                                        <span id="verif-threshold-CurrentSliderValLabel" class="left10">Tolérance : <span id="verif-threshold-SliderVal">0</span></span>
+                                                        <input id="verif-threshold" name="verif_threshold" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3"/>
+                                                        <span id="verif-threshold-CurrentSliderValLabel" class="left10">Tolérance : <span id="verif-threshold-SliderVal">3</span></span>
                                                         <div class="top10">
                                                             <button id="valider" value="Valider" class="btn btn-success btn-block">
                                                                 Valider

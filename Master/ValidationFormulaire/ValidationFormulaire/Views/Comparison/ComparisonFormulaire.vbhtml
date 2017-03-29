@@ -154,8 +154,8 @@ End Code
         -->
         <div class="col-md-12">
             <div class="text-center">
-                <input id="comp-threshold" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="@Session("threshold")"/>
-                <span id="comp-threshold-CurrentSliderValLabel" class="left10">Tolérance : <span id="comp-threshold-SliderVal">0</span></span>
+                <input id="comp-threshold" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3"/>
+                <span id="comp-threshold-CurrentSliderValLabel" class="left10">Tolérance : <span id="comp-threshold-SliderVal">3</span></span>
                 @If (Session("images_left") IsNot Nothing) And (Session("images_right") IsNot Nothing) Then
                     @<div class="top5">
                         <button type="submit" class="btn btn-success btn-sm btn-block active"
@@ -184,15 +184,14 @@ End Code
     var current_page_right = parseInt('@Session("current_page_right")');
     var page_number_left = parseInt('@Session("page_number_left")');
     var page_number_right = parseInt('@Session("page_number_right")');
-    var threshold_slider_comp = new Slider("#comp-threshold");
+	var threshold_slider_comp = new Slider("#comp-threshold");
 
     threshold_slider_comp.on("slide", function (sliderValue) {
         document.getElementById("comp-threshold-SliderVal").textContent = sliderValue;
     });
-    document.getElementById("comp-threshold-SliderVal").textContent = '@Session("threshold")';
+    document.getElementById("comp-threshold-SliderVal").textContent = 3;
 
 </script>
 
-<script type="text/javascript" src="/content/js/Approbation/slider.js"></script>
 <script type="text/javascript" src="/content/js/Comparison/pagination.js"></script>
 <script type="text/javascript" src="/content/js/Comparison/comparison.js"></script>

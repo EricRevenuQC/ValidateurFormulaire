@@ -3,11 +3,14 @@ function Compare() {
     $.ajax({
         url: "/comparison/ComparisonFormulaire",
         method: 'GET',
+        cache: false,
+        async: false,
         data: {
             page_action: "compare",
             threshold: threshold_value
         },
-        success: function (data) { }
+        success: function (data) { },
+        error: function (request, status, error) {}
     });
     document.getElementById("compared-image-left").style.display = "none";
     document.getElementById("non-compared-image-left").style.display = "none";

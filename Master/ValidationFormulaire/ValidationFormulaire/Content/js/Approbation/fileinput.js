@@ -1,6 +1,7 @@
 $("#file").fileinput({
     maxFileCount: 1,
     showUpload: false,
+    showPreview: false,
     language: "fr"
 });
 
@@ -21,11 +22,13 @@ $("#file_template").fileinput({
 $("#file_left").fileinput({
     maxFileCount: 1,
     showUpload: false,
+    showPreview: false,
     language: "fr"
 });
 
 $("#file_right").fileinput({
     maxFileCount: 1,
     showUpload: false,
+    showPreview: false,
     language: "fr"
 });

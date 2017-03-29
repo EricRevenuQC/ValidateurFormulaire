@@ -4,6 +4,7 @@ function ChangePage(formulaire_side, action) {
     $.ajax({
         url: page_data.url,
         method: 'GET',
+        cache: false,
         data: {
             page_action: action,
             formulaire: formulaire_side

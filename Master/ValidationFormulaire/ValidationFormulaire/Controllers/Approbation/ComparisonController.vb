@@ -25,33 +25,34 @@ Public Class ComparisonController
     End Function
 
     <HttpGet> _
-    <[RequireRequestValue]("page_action")> _
+    <[RequireRequestValue]("formulaire")> _
     Function ComparisonFormulaire(page_action As DeterminePage.PageAction,
-                                   Optional formulaire As FormulairePosition = Nothing,
-                                   Optional page As Integer = Nothing,
-                                   Optional threshold As Single = 0) As ActionResult
-        If (page_action = Core.DeterminePage.PageAction.Compare) Then
-            If (session_value_provider.GetValue("images_left") IsNot Nothing) And
-                    (session_value_provider.GetValue("images_right") IsNot Nothing) Then
-                session_value_provider.SetValue("threshold", threshold)
-                session_value_provider.SetValue("compared_images", comparaison.Compare(
-                    session_value_provider.GetValue("images_left")(session_value_provider.GetValue("current_page_left")),
-                    session_value_provider.GetValue("images_right")(session_value_provider.GetValue("current_page_right")),
-                    session_value_provider.GetValue("threshold")
-                ))
-                session_value_provider.SetValue("comparing", "block")
-                session_value_provider.SetValue("non_comparing", "none")
-            End If
-        Else
-            session_value_provider.SetValue("comparing", "none")
-            session_value_provider.SetValue("non_comparing", "block")
-            If (formulaire = FormulairePosition.left) Then
-                session_value_provider.SetValue("current_page_left", pagination.DeterminePageChange(
-                    page_action, session_value_provider.GetValue("current_page_left"), page))
-            ElseIf (formulaire = FormulairePosition.right) Then
-                session_value_provider.SetValue("current_page_right", pagination.DeterminePageChange(
-                    page_action, session_value_provider.GetValue("current_page_right"), page))
-            End If
+                                   formulaire As FormulairePosition,
+                                   Optional page As Integer = Nothing) As ActionResult
+        session_value_provider.SetValue("comparing", "none")
+        session_value_provider.SetValue("non_comparing", "block")
+        If (formulaire = FormulairePosition.left) Then
+            session_value_provider.SetValue("current_page_left", pagination.DeterminePageChange(
+                page_action, session_value_provider.GetValue("current_page_left"), page))
+        ElseIf (formulaire = FormulairePosition.right) Then
+            session_value_provider.SetValue("current_page_right", pagination.DeterminePageChange(
+                page_action, session_value_provider.GetValue("current_page_right"), page))
+        End If
+        Return View("ComparisonFormulaire")
+    End Function
+
+    <HttpGet> _
+    <[RequireRequestValue]("threshold")> _
+    Function ComparisonFormulaire(page_action As DeterminePage.PageAction, threshold As Single) As ActionResult
+        System.Diagnostics.Debug.WriteLine(threshold)
+        If (session_value_provider.GetValue("images_left") IsNot Nothing) And
+                (session_value_provider.GetValue("images_right") IsNot Nothing) Then
+            session_value_provider.SetValue("compared_images", comparaison.Compare(
+                session_value_provider.GetValue("images_left")(session_value_provider.GetValue("current_page_left")),
+                session_value_provider.GetValue("images_right")(session_value_provider.GetValue("current_page_right")),
+                threshold))
+            session_value_provider.SetValue("comparing", "block")
+            session_value_provider.SetValue("non_comparing", "none")
         End If
         Return View("ComparisonFormulaire")
     End Function
