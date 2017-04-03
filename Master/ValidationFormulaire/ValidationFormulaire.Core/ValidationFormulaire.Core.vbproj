@@ -48,6 +48,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DiffLib">
+      <HintPath>..\..\..\..\..\..\Downloads\DiffLib_Binaries_1.0.0.0\DiffLib.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV, Version=2.4.2.1773, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ValidationFormulaire\Dependencies\Emgu.CV.dll</HintPath>
@@ -105,14 +108,16 @@
     <Compile Include="Interfaces\Approbation\IConfig.vb" />
     <Compile Include="Interfaces\Approbation\IConverter.vb" />
     <Compile Include="Interfaces\Approbation\IPagination.vb" />
-    <Compile Include="Interfaces\Approbation\Verification\IAnchorCorner.vb" />
-    <Compile Include="Interfaces\Approbation\Verification\IVerification.vb" />
+    <Compile Include="Interfaces\Approbation\VerificationFormat\IAnchorCorner.vb" />
+    <Compile Include="Interfaces\Approbation\VerificationFormat\IVerificationFormat.vb" />
+    <Compile Include="Interfaces\Approbation\VerificationText\IVerificationText.vb" />
     <Compile Include="Interfaces\Authorization\ISearchPDFText.vb" />
     <Compile Include="Interfaces\Authorization\IVerifyReleves.vb" />
-    <Compile Include="Interfaces\Authorization\PDFText\Extraction\ITextExtractionStrategy.vb" />
-    <Compile Include="Interfaces\Authorization\PDFText\Extraction\ITextExtractor.vb" />
-    <Compile Include="Interfaces\Authorization\PDFText\Extraction\ITextGroupSeperator.vb" />
-    <Compile Include="Interfaces\Authorization\PDFText\ITextCleaner.vb" />
+    <Compile Include="Interfaces\PDFText\Combination\ICombineText.vb" />
+    <Compile Include="Interfaces\PDFText\Extraction\ITextExtractionStrategy.vb" />
+    <Compile Include="Interfaces\PDFText\Extraction\ITextExtractor.vb" />
+    <Compile Include="Interfaces\PDFText\Extraction\ITextGroupSeperator.vb" />
+    <Compile Include="Interfaces\PDFText\ITextCleaner.vb" />
     <Compile Include="Interfaces\Authorization\Releves\IReleves.vb" />
     <Compile Include="Interfaces\BarCode\IBarCodeReader.vb" />
     <Compile Include="Interfaces\Converters\IBarCodeConverter.vb" />
@@ -123,26 +128,32 @@
     <Compile Include="Model\Alerts\AlertsManager.vb" />
     <Compile Include="Model\Approbation\Comparison\Comparaison.vb" />
     <Compile Include="Model\Approbation\ImageMask.vb" />
-    <Compile Include="Model\Approbation\Verification\Anchor.vb" />
-    <Compile Include="Model\Approbation\Verification\AnchorCorner\FindTopRightAnchorCorner.vb" />
-    <Compile Include="Model\Approbation\Verification\AnchorCorner\FindBotLeftAnchorCorner.vb" />
-    <Compile Include="Model\Approbation\Verification\DrawInputZone.vb" />
-    <Compile Include="Model\Approbation\Verification\PixelMarker.vb" />
-    <Compile Include="Model\Authorization\PDFText\TextCleaner.vb" />
+    <Compile Include="Model\Approbation\VerificationText\CompareTexts.vb" />
+    <Compile Include="Model\Approbation\VerificationText\VerificationText.vb" />
+    <Compile Include="Model\Approbation\VerificationFormat\Anchor.vb" />
+    <Compile Include="Model\Approbation\VerificationFormat\AnchorCorner\FindTopRightAnchorCorner.vb" />
+    <Compile Include="Model\Approbation\VerificationFormat\AnchorCorner\FindBotLeftAnchorCorner.vb" />
+    <Compile Include="Model\Approbation\VerificationFormat\DrawInputZone.vb" />
+    <Compile Include="Model\Approbation\VerificationFormat\PixelMarker.vb" />
+    <Compile Include="Model\Approbation\VerificationText\VerifyTexts.vb" />
+    <Compile Include="Model\PDFText\Combination\CombineCloseText.vb" />
+    <Compile Include="Model\PDFText\Combination\CombineLine.vb" />
+    <Compile Include="Model\PDFText\Extraction\TextWordSeperator.vb" />
+    <Compile Include="Model\PDFText\TextCleaner.vb" />
     <Compile Include="Model\BarCode\BarCodeData.vb" />
     <Compile Include="Model\BarCode\BarCodeProperties.vb" />
     <Compile Include="Model\Authorization\VerifyReleves.vb" />
     <Compile Include="Model\DictionaryKeys.vb" />
-    <Compile Include="Model\Authorization\PDFText\Extraction\TextExtractionStrategy.vb" />
-    <Compile Include="Model\Authorization\PDFText\Extraction\TextGroupSeperator.vb" />
-    <Compile Include="Model\Authorization\PDFText\Extraction\TextProperties.vb" />
-    <Compile Include="Model\Authorization\PDFText\Extraction\TextRectangle.vb" />
+    <Compile Include="Model\PDFText\Extraction\TextExtractionStrategy.vb" />
+    <Compile Include="Model\PDFText\Extraction\TextGroupSeperator.vb" />
+    <Compile Include="Model\PDFText\Extraction\TextProperties.vb" />
+    <Compile Include="Model\PDFText\Extraction\TextRectangle.vb" />
     <Compile Include="Model\Authorization\Releves\Releve1.vb" />
     <Compile Include="Model\Authorization\SearchPDFText.vb" />
     <Compile Include="Model\Config.vb" />
     <Compile Include="Model\Converters\BarCodeConverter.vb" />
     <Compile Include="Model\Converters\PDFConverter.vb" />
-    <Compile Include="Model\Approbation\FormulairePosition.vb" />
+    <Compile Include="Model\FormulairePosition.vb" />
     <Compile Include="Model\BGRColors.vb" />
     <Compile Include="Model\ImageOperations\FindFirstPixel\DifferentColor.vb" />
     <Compile Include="Model\ImageOperations\FindFirstPixel\SameColorDiagonally.vb" />
@@ -150,12 +161,12 @@
     <Compile Include="Model\ImageOperations\FormulaireImage.vb" />
     <Compile Include="Model\Authorization\Authorization.vb" />
     <Compile Include="Model\BarCode\BarCodeReader.vb" />
-    <Compile Include="Model\Authorization\PDFText\Extraction\TextExtractor.vb" />
+    <Compile Include="Model\PDFText\Extraction\TextExtractor.vb" />
     <Compile Include="Model\ImageOperations\ComparePixelColor.vb" />
     <Compile Include="Model\Pagination\DeterminePage.vb" />
     <Compile Include="Model\ImageOperations\ColorSelector.vb" />
     <Compile Include="Model\Approbation\Threshold.vb" />
-    <Compile Include="Model\Approbation\Verification\Verification.vb" />
+    <Compile Include="Model\Approbation\VerificationFormat\VerificationFormat.vb" />
     <Compile Include="Model\Session\SessionValueProvider.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

@@ -16,7 +16,7 @@ Imports System.Drawing
 
     <TestMethod()> Public Sub VerifyThatSeperateTextIntoGroupsCombineCorrectWordsTogether()
         Dim rectangle_points As New List(Of TextRectangle)()
-        Dim word_list As New Dictionary(Of Point, String)()
+        Dim word_list As New Dictionary(Of Point, TextProperties)()
         Dim expected_results As New Dictionary(Of Point, String)()
 
         rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(10, 10, 20, 15), "Ceci est "))

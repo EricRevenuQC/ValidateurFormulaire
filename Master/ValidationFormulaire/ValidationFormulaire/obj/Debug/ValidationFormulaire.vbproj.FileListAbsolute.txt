@@ -536,3 +536,5 @@ C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\Valida
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.xml
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\obj\Debug\ValidationFormulaire.pdb
+C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\bin\DiffLib.dll
+C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire\bin\DiffLib.xml

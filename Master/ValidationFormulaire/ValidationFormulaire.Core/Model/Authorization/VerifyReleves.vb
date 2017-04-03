@@ -48,19 +48,9 @@ Public Class VerifyReleves
         east_marker_position = FindMarkerPosition(words, releve.GetEastMarker, releve.GetEastMarkerOccurence).X
 
         If marker_reference.Count > 0 Then
-            System.Diagnostics.Debug.WriteLine("Could not find references for " + String.Join(" | ", marker_reference))
             not_found_data += 1
             Return False
         End If
-
-        System.Diagnostics.Debug.WriteLine("------------------------------------------------------")
-        System.Diagnostics.Debug.WriteLine(bar_code_index.ToString + " : " + adjusted_bar_code_values)
-        System.Diagnostics.Debug.WriteLine("Y : " + north_marker_position.ToString + " > " + _
-                                           dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).Y.ToString + _
-                                           " > " + south_marker_position.ToString)
-        System.Diagnostics.Debug.WriteLine("X : " + east_marker_position.ToString + " > " + _
-                                           dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X.ToString + _
-                                           " > " + west_marker_position.ToString)
 
         If String.IsNullOrWhiteSpace(adjusted_bar_code_values) Then
             For Each word As KeyValuePair(Of Point, String) In words
@@ -68,12 +58,10 @@ Public Class VerifyReleves
                         south_marker_position <= word.Key.Y - MARKER_DISTANCE_THRESHOLD AndAlso
                         west_marker_position <= word.Key.X - MARKER_DISTANCE_THRESHOLD AndAlso
                         east_marker_position >= word.Key.X + MARKER_DISTANCE_THRESHOLD Then
-                    System.Diagnostics.Debug.WriteLine("Fail, found text when it should be empty.")
                     failed_data += 1
                     Return False
                 End If
             Next
-            System.Diagnostics.Debug.WriteLine("Pass, empty.")
             successful_data += 1
             Return True
         End If
@@ -82,11 +70,9 @@ Public Class VerifyReleves
                 south_marker_position <= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).Y + MARKER_DISTANCE_THRESHOLD AndAlso
                 west_marker_position <= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X + MARKER_DISTANCE_THRESHOLD AndAlso
                 east_marker_position >= dict_operations.GetKeyFromDictionaryValue(words, adjusted_bar_code_values).X - MARKER_DISTANCE_THRESHOLD Then
-            System.Diagnostics.Debug.WriteLine("Pass")
             successful_data += 1
             Return True
         End If
-        System.Diagnostics.Debug.WriteLine("Fail")
         failed_data += 1
         Return False
     End Function

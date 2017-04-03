@@ -8,6 +8,7 @@ Public Class PixelMarker
     Private compare_pixels_color As IComparePixelColor
     Private color_selector As ColorSelector
     Private anchors_pixels As List(Of Point)
+    Private out_of_bound_pixels As List(Of Point)
 
     Private Const PROXIMITY_PIXEL_DISTANCE As Integer = 10
 
@@ -25,7 +26,7 @@ Public Class PixelMarker
     End Sub
 
     Public Sub FindAllOutOfBoundColoredPixels(bot_left_anchor As Point, top_right_anchor As Point, page As Integer)
-        Dim out_of_bound_pixels As New List(Of Point)()
+        out_of_bound_pixels = New List(Of Point)()
         Dim steps As New Point(1, 1)
 
         Dim starting_position As New Point(0, 0)
@@ -47,9 +48,6 @@ Public Class PixelMarker
         ending_position = New Point(image.Width - 1, image.Height - 1)
 
         out_of_bound_pixels.AddRange(FindAllColoredPixelsInZone(starting_position, ending_position, steps, page))
-
-        MarkPixels(out_of_bound_pixels)
-        AddOutOfZoneAlerts(out_of_bound_pixels, page)
     End Sub
 
     Private Function FindAllColoredPixelsInZone(starting_point As Point, ending_point As Point,
@@ -90,8 +88,8 @@ Public Class PixelMarker
         Return error_pixels
     End Function
 
-    Private Sub MarkPixels(error_pixels As List(Of Point))
-        For Each pixel In error_pixels
+    Public Sub MarkOutOfBoundPixels()
+        For Each pixel In out_of_bound_pixels
             Dim graphic = Graphics.FromImage(image)
             graphic.DrawImage(marker, New Point(pixel.X - (marker.Width / 2), pixel.Y - (marker.Height / 2)))
             graphic.Flush()
@@ -99,7 +97,7 @@ Public Class PixelMarker
         Next
     End Sub
 
-    Private Sub AddOutOfZoneAlerts(out_of_bound_pixels As List(Of Point), page As Integer)
+    Public Sub AddOutOfZoneAlerts(page As Integer)
         If out_of_bound_pixels.Count > 0 Then
             If out_of_bound_pixels.Count > 1 Then
                 AlertsManager.AddAlert("Page " + page.ToString + " - " + New AlertMessages().GetElementsOutOfZoneMsg)

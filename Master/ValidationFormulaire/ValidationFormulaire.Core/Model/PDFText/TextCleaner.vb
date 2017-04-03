@@ -16,7 +16,7 @@ Public Class TextCleaner
     End Sub
 
     Public Function RemoveOffLimitsWords(words() As Dictionary(Of Point, String)) As Dictionary(Of Point, String)() _
-            Implements ITextCleaner.CleanPDFWords
+            Implements ITextCleaner.RemoveOffLimitsWords
         Dim height_threshold As Point
         Dim temp_words As New Dictionary(Of Point, String)
 

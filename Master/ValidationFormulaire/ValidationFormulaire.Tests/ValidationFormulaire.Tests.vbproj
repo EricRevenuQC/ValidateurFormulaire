@@ -146,7 +146,8 @@
   <ItemGroup>
     <Compile Include="Controllers\VerificationControllerTests.vb" />
     <Compile Include="Models\Alerts\AlertsManagerTest.vb" />
-    <Compile Include="Models\Approbation\Verification\AnchorTests.vb" />
+    <Compile Include="Models\Approbation\VerificationFormat\AnchorTests.vb" />
+    <Compile Include="Models\Approbation\VerificationText\CompareTextsTests.vb" />
     <Compile Include="Models\Authorization\PDFText\Extraction\TextExtractorTests.vb" />
     <Compile Include="Models\Authorization\PDFText\Extraction\TextGroupSeperatorTests.vb" />
     <Compile Include="Models\Authorization\PDFText\TextCleanerTests.vb" />

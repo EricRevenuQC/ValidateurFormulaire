@@ -97,9 +97,9 @@ Imports System.IO
         bar_code_reader.Setup(Sub(s) s.ReadBarCode(file_mock.Object))
         bar_code_reader.Setup(Function(f) f.GetBarCodeText()).Returns("13RSFS99999992017D")
         bar_code_reader.Setup(Function(f) f.GetBarCodeId()).Returns("13RS")
-        extractor.Setup(Function(f) f.PDFToText(file_mock.Object)).Returns(pdf_words)
+        extractor.Setup(Function(f) f.PDFToText(file_mock.Object, True)).Returns(pdf_words)
         bar_code_converter.Setup(Function(f) f.ConvertBarCodeToData("13RS")).Returns(data)
-        text_cleaner.Setup(Function(f) f.CleanPDFWords(pdf_words)).Returns(cleaned_pdf_words)
+        text_cleaner.Setup(Function(f) f.RemoveOffLimitsWords(pdf_words)).Returns(cleaned_pdf_words)
         search_pdf_text.Setup(Function(f) f.FindBarCodeValues(cleaned_pdf_words, data_dictionary)).Returns(failed_data_dictionary)
 
         authorization = New Authorization(extractor.Object, bar_code_reader.Object, search_pdf_text.Object,
@@ -132,18 +132,18 @@ Imports System.IO
         bar_code_reader.Setup(Sub(s) s.ReadBarCode(file_mock.Object))
         bar_code_reader.Setup(Function(f) f.GetBarCodeText()).Returns("13RSFS99999992017D")
         bar_code_reader.Setup(Function(f) f.GetBarCodeId()).Returns("13RS")
-        extractor.InSequence(sequence).Setup(Function(f) f.PDFToText(file_mock.Object)).Returns(pdf_words)
+        extractor.InSequence(sequence).Setup(Function(f) f.PDFToText(file_mock.Object, True)).Returns(pdf_words)
         bar_code_converter.InSequence(sequence).Setup(Function(f) f.ConvertBarCodeToData("13RS")).Returns(data)
-        text_cleaner.InSequence(sequence).Setup(Function(f) f.CleanPDFWords(pdf_words)).Returns(cleaned_pdf_words)
+        text_cleaner.InSequence(sequence).Setup(Function(f) f.RemoveOffLimitsWords(pdf_words)).Returns(cleaned_pdf_words)
         search_pdf_text.InSequence(sequence).Setup(Function(f) f.FindBarCodeValues(cleaned_pdf_words, data_dictionary)).Returns(failed_data_dictionary)
 
         authorization = New Authorization(extractor.Object, bar_code_reader.Object, search_pdf_text.Object,
                                           bar_code_converter.Object, text_cleaner.Object)
         authorization.AuthorizePDF(file_mock.Object)
 
-        extractor.Verify(Function(f) f.PDFToText(file_mock.Object), Times.Exactly(1))
+        extractor.Verify(Function(f) f.PDFToText(file_mock.Object, True), Times.Exactly(1))
         bar_code_converter.Verify(Function(f) f.ConvertBarCodeToData("13RS"), Times.Exactly(1))
-        text_cleaner.Verify(Function(f) f.CleanPDFWords(pdf_words), Times.Exactly(1))
+        text_cleaner.Verify(Function(f) f.RemoveOffLimitsWords(pdf_words), Times.Exactly(1))
         search_pdf_text.Verify(Function(f) f.FindBarCodeValues(cleaned_pdf_words, data_dictionary), Times.Exactly(1))
     End Sub
 End Class

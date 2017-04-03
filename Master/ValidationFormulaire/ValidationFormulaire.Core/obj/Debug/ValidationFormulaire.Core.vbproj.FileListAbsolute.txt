@@ -69,3 +69,6 @@ C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\Valida
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.dll
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.xml
 C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.pdb
+C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\DiffLib.dll
+C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\bin\Debug\DiffLib.xml
+C:\Users\RSIE016\Desktop\ValidateurFormulaire\ValidateurFormulaire\Master\ValidationFormulaire\ValidationFormulaire.Core\obj\Debug\ValidationFormulaire.Core.vbprojResolveAssemblyReference.cache

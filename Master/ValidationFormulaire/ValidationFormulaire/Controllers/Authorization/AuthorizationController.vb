@@ -51,8 +51,6 @@ Public Class AuthorizationController
             authorization.AuthorizePDF(file)
             model.bar_code_data = authorization.GetData
             model.bar_code_unverified_data = authorization.GetFailedData
-            System.Diagnostics.Debug.WriteLine(model.bar_code_unverified_data.Count)
-            session_value_provider.SetValue("current_dialog", 0)
 
             model.alert_messages = New Dictionary(Of String, String)()
             For Each alert As KeyValuePair(Of String, String) In AlertsManager.GetAllAlerts

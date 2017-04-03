@@ -26,12 +26,22 @@ function UpdateCurrentPage(formulaire_side, action) {
         else {
             current_page -= 1;
         }
-        url_action = "/Verification/VerificationFormat";
+        url_action = "/VerificationFormat/VerificationFormat";
         page = current_page;
+    }
+    else if (formulaire_side == "text") {
+        if (action == "NextPage") {
+            current_page_text += 1;
+        }
+        else {
+            current_page_text -= 1;
+        }
+        url_action = "/VerificationText/VerificationText";
+        page = current_page_text;
     }
     else if (formulaire_side == "left") {
         if (action == "NextPage") {
-            current_page_left += 1;
+            current_page_left += 1; 
         }
         else {
             current_page_left -= 1;
@@ -62,6 +72,12 @@ function UpdateImages(page, formulaire_side) {
             document.getElementById("image" + i).style.display = "none";
         }
         document.getElementById("image" + page).style.display = "block";
+    }
+    else if (formulaire_side == "text") {
+        for (i = 1; i <= page_number_text; i++) {
+            document.getElementById("image_text" + i).style.display = "none";
+        }
+        document.getElementById("image_text" + page).style.display = "block";
     }
     else {
         if (formulaire_side == "left") {
@@ -97,6 +113,21 @@ function DisplayPaginationButtons(page, formulaire_side) {
         }
         else {
             document.getElementById("previous-page").style.display = "block";
+        }
+    }
+    else if (formulaire_side == "text") {
+        if (page >= page_number_text) {
+            document.getElementById("next-page-text").style.display = "none";
+        }
+        else {
+            document.getElementById("next-page-text").style.display = "block";
+        }
+
+        if (page <= 1) {
+            document.getElementById("previous-page-text").style.display = "none";
+        }
+        else {
+            document.getElementById("previous-page-text").style.display = "block";
         }
     }
     else if (formulaire_side == "left") {

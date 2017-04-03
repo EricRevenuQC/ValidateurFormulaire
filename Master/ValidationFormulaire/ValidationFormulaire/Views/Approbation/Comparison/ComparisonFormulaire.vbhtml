@@ -1,7 +1,7 @@
 ﻿@ModelType ValidationFormulaire.Models.ApprobationModel
 
 @Code
-    ViewData("Title") = "VerificationFormat"
+    ViewData("Title") = "ComparisonFormulaire"
 	Layout = "~/Views/Approbation/Comparison/Layouts/ComparisonFormulaireLayout.vbhtml"
 End Code
 

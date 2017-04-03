@@ -4,4 +4,5 @@
     right
     compared
     donnees
+    text
 End Enum

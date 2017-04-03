@@ -34,14 +34,14 @@ Public Class TextExtractorTests
 
     <TestMethod()> _
     Public Sub VerifyThatAllPDFToTextLogicFunctionsAreCalledInCorrectOrder()
-        Dim words(1) As Dictionary(Of Point, String)
-        words(1) = New Dictionary(Of Point, String)()
+        Dim words(1) As Dictionary(Of Point, TextProperties)
+        words(1) = New Dictionary(Of Point, TextProperties)()
 
         text_seperator.Setup(Function(f) f.SeperateTextIntoGroups(text_extraction_strategy.Object)).Returns(words(1))
 
         extractor = New TextExtractor(text_seperator.Object, text_extraction_strategy.Object)
 
-        extractor.PDFToText(file_mock.Object)
+        extractor.PDFToText(file_mock.Object, True)
 
         text_seperator.Verify(Function(f) f.SeperateTextIntoGroups(text_extraction_strategy.Object), Times.Exactly(1))
     End Sub

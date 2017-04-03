@@ -10,11 +10,11 @@ Imports System.Drawing
 
 <TestClass()> _
 Public Class VerificationControllerTests
-    Private verification_controller As VerificationController
+    Private verification_controller As VerificationFormatController
     Private session_value_provider As Mock(Of SessionValueProvider)
     Private pagination As Mock(Of IPagination)
     Private converter As Mock(Of IConverter)
-    Private verification As Mock(Of IVerification)
+    Private verification As Mock(Of IVerificationFormat)
     Private config As Mock(Of IConfig)
 
     <TestInitialize()> _
@@ -22,15 +22,15 @@ Public Class VerificationControllerTests
         session_value_provider = New Mock(Of SessionValueProvider)
         pagination = New Mock(Of IPagination)
         converter = New Mock(Of IConverter)
-        verification = New Mock(Of IVerification)
+        verification = New Mock(Of IVerificationFormat)
         config = New Mock(Of IConfig)
 
         session_value_provider.Setup(Function(f) f.GetValue("current_page")).Returns(2)
-        
+
     End Sub
 
     Private Sub InitController()
-        verification_controller = New VerificationController(pagination:=pagination.Object, converter:=converter.Object,
+        verification_controller = New VerificationFormatController(pagination:=pagination.Object, converter:=converter.Object,
                                                              session_value_provider:=session_value_provider.Object,
                                                              config:=config.Object, verification:=verification.Object)
     End Sub

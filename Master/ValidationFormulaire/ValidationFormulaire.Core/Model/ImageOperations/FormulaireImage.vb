@@ -20,6 +20,8 @@ Public Class FormulaireImage
             images = session_value_provider.GetValue("images_right")
         ElseIf formulaire.Equals(FormulairePosition.donnees) Then
             images = session_value_provider.GetValue("images_donnees")
+        ElseIf formulaire.Equals(FormulairePosition.text) Then
+            images = session_value_provider.GetValue("images_text")
         ElseIf formulaire.Equals(FormulairePosition.compared) Then
             If (session_value_provider.GetValue("compared_images") IsNot Nothing) Then
                 images = session_value_provider.GetValue("compared_images")

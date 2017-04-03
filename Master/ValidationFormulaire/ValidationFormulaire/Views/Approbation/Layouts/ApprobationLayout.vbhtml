@@ -22,14 +22,15 @@ End Code
 						ElseIf Request.Url.AbsoluteUri.Contains("/VerificationText") Then
 						verification_text = "active"
 						End If
+						
 						@<li class="@verification_format">
-							<a href="~/Verification/VerificationFormat">Vérification de formulaire</a>
+							<a href="~/VerificationFormat/VerificationFormat">Vérification de formulaire</a>
 						</li>
 						@<li class="@comparison">
 							<a href="~/Comparison/ComparisonFormulaire">Comparaison de formulaire</a>
 						</li>
 						@<li class="@verification_text">
-							<a href="~/Verification/VerificationText">Vérification du text</a>
+							<a href="~/VerificationText/VerificationText">Vérification du text</a>
 						</li>
 					End code
 				</ul>

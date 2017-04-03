@@ -28,17 +28,11 @@ Public Class SearchPDFText
         Dim bar_code_index As Integer
         Dim failed_bar_code_values_index As New Dictionary(Of String, BarCodeData)()
 
-        System.Diagnostics.Debug.WriteLine("Page number : " + words.Count.ToString)
-
         For page As Integer = 1 To words.Count - 1
             bar_code_index = 0
             words(page) = words(page).OrderByDescending(
                 Function(x) x.Key.Y).ThenBy(Function(x) x.Key.X).ToDictionary(Function(x) x.Key, Function(y) y.Value)
             words(page) = AdjustWords(words(page))
-
-            For Each test As KeyValuePair(Of Point, String) In words(page)
-                System.Diagnostics.Debug.WriteLine(test.Value)
-            Next
 
             For Each data As KeyValuePair(Of String, BarCodeData) In bar_code_data
                 adjusted_bar_code_values = data.Value.value.Trim()
@@ -68,10 +62,6 @@ Public Class SearchPDFText
 
                 bar_code_index += 1
             Next
-        Next
-
-        For Each data As KeyValuePair(Of String, BarCodeData) In failed_bar_code_values_index
-            System.Diagnostics.Debug.WriteLine("Failed : " + data.Value.value.Trim())
         Next
 
         Dim success_percent As Single = (verify_releve.GetSuccessfulData / _

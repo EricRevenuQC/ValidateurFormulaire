@@ -21,6 +21,8 @@ Namespace Models
 
         Public Property alert_title As String
         Public Property alert_messages As Dictionary(Of String, String)
+
+        Public Property analysed_text As String()
     End Class
 
     Public Class ApprobationDB

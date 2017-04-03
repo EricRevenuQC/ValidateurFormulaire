@@ -2,8 +2,8 @@
 Imports Emgu.CV.Structure
 Imports System.Drawing
 
-Public Class Verification
-    Implements IVerification
+Public Class VerificationFormat
+    Implements IVerificationFormat
 
     Private red_circle = Drawing.Image.FromFile(New Config().GetRedCirclePath)
     Private draw_input_zone As DrawInputZone
@@ -12,7 +12,7 @@ Public Class Verification
 
     Private Const FIRST_PAGE As Integer = 1
 
-    Public Function Verification(images() As Image) As Image() Implements IVerification.Verification
+    Public Function VerificationFormat(images() As Image) As Image() Implements IVerificationFormat.Verification
         For page As Integer = 1 To images.Length - 1
             draw_input_zone = New DrawInputZone(images(page))
             pixel_marker = New PixelMarker(images(page), red_circle)
@@ -27,6 +27,8 @@ Public Class Verification
 
             draw_input_zone.DrawInputZoneFromAnchors(anchor.GetBotLeftAnchor(), anchor.GetTopRightAnchor())
             pixel_marker.FindAllOutOfBoundColoredPixels(anchor.GetBotLeftAnchor(), anchor.GetTopRightAnchor(), page)
+            pixel_marker.MarkOutOfBoundPixels()
+            pixel_marker.AddOutOfZoneAlerts(page)
             images(page) = images(page)
         Next
         Return images
@@ -34,7 +36,7 @@ Public Class Verification
 
     Public Function CalculateThreshold(images() As Image, template_image As Image,
                                        Optional distance_threshold As Integer = 0) _
-                                   As Image() Implements IVerification.CalculateThreshold
+                                   As Image() Implements IVerificationFormat.CalculateThreshold
         Dim threshold = New Threshold(distance_threshold)
         Dim bitmap_image As New Bitmap(images(FIRST_PAGE))
         Dim emgu_image = New Image(Of Bgr, Byte)(bitmap_image)

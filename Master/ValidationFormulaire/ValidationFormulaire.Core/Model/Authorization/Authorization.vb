@@ -20,7 +20,7 @@ Public Class Authorization
     Private Const CODE_INDEX As Integer = 6
 
     Sub New()
-        extractor = New TextExtractor()
+        extractor = New TextExtractor(New CombineCloseText)
         bar_code_reader = New BarCodeReader()
         search_pdf_text = New SearchPDFText()
         bar_code_converter = New BarCodeConverter()
@@ -46,8 +46,6 @@ Public Class Authorization
         bar_code_id = bar_code_reader.GetBarCodeId
         file.InputStream.Position = 0
 
-        System.Diagnostics.Debug.WriteLine("Bar Code : " + bar_code_text)
-
         If bar_code_text Is Nothing Then
             AlertsManager.AddAlert("Incapable de lire le code à bar de données!")
         End If
@@ -60,13 +58,13 @@ Public Class Authorization
             Exit Sub
         End If
 
-        pdf_words = extractor.PDFToText(file)
+        pdf_words = extractor.PDFToText(file, True)
 
         data = bar_code_converter.ConvertBarCodeToData(bar_code_id)
 
         FillBarCodeDataIntoDictionary(bar_code_text, data)
 
-        pdf_words = text_cleaner.CleanPDFWords(pdf_words)
+        pdf_words = text_cleaner.RemoveOffLimitsWords(pdf_words)
 
         failed_data_dictionary = search_pdf_text.FindBarCodeValues(pdf_words, data_dictionary)
     End Sub

@@ -3,25 +3,25 @@ Imports ValidationFormulaire.Models
 Imports System.Drawing
 Imports ValidationFormulaire.Core
 
-Public Class VerificationController
+Public Class VerificationFormatController
     Inherits System.Web.Mvc.Controller
 
     Private pagination As IPagination
     Private config As IConfig
     Private converter As IConverter
-    Private verification As IVerification
+    Private verification As IVerificationFormat
     Private session_value_provider As SessionValueProvider
 
     Public Sub New()
         pagination = New DeterminePage()
         config = New Config()
         converter = New PDFConverter()
-        verification = New Verification()
+        verification = New VerificationFormat()
         session_value_provider = New SessionValueProvider()
     End Sub
 
     Public Sub New(Optional pagination As IPagination = Nothing, Optional converter As IConverter = Nothing,
-                   Optional verification As IVerification = Nothing, Optional config As IConfig = Nothing,
+                   Optional verification As IVerificationFormat = Nothing, Optional config As IConfig = Nothing,
                    Optional session_value_provider As SessionValueProvider = Nothing)
         Me.pagination = pagination
         Me.converter = converter
@@ -31,7 +31,7 @@ Public Class VerificationController
     End Sub
 
     Function VerificationFormat() As ActionResult
-        Return View("../Approbation/Verification/VerificationFormat")
+        Return View("../Approbation/VerificationFormat/VerificationFormat")
     End Function
 
     <HttpGet> _
@@ -41,7 +41,7 @@ Public Class VerificationController
         session_value_provider.SetValue("current_page", pagination.DeterminePageChange(
                                         page_action, session_value_provider.GetValue("current_page"),
                                         page))
-        Return View("../Approbation/Verification/VerificationFormat")
+        Return View("../Approbation/VerificationFormat/VerificationFormat")
     End Function
 
     <HttpPost> _
@@ -75,12 +75,6 @@ Public Class VerificationController
             Next
             model.alert_title = AlertsManager.GetAlertTitle
         End If
-        Return View("../Approbation/Verification/VerificationFormat", model)
-    End Function
-
-    Public Function GetImage(Optional formulaire As FormulairePosition = Nothing,
-                             Optional current_page As Integer = 1) As ActionResult
-        Dim get_image As New FormulaireImage()
-        Return File(get_image.GetImageData(formulaire, current_page), "image/png")
+        Return View("../Approbation/VerificationFormat/VerificationFormat", model)
     End Function
 End Class
