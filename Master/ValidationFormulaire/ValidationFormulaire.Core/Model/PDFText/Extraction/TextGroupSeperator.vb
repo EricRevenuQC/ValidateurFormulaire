@@ -16,6 +16,15 @@ Public Class TextGroupSeperator
             text_properties = New TextProperties()
             text_properties.text = text_rectangle.text
             text_properties.right_side = text_rectangle.rectangle.Right
+            text_properties.bold = False
+            text_properties.italic = False
+            If text_rectangle.font.ToLower.Contains("bold") Then
+                text_properties.bold = True
+            End If
+            If text_rectangle.font.ToLower.Contains("italic") Then
+                text_properties.italic = True
+            End If
+
             If Not text_groups.ContainsKey(New Point(text_rectangle.rectangle.Left, text_rectangle.rectangle.Bottom)) Then
                 text_groups.Add(New Point(text_rectangle.rectangle.Left, text_rectangle.rectangle.Bottom), text_properties)
             End If

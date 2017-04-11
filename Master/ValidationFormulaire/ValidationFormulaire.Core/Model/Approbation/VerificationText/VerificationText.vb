@@ -24,26 +24,37 @@ Public Class VerificationText
         Dim pdf_words() As Dictionary(Of Point, String)
         Dim pdf_words_template() As Dictionary(Of Point, String)
 
-        pdf_words = extractor.PDFToText(file, False)
-        pdf_words_template = extractor.PDFToText(file_template, False)
+        pdf_words = extractor.PDFToText(file, TextExtractor.ordering.DescendingAscending)
+        pdf_words_template = extractor.PDFToText(file_template, TextExtractor.ordering.DescendingAscending)
 
         Dim text1(pdf_words.Count - 1) As String
         Dim text2(pdf_words_template.Count - 1) As String
         Dim new_text(If(pdf_words.Count >= pdf_words_template.Count, pdf_words_template.Count - 1, pdf_words.Count - 1)) As String
 
+        'For page As Integer = 1 To new_text.Count - 1
+        '    For Each data2 As KeyValuePair(Of Point, String) In pdf_words(page)
+        '        System.Diagnostics.Debug.WriteLine("Word : " + data2.Value + " at : " + data2.Key.X.ToString + "," + data2.Key.Y.ToString)
+        '    Next
+        '    For Each data2 As KeyValuePair(Of Point, String) In pdf_words_template(page)
+        '        System.Diagnostics.Debug.WriteLine("Word : " + data2.Value + " at : " + data2.Key.X.ToString + "," + data2.Key.Y.ToString)
+        '    Next
+        'Next
+
         For page As Integer = 1 To new_text.Count - 1
             For Each word As KeyValuePair(Of Point, String) In pdf_words(page)
-                text1(page) += (word.Value) + "<br />"
+                text1(page) += (word.Value) + "¶"
             Next
         Next
         For page As Integer = 1 To new_text.Count - 1
             For Each word As KeyValuePair(Of Point, String) In pdf_words_template(page)
-                text2(page) += (word.Value) + "<br />"
+                text2(page) += (word.Value) + "¶"
             Next
         Next
 
         For page As Integer = 1 To new_text.Count - 1
-            new_text(page) = compare_texts.CompareTexts(text1(page).ToString, text2(page).ToString)
+            text1(page) = text1(page).Replace(vbTab, " ")
+            text2(page) = text2(page).Replace(vbTab, " ")
+            new_text(page) = compare_texts.CompareTexts(text1(page), text2(page))
         Next
 
         Return new_text
