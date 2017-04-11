@@ -1,12 +1,17 @@
 ﻿Imports System.Drawing
 
 Public Class CombineLine
-    Implements ICombineText
+    Implements ICombinePDFText
+
 
     Private Const MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_X As Integer = 15
     Private Const MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_Y As Integer = 6
 
     Public Function CombineText(text_groups As Object) As Object Implements ICombineText.CombineText
+        
+    End Function
+
+    Public Function CombineText(text_groups As Object) As Object Implements ICombinePDFText.CombineText
         Dim words As New Dictionary(Of Point, String)()
         Dim current_y As Integer = 0
         Dim previous_word_x As Integer = 0
