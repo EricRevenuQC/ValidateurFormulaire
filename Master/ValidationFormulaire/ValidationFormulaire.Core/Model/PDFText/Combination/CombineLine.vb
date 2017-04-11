@@ -62,7 +62,7 @@ Public Class CombineLine
         If Not word_list.ContainsKey(New Point(words.First.Key.X, current_y)) Then
             word_list.Add(New Point(words.First.Key.X, current_y), word_string)
         Else
-            word_list(New Point(, current_y)) = word_string
+            word_list(New Point(words.First.Key.X, current_y)) = word_string
         End If
 
         Return word_list

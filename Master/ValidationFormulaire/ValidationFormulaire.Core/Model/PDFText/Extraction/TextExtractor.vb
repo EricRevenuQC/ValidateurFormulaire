@@ -15,9 +15,9 @@ Public Class TextExtractor
 
     Private text_seperator As ITextGroupSeperator
     Private text_extraction_strategy As TextExtractionStrategy
-    Private combine_text As ICombineText
+    Private combine_text As ICombinePDFText
 
-    Sub New(combine_text As ICombineText)
+    Sub New(combine_text As ICombinePDFText)
         text_seperator = New TextGroupSeperator()
         text_extraction_strategy = New TextExtractionStrategy()
         Me.combine_text = combine_text
