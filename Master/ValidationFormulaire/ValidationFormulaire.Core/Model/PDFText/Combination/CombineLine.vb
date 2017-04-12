@@ -7,7 +7,7 @@ Public Class CombineLine
     Private Const MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_X As Integer = 15
     Private Const MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_Y As Integer = 6
 
-    Public Function CombineText(text_groups As Dictionary(Of Point, TextProperties)) As Object Implements ICombineText.CombineText
+    Public Function CombineText(text_groups As Object) As Object Implements ICombineText.CombineText
         Dim words As New Dictionary(Of Point, String)()
         Dim current_y As Integer = 0
         Dim previous_word_x As Integer = 0
