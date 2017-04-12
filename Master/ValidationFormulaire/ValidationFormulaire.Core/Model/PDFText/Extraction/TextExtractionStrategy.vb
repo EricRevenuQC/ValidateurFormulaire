@@ -28,17 +28,4 @@ Public Class TextExtractionStrategy
     Public Function GetRectanglePoints() As List(Of TextRectangle) Implements ITextExtractionStrategy.GetRectanglePoints
         Return rectangle_points
     End Function
-
-    Private Function InsertStringBetweenCharactersInString(text As String, before As String,
-                                                           after As String) As String
-        Dim new_text As String = ""
-
-        For Each character As Char In text
-            new_text += before
-            new_text += character
-            new_text += after
-        Next
-
-        Return new_text
-    End Function
 End Class

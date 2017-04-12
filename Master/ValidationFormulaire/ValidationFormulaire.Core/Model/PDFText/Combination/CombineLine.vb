@@ -21,11 +21,11 @@ Public Class CombineLine
                     words = words.OrderBy(Function(x) x.Key.X).ToDictionary(Function(x) x.Key, Function(y) y.Value)
                     previous_word_x = 0
                     For Each word As KeyValuePair(Of Point, String) In words
-                        If previous_word_x <> 0 AndAlso Math.Abs(word.Key.Y - previous_word_x) > MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_X Then
+                        If previous_word_x <> 0 AndAlso Math.Abs(word.Key.X - previous_word_x) > MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_X Then
                             word_string += " "
                         End If
                         word_string += word.Value
-                        previous_word_x = word.Key.X
+                        previous_word_x = word.Key.Y
                     Next
                     If Not word_list.ContainsKey(New Point(words.First.Key.X, current_y)) Then
                         word_list.Add(New Point(words.First.Key.X, current_y), word_string)
@@ -50,11 +50,11 @@ Public Class CombineLine
         words = words.OrderBy(Function(x) x.Key.X).ToDictionary(Function(x) x.Key, Function(y) y.Value)
         previous_word_x = 0
         For Each word As KeyValuePair(Of Point, String) In words
-            If previous_word_x <> 0 AndAlso Math.Abs(word.Key.Y - previous_word_x) > MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_X Then
+            If previous_word_x <> 0 AndAlso Math.Abs(word.Key.X - previous_word_x) > MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_X Then
                 word_string += " "
             End If
             word_string += word.Value
-            previous_word_x = word.Key.X
+            previous_word_x = word.Key.Y
         Next
         If Not word_list.ContainsKey(New Point(words.First.Key.X, current_y)) Then
             word_list.Add(New Point(words.First.Key.X, current_y), word_string)
