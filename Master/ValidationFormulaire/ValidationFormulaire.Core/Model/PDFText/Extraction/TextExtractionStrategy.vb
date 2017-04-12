@@ -1,5 +1,4 @@
 ﻿Imports iTextSharp.text.pdf.parser
-Imports System.Drawing
 
 Public Class TextExtractionStrategy
     Inherits LocationTextExtractionStrategy
@@ -13,32 +12,13 @@ Public Class TextExtractionStrategy
 
         Dim bottom_left = render_info.GetDescentLine().GetStartPoint()
         Dim top_right = render_info.GetAscentLine().GetEndPoint()
-        Dim text As String = render_info.GetText()
 
         Dim rect = New iTextSharp.text.Rectangle(bottom_left(Vector.I1), bottom_left(Vector.I2), top_right(Vector.I1), top_right(Vector.I2))
 
-        Me.rectangle_points.Add(New TextRectangle(rect, text, render_info.GetFont.PostscriptFontName))
-
-        If render_info.GetFont.PostscriptFontName.ToLower.Contains("bold") Then
-        End If
-        If render_info.GetFont.PostscriptFontName.ToLower.Contains("italic") Then
-        End If
+        Me.rectangle_points.Add(New TextRectangle(rect, render_info.GetText()))
     End Sub
 
     Public Function GetRectanglePoints() As List(Of TextRectangle) Implements ITextExtractionStrategy.GetRectanglePoints
         Return rectangle_points
-    End Function
-
-    Private Function InsertStringBetweenCharactersInString(text As String, before As String,
-                                                           after As String) As String
-        Dim new_text As String = ""
-
-        For Each character As Char In text
-            new_text += before
-            new_text += character
-            new_text += after
-        Next
-
-        Return new_text
     End Function
 End Class

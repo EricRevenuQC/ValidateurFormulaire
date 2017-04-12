@@ -8,16 +8,11 @@ Imports System.Drawing
 Public Class TextExtractor
     Implements ITextExtractor
 
-    Public Enum ordering
-        AscendingAscending
-        DescendingAscending
-    End Enum
-
     Private text_seperator As ITextGroupSeperator
     Private text_extraction_strategy As TextExtractionStrategy
-    Private combine_text As ICombinePDFText
+    Private combine_text As ICombineText
 
-    Sub New(combine_text As ICombinePDFText)
+    Sub New(combine_text As ICombineText)
         text_seperator = New TextGroupSeperator()
         text_extraction_strategy = New TextExtractionStrategy()
         Me.combine_text = combine_text
@@ -28,7 +23,7 @@ Public Class TextExtractor
         Me.text_extraction_strategy = text_extraction_strategy
     End Sub
 
-    Public Function PDFToText(file As HttpPostedFileBase, order As ordering) As Dictionary(Of Point, String)() Implements ITextExtractor.PDFToText
+    Public Function PDFToText(file As HttpPostedFileBase, reverse_order As Boolean) As Dictionary(Of Point, String)() Implements ITextExtractor.PDFToText
         Using reader As New PdfReader(file.InputStream)
             Dim text_result(reader.NumberOfPages) As String
             Dim words As New Dictionary(Of Point, TextProperties)()
@@ -38,12 +33,9 @@ Public Class TextExtractor
                 text_extraction_strategy = New TextExtractionStrategy()
                 text_result(i) = PdfTextExtractor.GetTextFromPage(reader, i, text_extraction_strategy)
                 words = text_seperator.SeperateTextIntoGroups(text_extraction_strategy)
-                If order = ordering.AscendingAscending Then
+                If reverse_order Then
                     words = words.OrderBy(Function(x) x.Key.Y).ThenBy(Function(x) x.Key.X).ToDictionary(Function(x) x.Key, Function(y) y.Value)
-                ElseIf order = ordering.DescendingAscending Then
-                    words = words.OrderByDescending(Function(x) x.Key.Y).ThenBy(Function(x) x.Key.X).ToDictionary(Function(x) x.Key, Function(y) y.Value)
                 End If
-
                 combined_words(i) = combine_text.CombineText(words)
             Next
 
