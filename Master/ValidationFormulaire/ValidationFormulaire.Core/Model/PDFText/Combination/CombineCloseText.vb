@@ -6,7 +6,7 @@ Public Class CombineCloseText
     Private Const MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_X As Integer = 10
     Private Const MAX_DISTANCE_BETWEEN_CHARACTERS_FOR_Y As Integer = 5
 
-    Public Function CombineText(text_groups As Object) As Object Implements ICombineText.CombineText
+    Public Function CombineText(text_groups As Dictionary(Of Point, TextProperties)) As Object Implements ICombineText.CombineText
         Dim word As String = ""
         Dim current_x_left As Integer = 0
         Dim current_x_right As Integer = 0
