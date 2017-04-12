@@ -19,14 +19,14 @@ Imports System.Drawing
         Dim word_list As New Dictionary(Of Point, TextProperties)()
         Dim expected_results As New Dictionary(Of Point, String)()
 
-        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(10, 10, 20, 15), "Ceci est "))
-        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(25, 10, 30, 15), "un test"))
-        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(25, 30, 40, 35), "pour séparer"))
-        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(40, 50, 50, 55), " des mots"))
-        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(55, 70, 65, 75), "en différent"))
-        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(90, 70, 93, 75), "grou"))
-        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(97, 75, 98, 80), "."))
-        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(94, 70, 96, 75), "pes"))
+        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(10, 10, 20, 15), "Ceci est ", ""))
+        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(25, 10, 30, 15), "un test", ""))
+        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(25, 30, 40, 35), "pour séparer", ""))
+        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(40, 50, 50, 55), " des mots", ""))
+        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(55, 70, 65, 75), "en différent", ""))
+        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(90, 70, 93, 75), "grou", ""))
+        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(97, 75, 98, 80), ".", ""))
+        rectangle_points.Add(New TextRectangle(New iTextSharp.text.Rectangle(94, 70, 96, 75), "pes", ""))
 
         text_extraction_strategy.Setup(Function(f) f.GetRectanglePoints()).Returns(rectangle_points)
 

@@ -58,7 +58,7 @@ Public Class Authorization
             Exit Sub
         End If
 
-        pdf_words = extractor.PDFToText(file, True)
+        pdf_words = extractor.PDFToText(file, TextExtractor.ordering.AscendingAscending)
 
         data = bar_code_converter.ConvertBarCodeToData(bar_code_id)
 
