@@ -29,15 +29,8 @@ $("#file_template").fileinput({
 $("#file_template_text").fileinput({
     maxFileCount: 1,
     showUpload: false,
-    language: "fr",
-    overwriteInitial: true,
-    initialPreview: ['/images/VerificationTemplate.png'],
-    initialPreviewAsData: true,
-    initialPreviewFileType: 'image',
-    initialPreviewConfig: [
-        { caption: "Gabarit", width: "120px", key: 1 }
-    ],
-    purifyHtml: true
+    showPreview: false,
+    language: "fr"
 });
 
 $("#file_left").fileinput({

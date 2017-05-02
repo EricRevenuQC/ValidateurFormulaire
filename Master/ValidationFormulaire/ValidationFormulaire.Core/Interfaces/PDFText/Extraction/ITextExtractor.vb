@@ -2,5 +2,6 @@
 Imports System.Drawing
 
 Public Interface ITextExtractor
-    Function PDFToText(file As HttpPostedFileBase, reverse_order As TextExtractor.ordering) As Dictionary(Of Point, String)()
+    Sub PDFToText(file As HttpPostedFileBase, reverse_order As TextExtractor.ordering)
+    Function GetWords() As Dictionary(Of Point, String)()
 End Interface

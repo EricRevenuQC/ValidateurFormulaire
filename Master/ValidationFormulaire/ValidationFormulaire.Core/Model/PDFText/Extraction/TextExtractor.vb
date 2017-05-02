@@ -17,6 +17,8 @@ Public Class TextExtractor
     Private text_extraction_strategy As TextExtractionStrategy
     Private combine_text As ICombineText
 
+    Private combined_words() As Dictionary(Of Point, String)
+
     Sub New(combine_text As ICombineText)
         text_seperator = New TextGroupSeperator()
         text_extraction_strategy = New TextExtractionStrategy()
@@ -28,11 +30,11 @@ Public Class TextExtractor
         Me.text_extraction_strategy = text_extraction_strategy
     End Sub
 
-    Public Function PDFToText(file As HttpPostedFileBase, order As ordering) As Dictionary(Of Point, String)() Implements ITextExtractor.PDFToText
+    Public Sub PDFToText(file As HttpPostedFileBase, order As ordering) Implements ITextExtractor.PDFToText
         Using reader As New PdfReader(file.InputStream)
             Dim text_result(reader.NumberOfPages) As String
             Dim words As New Dictionary(Of Point, TextProperties)()
-            Dim combined_words(reader.NumberOfPages) As Dictionary(Of Point, String)
+            combined_words = New Dictionary(Of Point, String)(reader.NumberOfPages) {}
 
             For i As Integer = 1 To reader.NumberOfPages
                 text_extraction_strategy = New TextExtractionStrategy()
@@ -46,8 +48,10 @@ Public Class TextExtractor
 
                 combined_words(i) = combine_text.CombineText(words)
             Next
-
-            Return combined_words
         End Using
+    End Sub
+
+    Public Function GetWords() As Dictionary(Of Point, String)() Implements ITextExtractor.GetWords
+        Return combined_words
     End Function
 End Class
